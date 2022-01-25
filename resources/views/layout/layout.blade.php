@@ -263,6 +263,19 @@
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
+
+                        @if(Auth::user()->rol === 'Admin')
+                        <li class="nav-small-cap">Usuarios</li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fas fa-user-circle"></i>
+                                <span class="hide-menu">Usuarios</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{URL::to('/usuarios')}}">Gestión de Usuarios</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-devider"></li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -317,11 +330,11 @@
     <div class="modal fade" id="infoUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-info text-white ">
                     <center>
-                        <h5 class="card-title text-center text-uppercase">Información del Usuario</h5>
+                        <h5 class="card-title text-center text-white text-uppercase">Información del Usuario</h5>
                     </center>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-white   " data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -436,9 +449,9 @@
     <!-- ============================================================== -->
     <!-- This is data table -->
     <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
-    <!-- start - This is for export functionality only 
+    <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>-->
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>

@@ -143,6 +143,68 @@ const GuardarImagen = () => {
  * Uso de Datatables
  */
 $(document).ready(function () {
+    $('#txtpassword').bind('keyup', function (e) {
+        var key = e.keyCode || e.which;
+        if (key === 13) {
+            iniciarSesion();
+        };
+    });
+
+    /**
+     * Uso de Select2
+     */
+    $('#cmbRol').select2({
+        theme: "bootstrap-5",
+        color: "#184f4f",
+        background: "#184f4f",
+        backgroundColor: "184f4f",
+        placeholder: "Seleccione"
+    });
+    
+    $('#cmbPeriodo').select2({
+        theme: "bootstrap-5",
+        color: "#184f4f",
+        background: "#184f4f",
+        backgroundColor: "184f4f",
+        placeholder: "Seleccione"
+    });
+
+
+    /***
+     * Uso de Dropify
+     */
+     // Basic
+     $('.dropify').dropify();
+      // Used events
+      var drEvent = $('#input-file-events').dropify();
+
+      drEvent.on('dropify.beforeClear', function(event, element) {
+          return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+      });
+
+      drEvent.on('dropify.afterClear', function(event, element) {
+          alert('File deleted');
+      });
+
+      drEvent.on('dropify.errors', function(event, element) {
+          console.log('Has Errors');
+      });
+
+      var drDestroy = $('#input-file-to-destroy').dropify();
+      drDestroy = drDestroy.data('dropify')
+      $('#toggleDropify').on('click', function(e) {
+          e.preventDefault();
+          if (drDestroy.isDropified()) {
+              drDestroy.destroy();
+          } else {
+              drDestroy.init();
+          }
+      })
+
+
+      /**
+       * Uso de Datatables
+       */
     $('#tblReporteVentas').DataTable({
         dom: 'Bfrtip',
         buttons: [{
@@ -260,11 +322,43 @@ $(document).ready(function () {
         }
     })
 
-    $('#cmbPeriodo').select2({
-        theme: "bootstrap-5",
-        color: "#184f4f",
-        background: "#184f4f",
-        backgroundColor: "184f4f",
-        placeholder: "Seleccione"
+    
+
+    $('#tblUsuarios').DataTable({
+        dom: 'Bfrtip',
+        buttons: [{
+            extend: 'copyHtml5',
+            text: '<i class="fa fa-table"></i>  Copy',
+            titleAttr: 'copy',
+            className: 'btn btn-outline-info'
+        }, {
+            extend: 'excelHtml5',
+            text: '<i class="fas fa-file-excel"></i>  EXCEL',
+            titleAttr: 'Excel',
+            className: 'btn btn-outline-info',
+            style: 'background-color:#184f4f;'
+        },
+        {
+            extend: 'csvHtml5',
+            text: '<i class="fas fa-file-alt"></i>  CSV',
+            titleAttr: 'CSV',
+            className: 'btn btn-outline-info'
+        },
+        {
+            extend: 'pdfHtml5',
+            text: '<i class="fas fa-file-pdf"></i>  PDF',
+            titleAttr: 'PDF',
+            className: 'btn btn-outline-info'
+        }, {
+            extend: 'print',
+            text: '<i class="fas fa-print"></i>  IMPRIMIR',
+            titleAttr: 'print',
+            className: 'btn btn-outline-info'
+        }
+        ],
+        "oLanguage": {
+            "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+        },
+        "deferRender": true,
     });
 });

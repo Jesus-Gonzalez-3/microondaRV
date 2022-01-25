@@ -21,9 +21,6 @@
     <!--<link href="{{asset('assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
-    <!-- Or for RTL support -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 </head>
 
 <body style="background:#184F4F;">
@@ -78,14 +75,14 @@
                             <div class="form-group m-t-40">
                                 <div class="col-xs-12">
                                     <label for="txtusuario">Usuario</label>
-                                    <input class="form-control" type="email" required="true" id="txtusuario" name="txtusuario" placeholder="Correo">
+                                    <input class="form-control" type="email" required="true" id="txtusuario" autocomplete="username" name="txtusuario" placeholder="Correo">
                                     <small id="helpId" class="form-text text-muted">Introduzca su correo empresarial</small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="txtpassword">Contraseña</label>
-                                    <input class="form-control" type="password" required="true" id="txtpassword" name="txtpassword" placeholder="Contraseña">
+                                    <input class="form-control" type="password" required="true" id="txtpassword" name="txtpassword" autocomplete="current-password" placeholder="Contraseña">
                                     <small id="helpId" class="form-text text-muted">Introduzca su contraseña, diferenciando mayúsculas y minúsculas</small>
                                 </div>
                             </div>
@@ -99,7 +96,7 @@
                             </div>
                             <div class="form-group text-center m-t-20">
                                 <div class="col-xs-12">
-                                    <button class="btn btn-block text-uppercase waves-effect waves-light text-white" style="background-color:#184F4F;" type="button" onclick="iniciarSesion();"> <i class="fas fa-sign-in-alt"></i> Inciar sesión</button>
+                                    <button class="btn btn-block text-uppercase waves-effect waves-light text-white" id="btnIniciarSesion" name="btnIniciarSesion" style="background-color:#184F4F;" type="button" onclick="iniciarSesion();"> <i class="fas fa-sign-in-alt"></i> Inciar sesión</button>
                                 </div>
                             </div>
                         </form>
@@ -110,17 +107,17 @@
                         </div>
                     </div>
                     <div class="card-body" id="card-register" hidden>
-                        <form class="form-horizontal form-material" id="registerform" action="{{URL::to('/paginaPrincipal')}}">
+                        <form class="form-horizontal form-material" id="registerform" action="#">
                             @csrf
                             <br>
                             <br>
+                            <br>
+                            <br>
                             <a href="javascript:void(0)" class="text-center db">
-                                <center>
-                                    <img src="{{asset('/img/logo_mc2.2.png')}}" style="width: 30%; height:30%;" alt="Home" /><br /><img src="{{asset('/img/logo_mc2.3.png')}}" style="width: 100%; height: 100%;" alt="Home" />
+                            <center>
+                                    <img src="{{asset('/img/logo_mc2.3.1.png')}}" style="width: 100%; height: 100%;" alt="Home" />
                                 </center>
                             </a>
-                            <br>
-                            <br>
                             <h4 class="text-center card-title text-uppercase" style="color:#184F4F">Registro de usuarios</h4>
                             <h6 class="text-center card-text text-uppercase" style="color: #184F4F;"> Ingrese los siguentes datos</h6>
                             <div class="form-group m-t-40">
@@ -133,14 +130,14 @@
                             <div class="form-group m-t-40">
                                 <div class="col-xs-12">
                                     <label for="txtusuario">Usuario</label>
-                                    <input class="form-control" type="email" required="" id="txtusuarioregistro" name="txtusuarioregistro" placeholder="Correo">
+                                    <input class="form-control" type="email" required="" id="txtusuarioregistro"  autocomplete="username" name="txtusuarioregistro" placeholder="Correo">
                                     <small id="helpId" class="form-text text-muted">Introduzca su correo empresarial</small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="txtpassword">Contraseña</label>
-                                    <input class="form-control" type="password" required="" id="txtpasswordregistro" name="txtpasswordregistro" placeholder="Contraseña">
+                                    <input class="form-control" type="password" required="" id="txtpasswordregistro" autocomplete="current-password" name="txtpasswordregistro" placeholder="Contraseña">
                                     <small id="helpId" class="form-text text-muted">Introduzca su contraseña, diferenciando mayúsculas y minúsculas</small>
                                 </div>
                             </div>
@@ -195,6 +192,16 @@
     <script src="{{asset('/assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!--Custom JavaScript -->
     <script src="{{asset('js/custom.min.js')}}"></script>
+      <!-- This is data table -->
+      <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
@@ -206,15 +213,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
     <!-- Or for RTL support -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
-    <script>
-        $('#cmbRol').select2({
-            theme: "bootstrap-5",
-            color: "#184f4f",
-            background: "#184f4f",
-            backgroundColor: "184f4f",
-            placeholder: "Seleccione"
-        });
-    </script>
 
 </body>
 

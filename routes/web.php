@@ -22,7 +22,12 @@ Route::get('/', function () {
 
 
 
-
+Route::group(['prefix' => 'usuarios/acciones'], function () {
+    Route::post('/agregar', 'UsuarioController@registrar');
+    Route::post('/login', 'UsuarioController@login');
+    Route::post('/update', 'UsuarioController@updateUser');
+    Route::get('/logout', 'UsuarioController@logout');
+});
 
 Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
 try {
@@ -53,13 +58,8 @@ try {
             return view('users/users');
         });
 
+
         
-        Route::group(['prefix' => 'usuarios/acciones'], function () {
-            Route::post('/agregar', 'UsuarioController@registrar');
-            Route::post('/login', 'UsuarioController@login');
-            Route::post('/update', 'UsuarioController@updateUser');
-            Route::get('/logout', 'UsuarioController@logout');
-        });
     });
 } catch (Exception $ex) {
     return view('error.pagenotfound');

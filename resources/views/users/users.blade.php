@@ -7,50 +7,21 @@
         <p class="card-text"> ¡Hola {{Auth::user()->name}}. En esta pantalla podrás visualizar un reporte de todas las ventas realizadas</p>
         <hr>
         <br />
-
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs customtab" role="tablist">
-            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tablaVentasPeriodo" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-table-large"></i></span> <span class="hidden-xs-down"> <i class="mdi mdi-table-large"></i> Tabla</span></a> </li>
-            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#graBarraVentasPeriodo" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-chart-bar"></i></span> <span class="hidden-xs-down"> <i class="mdi mdi-chart-bar"></i> Gráfica de barras</span></a> </li>
-            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#graCirVentasPeriodo" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-chart-pie"></i></span> <span class="hidden-xs-down"> <i class="mdi mdi-chart-pie"></i> Gráfica de pastel</span></a> </li>
-        </ul>
     </div>
     <div class="table-responsive ">
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <center>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modelId">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Agregar
+                    </button>
+                </center>
+            </div>
+        </div>
         <div class="container-fluid">
-            <!--<div class="row">
-                <div class="col-5">
-                    <div class="row">
-                        <div class="btn-group dropdown col-md-6 ">
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-file-excel"></i> Exportar información Excel
-                            </button>
-                            <div class="dropdown-menu animated flipInX">
-                                <a class="dropdown-item themecolor" href="#" onclick="GenerarPDF();"> <i class="fas fa-file-excel"></i> &nbsp; Exportar solo datos</a>
-                                <a class="dropdown-item" href="#"> <i class="fas fa-file-excel"></i> &nbsp; Exportar datos con gráfico de barras</a>
-                                <a class="dropdown-item" href="#"> <i class="fas fa-file-excel"></i> &nbsp; Exportar datos co gráfico de pastel</a>
-                                <a class="dropdown-item" href="#"> <i class="fas fa-file-excel"></i> &nbsp; Exportar datos con ambas gráficas</a>
-                            </div>
-                        </div>
-                        <div class="btn-group dropdown col-md-6">
-                            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-file-pdf"></i> Exportar información PDF
-                            </button>
-                            <div class="dropdown-menu animated flipInX">
-                                <a class="dropdown-item themecolor" href="#" onclick="GenerarPDF();"> <i class="fas fa-file-pdf"></i> &nbsp; Exportar solo datos</a>
-                                <a class="dropdown-item" href="#"> <i class="fas fa-file-pdf"></i> &nbsp; Exportar datos con gráfico de barras</a>
-                                <a class="dropdown-item" href="#"> <i class="fas fa-file-pdf"></i> &nbsp; Exportar datos co gráfico de pastel</a>
-                                <a class="dropdown-item" href="#"> <i class="fas fa-file-pdf"></i> &nbsp; Exportar datos con ambas gráficas</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-1">
-                </div>
-                <div class="col-6">
-                </div>
-
-            </div>-->
-            <table id="tblUsuarios" class="table table-striped table-bordered table-condensed table-hover" cellspacing="0" width="100%">
+            <table id="tblUsuarios" class="table table-striped table-bordered table-condensed table-hover text-center" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Nombre de usuario</th>
@@ -72,7 +43,7 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @forelse($Usuarios as $usuario)
+                    @forelse($Usuarios =[] as $usuario)
                     <tr>
                         <td>{{$usuario->name}}</td>
                         <td>{{$usuario->email}}</td>
@@ -99,22 +70,72 @@
             <br />
         </div>
     </div>
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div class="tab-pane active" id="tablaVentasPeriodo" role="tabpanel">
+</div>
 
-        </div>
-        <div class="tab-pane  p-20" id="graBarraVentasPeriodo" role="tabpanel">
-            <figure class="highcharts-figure">
-                <div id="containerVentasAllBarra"></div>
-            </figure>
-            <div id="tester">
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header btn-info text-white ">
+                <h3 class="text-center text-white " style="text-align: center;">Gestión de Usuarios</h3>
+                <button type="button" class="close text-white " data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-        <div class="tab-pane p-20" id="graCirVentasPeriodo" role="tabpanel">
-            <figure class="highcharts-figure">
-                <div id="containerVentasAllPastel"></div>
-            </figure>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form class="form-horizontal form-material" id="registerform" action="#">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-2 offset-2">
+                                <img src="{{asset('img/user.png')}}" style="width: 100%; height:100%;" alt="Usuario">
+                                <input type="hidden" name="idUser" id="idUser">
+                            </div>
+                            <div class="col-md-8">
+                                <h2 class="card-title text-uppercase" id="txtTitulo" name="txtTitulo">Registro de usuarios</h2>
+                                <h4 class="card-text"> Ingrese los siguentes datos</h4>
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40">
+                            <div class="col-xs-12">
+                                <label for="txtNombre">Nombre</label>
+                                <input class="form-control" type="text" required="" id="txtNombre" name="txtNombre">
+                                <small id="helpId" class="form-text text-muted">Introduzca su nombre completo</small>
+                            </div>
+                        </div>
+                        <div class="form-group m-t-40">
+                            <div class="col-xs-12">
+                                <label for="txtusuario">Usuario</label>
+                                <input class="form-control" type="email" required="" id="txtusuarioregistro" autocomplete="username" name="txtusuarioregistro">
+                                <small id="helpId" class="form-text text-muted">Introduzca su correo empresarial</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="txtpassword">Contraseña</label>
+                                <input class="form-control" type="password" required="" id="txtpasswordregistro" autocomplete="current-password" name="txtpasswordregistro">
+                                <small id="helpId" class="form-text text-muted">Introduzca su contraseña, diferenciando mayúsculas y minúsculas</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cmbRol">Rol del Usuario</label>
+                            <div class="d-flex no-block align-items-center">
+                                <select class="js-example-basic-single" style="width: 100%;" name="cmbRol" id="cmbRol">
+                                    <option value="0">Seleccione</option>
+                                    <option value="Gerente">Gerente</option>
+                                    <option value="Agente">Agente</option>
+                                </select>
+                            </div>
+                            <small id="helpId" class="form-text text-muted">Seleccione el rol al que pertenece este usuario</small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times-circle" aria-hidden="true"></i> &nbsp; Cerrar</button>
+                <button type="button" class="btn waves-effect waves-light text-white" style="background-color:#184F4F;"> <i class="fa fa-save" aria-hidden="true"></i>&nbsp; Guardar</button>
+            </div>
         </div>
     </div>
 </div>

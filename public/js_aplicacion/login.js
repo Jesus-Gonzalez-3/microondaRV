@@ -135,6 +135,8 @@ const iniciarSesion = () => {
             password: password, 
             _token: $('input[name="_token"]').val(),
         };
+
+        console.log(datos);
         $.ajax({
             url: "/public/usuarios/acciones/login",
             method: "POST",
