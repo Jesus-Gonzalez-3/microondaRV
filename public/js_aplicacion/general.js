@@ -160,6 +160,14 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+
+    $('#cmbRolUpdate').select2({
+        theme: "bootstrap-5",
+        color: "#184f4f",
+        background: "#184f4f",
+        backgroundColor: "184f4f",
+        placeholder: "Seleccione"
+    });
     
     $('#cmbPeriodo').select2({
         theme: "bootstrap-5",
@@ -322,8 +330,6 @@ $(document).ready(function () {
         }
     })
 
-    
-
     $('#tblUsuarios').DataTable({
         dom: 'Bfrtip',
         buttons: [{
@@ -360,5 +366,17 @@ $(document).ready(function () {
             "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
         },
         "deferRender": true,
+        "responsive": true,
+        "sPaginationType":"full_numbers",
+    });
+
+    /**
+     * Uso de Switchery
+     */
+
+    // Switchery
+    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+    $('.js-switch').each(function() {
+        new Switchery($(this)[0], $(this).data());
     });
 });

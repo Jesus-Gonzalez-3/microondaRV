@@ -80,4 +80,17 @@ class UsuarioController extends Controller
             return  $ex;
         }
     }
+
+    public function updateDataUser(Request $request)
+    {
+        $muser = UsuarioEloquent::find($request->id);
+        $muser->name = $request->name;
+        $muser->email = $request->name;
+    }
+
+    public function GetAll()
+    {
+        $usuarios = UsuarioEloquent::all()->where('estatus','=','Activo');
+        return view('users.users', compact('usuarios'));
+    }
 }

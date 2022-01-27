@@ -1,5 +1,5 @@
 $(document).ready(e => {
-    consultarDatos();
+    //consultarDatos();
 });
 
 

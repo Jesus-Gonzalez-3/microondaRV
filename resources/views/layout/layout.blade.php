@@ -20,6 +20,9 @@
     <link href="{{asset('assets/plugins/chartist-js/dist/chartist.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/chartist-js/dist/chartist-init.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
+    
+    <link href="{{asset('assets/plugins/switchery/dist/switchery.min.css')}}" rel="stylesheet" />
     <!--This page css - Morris CSS -->
     <link href="{{asset('assets/plugins/c3-master/c3.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -430,6 +433,10 @@
     <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!-- Sweet-Alert  -->
     <script src="{{asset('assets/plugins/sweetalert/sweetalert.min.js')}}"></script>
+    
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{{asset('assets/plugins/bootstrap-notify/bootstrap-notify.js')}}"></script>
+    <script src="{{asset('assets/plugins/bootstrap-notify/notifications.js')}}"></script>
     <!-- ============================================================== -->
     <!--Custom JavaScript -->
     <script src="{{asset('js/custom.min.js')}}"></script>
@@ -461,7 +468,6 @@
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="{{asset('assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js" integrity="sha256-AFAYEOkzB6iIKnTYZOdUf9FFje6lOTYdwRJKwTN5mks=" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
@@ -469,6 +475,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 
     <script src="{{asset('js_aplicacion/general.js')}}"></script>
+    <script src="{{asset('js_aplicacion/login.js')}}"></script>
     <script src="{{asset('js_aplicacion/reportes.js')}}"></script>
     <script src="{{asset('assets/plugins/dropify/dist/js/dropify.min.js')}}"></script>
     <script src="{{asset('assets/plugins/highcharts/highstock.js')}}"></script>
@@ -480,9 +487,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.js"></script>
 
-    <script>
-       
-    </script>
+ 
+    <script src="{{asset('assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+    <script src="{{asset('assets/plugins/switchery/dist/switchery.min.js')}}"></script>
 
 </body>
 

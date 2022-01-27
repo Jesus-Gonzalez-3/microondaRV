@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsuarioController;
 use Facade\FlareClient\Report;
 use Illuminate\Support\Facades\Route;
 
@@ -54,9 +55,7 @@ try {
             return view('paginaPrincipal.index');
         });
 
-        Route::get('/usuarios', function(){
-            return view('users/users');
-        });
+        Route::get('/usuarios','UsuarioController@GetAll');
 
 
         
