@@ -4,19 +4,14 @@
 <div class="card">
     <div class="card-body">
         <h2 class="card-title">Ctrl. de Usuarios </h2>
-        <p class="card-text"> ¡Hola {{Auth::user()->name}}. En esta pantalla podrás visualizar los usuarios activos del sistema</p>
+        <p class="card-text"> ¡Hola {{Auth::user()->name}}. En esta pantalla podrás visualizar los usuarios Inactivos en el sistema</p>
         <hr>
+        <br />
     </div>
     <div class="table-responsive ">
         <div class="row">
             <div class="col-md-10"></div>
             <div class="col-md-2">
-                <center>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modelId">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Agregar
-                    </button>
-                </center>
             </div>
         </div>
         <div class="container-fluid">
@@ -44,18 +39,16 @@
                     <tr>
                         <td>{{$usuario->name}}</td>
                         <td>{{$usuario->email}}</td>
-                        <td> <i class="fa fa-check-circle" aria-hidden="true"></i> {{$usuario->estatus}}</td>
+                        <td> <i class="fas fa-minus-circle" aria-hidden="true"></i> {{$usuario->estatus}}</td>
                         <td>{{$usuario->rol}}</td>
 
                         <form action="" method="POST">
                             @csrf
                             <td class="text-center">
-                                <button class="btn btn-warning waves-effect btn-circle waves-light" type="button" onclick="detalleUsuario(<?= $usuario->id ?>)">
-                                    <i class="fa fa-edit"></i>
+                                <button class="btn btn-warning waves-effect btn-circle waves-light" type="button" onclick="ActivarUsuario(<?= $usuario->id ?>)">
+                                    <i class="fa fa-check-circle"></i>
                                 </button>
-                                <button class="btn btn-danger waves-effect btn-circle waves-light" type="button" onclick="eliminarUsuario(<?= $usuario->id ?>)">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                                
                             </td>
                         </form>
                     </tr>

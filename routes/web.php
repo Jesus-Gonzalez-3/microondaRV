@@ -21,22 +21,37 @@ Route::get('/', function () {
     return view('login.login');
 });
 
-
+Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
 
 Route::group(['prefix' => 'usuarios/acciones'], function () {
     Route::post('/agregar', 'UsuarioController@registrar');
     Route::post('/login', 'UsuarioController@login');
-    Route::post('/update', 'UsuarioController@updateUser');
     Route::get('/logout', 'UsuarioController@logout');
 });
 
-Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
+
 try {
     Route::group(['middleware' => ['auth']], function () {
 
+        /**
+         * Gestión de Usuarios
+         */
+        
         Route::get('/reporteSemanal', function () {
             return view('reportes.reporteSemanal');
         });
+
+        Route::group(['prefix' => 'usuarios/acciones'], function () {
+            Route::get('/logout', 'UsuarioController@logout');
+            Route::post('/update', 'UsuarioController@updateUser');
+            Route::post('/updateDataUser', 'UsuarioController@updateDataUser');
+            Route::post('/delete', 'UsuarioController@EliminarUser');
+            Route::post('/active', 'UsuarioController@ActivarUser');
+            Route::post('/consultar', 'UsuarioController@Consultar');
+        });
+        Route::get('/usuarios', 'UsuarioController@GetAll');
+        Route::get('/usuariosInactivos', 'UsuarioController@GetAllInactivos');
+
 
         Route::get('/reportePeriodo', function () {
             return view('reportes.reportePeriodo');
@@ -54,11 +69,6 @@ try {
         Route::get('/paginaPrincipal', function () {
             return view('paginaPrincipal.index');
         });
-
-        Route::get('/usuarios','UsuarioController@GetAll');
-
-
-        
     });
 } catch (Exception $ex) {
     return view('error.pagenotfound');

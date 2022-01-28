@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-body">
         <h2 class="card-title">Reporte de Ventas Semanal</h2>
-        <p class="card-text"> ¡Hola En esta pantalla podrás visualizar un reporte de las ventas realizadas de la semana anterior.</p>
+        <p class="card-text"> ¡Hola {{Auth::user()->name;}}¡ En esta pantalla podrás visualizar un reporte de las ventas realizadas de la semana anterior.</p>
         <hr>
         <br />
         <div class="row">

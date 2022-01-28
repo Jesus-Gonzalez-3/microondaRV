@@ -83,14 +83,65 @@ class UsuarioController extends Controller
 
     public function updateDataUser(Request $request)
     {
-        $muser = UsuarioEloquent::find($request->id);
-        $muser->name = $request->name;
-        $muser->email = $request->name;
+        try {
+            $muser = UsuarioEloquent::find($request->id);
+            $muser->name = $request->nombre;
+            $muser->email = $request->email;
+            $muser->rol = $request->rol;
+            if (isset($request->password)) {
+                $muser->password = Hash::make($request->password);
+            }
+            $muser->save();
+            return 'OK';
+        } catch (Exception $ex) {
+            return 'ERROR: ' . $ex;
+        }
     }
 
     public function GetAll()
     {
-        $usuarios = UsuarioEloquent::all()->where('estatus','=','Activo');
+        $usuarios = UsuarioEloquent::all()
+            ->where('estatus', '=', 'Activo')
+            ->where('rol', '!=', 'Admin')
+            ->whereNotIn('name', [Auth::user()->name]);
         return view('users.users', compact('usuarios'));
+    }
+
+    public function GetAllInactivos()
+    {
+        $usuarios = UsuarioEloquent::all()
+            ->where('estatus', '=', 'Inactivo')
+            ->where('rol', '!=', 'Admin')
+            ->whereNotIn('name', [Auth::user()->name]);
+        return view('users.usersInactivos', compact('usuarios'));
+    }
+
+    public function Consultar(Request $request)
+    {
+        $mUser = UsuarioEloquent::find($request->id);
+        return $mUser;
+    }
+
+    public function EliminarUser(Request $request)
+    {
+        try {
+            $muser = UsuarioEloquent::find($request->id);
+            $muser->estatus = 'Inactivo';
+            $muser->save();
+            return 'OK';
+        } catch (Exception $ex) {
+            return 'ERROR ' . $ex;
+        }
+    }
+    public function ActivarUser(Request $request)
+    {
+        try {
+            $muser = UsuarioEloquent::find($request->id);
+            $muser->estatus = 'Activo';
+            $muser->save();
+            return 'OK';
+        } catch (Exception $ex) {
+            return 'ERROR ' . $ex;
+        }
     }
 }

@@ -271,10 +271,11 @@
                         <li class="nav-small-cap">Usuarios</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="fas fa-user-circle"></i>
-                                <span class="hide-menu">Usuarios</span>
+                                <span class="hide-menu">Gestión de Usuarios</span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{URL::to('/usuarios')}}">Gestión de Usuarios</a></li>
+                                <li><a href="{{URL::to('/usuarios')}}">Usuarios Activos</a></li>
+                                <li><a href="{{URL::to('/usuariosInactivos')}}">Usuarios Inactivos</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
@@ -477,6 +478,9 @@
     <script src="{{asset('js_aplicacion/general.js')}}"></script>
     <script src="{{asset('js_aplicacion/login.js')}}"></script>
     <script src="{{asset('js_aplicacion/reportes.js')}}"></script>
+
+
+    
     <script src="{{asset('assets/plugins/dropify/dist/js/dropify.min.js')}}"></script>
     <script src="{{asset('assets/plugins/highcharts/highstock.js')}}"></script>
     <script src="{{asset('assets/plugins/highcharts/exporting.js')}}"></script>
