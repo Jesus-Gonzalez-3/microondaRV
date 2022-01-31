@@ -68,10 +68,11 @@ const registrarUsuario = () => {
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-                url: "/public/usuarios/acciones/agregar",
+                url: "/microondaRV/public/usuarios/acciones/agregar",
                 method: "POST",
                 data: datos,
             }).done(function (res) {
+                console.log(res);
                 if (res == "OK") {
                     swal(
                         {
@@ -81,7 +82,7 @@ const registrarUsuario = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public";
+                            location.href = "/microondaRV/public";
                         }
                     );
                 } else {
@@ -93,11 +94,12 @@ const registrarUsuario = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public";
+                            location.href = "/microondaRV/public";
                         }
                     );
                 }
             }).fail(function (res) {
+                console.log(res);
                 swal(
                     {
                         type: "error",
@@ -106,7 +108,7 @@ const registrarUsuario = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public";
+                        location.href = "/microondaRV/public";
                     }
                 );
             });
@@ -143,7 +145,7 @@ const iniciarSesion = () => {
 
         console.log(datos);
         $.ajax({
-            url: "/public/usuarios/acciones/login",
+            url: "/microondaRV/public/usuarios/acciones/login",
             method: "POST",
             data: datos,
         }).done(function (res) {
@@ -157,7 +159,7 @@ const iniciarSesion = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/microondaRV/public/paginaPrincipal";
                     }
                 );
             } else {
@@ -169,7 +171,7 @@ const iniciarSesion = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public";
+                        location.href = "/microondaRV/public";
                     }
                 );
             }
@@ -182,7 +184,7 @@ const iniciarSesion = () => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public";
+                    location.href = "/microondaRV/public";
                 }
             );
         });
@@ -247,7 +249,7 @@ const RegistrarUsuarioAdmin = () => {
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-                url: "/public/usuarios/acciones/agregar",
+                url: "/microondaRV/public/usuarios/acciones/agregar",
                 method: "POST",
                 data: datos,
             }).done(function (res) {
@@ -260,7 +262,7 @@ const RegistrarUsuarioAdmin = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/microondaRV/public/usuarios";
                         }
                     );
                 } else {
@@ -272,7 +274,7 @@ const RegistrarUsuarioAdmin = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/microondaRV/public/usuarios";
                         }
                     );
                 }
@@ -285,7 +287,7 @@ const RegistrarUsuarioAdmin = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/microondaRV/public/usuarios";
                     }
                 );
             });
@@ -300,7 +302,7 @@ const detalleUsuario = (uid) => {
     };
 
     $.ajax({
-        url: "/public/usuarios/acciones/consultar",
+        url: "/microondaRV/public/usuarios/acciones/consultar",
         method: "POST",
         data: datos,
     }).done(function (res) {
@@ -327,7 +329,7 @@ const detalleUsuario = (uid) => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/usuarios";
+                    location.href = "/microondaRV/public/usuarios";
                 }
             );
         }
@@ -340,7 +342,7 @@ const detalleUsuario = (uid) => {
                 confirmButtonText: "OK",
             },
             function () {
-                location.href = "/public/usuarios";
+                location.href = "/microondaRV/public/usuarios";
             }
         );
     });
@@ -406,7 +408,7 @@ const updatedatauser = () => {
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-                url: "/public/usuarios/acciones/updateDataUser",
+                url: "/microondaRV/public/usuarios/acciones/updateDataUser",
                 method: "POST",
                 data: datos,
             }).done(function (res) {
@@ -420,7 +422,7 @@ const updatedatauser = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/microondaRV/public/usuarios";
                         }
                     );
                 } else {
@@ -432,7 +434,7 @@ const updatedatauser = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/microondaRV/public/usuarios";
                         }
                     );
                 }
@@ -446,7 +448,7 @@ const updatedatauser = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/microondaRV/public/usuarios";
                     }
                 );
             });
@@ -474,7 +476,7 @@ const eliminarUsuario = (uid) => {
         showLoaderOnConfirm: true,
     }, function () {
         $.ajax({
-            url: "/public/usuarios/acciones/delete",
+            url: "/microondaRV/public/usuarios/acciones/delete",
             method: "POST",
             data: datos,
         }).done(function (res) {
@@ -487,7 +489,7 @@ const eliminarUsuario = (uid) => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/microondaRV/public/usuarios";
                     }
                 );
             } else {
@@ -499,7 +501,7 @@ const eliminarUsuario = (uid) => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/microondaRV/public/usuarios";
                     }
                 );
             }
@@ -512,7 +514,7 @@ const eliminarUsuario = (uid) => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/usuarios";
+                    location.href = "/microondaRV/public/usuarios";
                 }
             );
         });
@@ -539,7 +541,7 @@ const ActivarUsuario = (uid) =>{
         showLoaderOnConfirm: true,
     }, function () {
         $.ajax({
-            url: "/public/usuarios/acciones/active",
+            url: "/microondaRV/public/usuarios/acciones/active",
             method: "POST",
             data: datos,
         }).done(function (res) {
@@ -552,7 +554,7 @@ const ActivarUsuario = (uid) =>{
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/microondaRV/public/usuarios";
                     }
                 );
             } else {
@@ -564,7 +566,7 @@ const ActivarUsuario = (uid) =>{
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/microondaRV/public/usuarios";
                     }
                 );
             }
@@ -577,7 +579,7 @@ const ActivarUsuario = (uid) =>{
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/usuarios";
+                    location.href = "/microondaRV/public/usuarios";
                 }
             );
         });

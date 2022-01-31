@@ -5,7 +5,7 @@ $(document).ready(e => {
 
 const consultarDatos = async () => {
     $.ajax({
-        url: "/public/reporteunidadgrafica",
+        url: "/microondaRV/public/reporteunidadgrafica",
         method: "GET",
         data: "",
     })
@@ -25,7 +25,7 @@ const consultarDatos = async () => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/microondaRV/public/paginaPrincipal";
                 }
             );
         });
@@ -190,7 +190,7 @@ function GenerarPDF() {
     $('#ventanaCarga').modal('show');
 
     $.ajax({
-        url: "/public/reportepdf",
+        url: "/microondaRV/public/reportepdf",
         method: "GET",
         data: "",
     }).done(function (res) {

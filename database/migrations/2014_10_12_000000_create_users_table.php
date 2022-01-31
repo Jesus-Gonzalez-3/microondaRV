@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('estatus',['Activo','Inactivo']);
             $table->enum('rol',['Agente', 'Gerente','Admin']);
-            $table->text('avatar');
+            $table->text('avatar')->default('null');
             $table->rememberToken();
             $table->timestamps();
         });

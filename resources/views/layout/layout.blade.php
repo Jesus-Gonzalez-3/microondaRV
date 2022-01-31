@@ -89,7 +89,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/public/paginaPrincipal">
+                    <a class="navbar-brand" href="/microondaRV/public/paginaPrincipal">
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
