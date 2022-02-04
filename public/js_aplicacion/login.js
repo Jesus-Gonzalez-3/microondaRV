@@ -68,7 +68,7 @@ const registrarUsuario = () => {
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-                url: "/public/usuarios/acciones/agregar",
+                url: "/public/usuarios/acciones/registrar",
                 method: "POST",
                 data: datos,
             }).done(function (res) {
@@ -147,7 +147,6 @@ const iniciarSesion = () => {
             method: "POST",
             data: datos,
         }).done(function (res) {
-            console.log(res);
             if (res.startsWith('OK')) {
                 swal(
                     {
@@ -410,7 +409,7 @@ const updatedatauser = () => {
                 method: "POST",
                 data: datos,
             }).done(function (res) {
-                console.log(res);
+                 
                 if (res == "OK") {
                     swal(
                         {
@@ -437,7 +436,7 @@ const updatedatauser = () => {
                     );
                 }
             }).fail(function (res) {
-                console.log(res);
+                 
                 swal(
                     {
                         type: "error",

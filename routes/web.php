@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
 
 Route::group(['prefix' => 'usuarios/acciones'], function () {
-    Route::post('/agregar', 'UsuarioController@registrar');
+    Route::post('/registrar', 'UsuarioController@registrar');
     Route::post('/login', 'UsuarioController@login');
     Route::get('/logout', 'UsuarioController@logout');
 });
@@ -36,12 +36,8 @@ try {
         /**
          * Gestión de Usuarios
          */
-        
-        Route::get('/reporteSemanal', function () {
-            return view('reportes.reporteSemanal');
-        });
-
         Route::group(['prefix' => 'usuarios/acciones'], function () {
+            Route::post('/agregar', 'UsuarioController@registrar');
             Route::get('/logout', 'UsuarioController@logout');
             Route::post('/update', 'UsuarioController@updateUser');
             Route::post('/updateDataUser', 'UsuarioController@updateDataUser');
@@ -49,22 +45,30 @@ try {
             Route::post('/active', 'UsuarioController@ActivarUser');
             Route::post('/consultar', 'UsuarioController@Consultar');
         });
+
         Route::get('/usuarios', 'UsuarioController@GetAll');
         Route::get('/usuariosInactivos', 'UsuarioController@GetAllInactivos');
 
+        /**
+         * Reportes
+         */
 
         Route::get('/reportePeriodo', function () {
             return view('reportes.reportePeriodo');
         });
-
         Route::get('/reporteAnual', function () {
             return view('reportes.reporteAnual');
         });
-
         Route::get('/reporteAll', 'ReportesController@GetAll');
-
         Route::get('/reporteunidadgrafica', 'ReportesController@ReporteVentasUnidadGrafica');
         Route::get('/exportarExcel', 'GeneradorReportesExcel@ExportarExcel2');
+        Route::get('/reporteSemanal', function () {
+            return view('reportes.reporteSemanal');
+        });
+
+        /**
+         * Index
+         */
 
         Route::get('/paginaPrincipal', function () {
             return view('paginaPrincipal.index');

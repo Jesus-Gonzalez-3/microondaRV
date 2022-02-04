@@ -16,7 +16,6 @@
                         @forelse(range(1,52) as $dia)
                         <option value="{{$dia}}">Semana {{$dia}}</option>
                         @empty
-                        <option>Op2</option>
                         @endforelse
                     </select>
                 </div>
