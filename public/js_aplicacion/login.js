@@ -149,7 +149,6 @@ const iniciarSesion = () => {
             method: "POST",
             data: datos,
         }).done(function (res) {
-            console.log(res);
             if (res.startsWith('OK')) {
                 swal(
                     {
@@ -412,7 +411,7 @@ const updatedatauser = () => {
                 method: "POST",
                 data: datos,
             }).done(function (res) {
-                console.log(res);
+                 
                 if (res == "OK") {
                     swal(
                         {
@@ -439,7 +438,7 @@ const updatedatauser = () => {
                     );
                 }
             }).fail(function (res) {
-                console.log(res);
+                 
                 swal(
                     {
                         type: "error",

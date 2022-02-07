@@ -10,7 +10,7 @@
     <meta name="author" content="Jesús Gp Gaona">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/img/logo_mc2.2.png')}}">
-    <title>Envases Microonda</title>
+    <title>Envases Microonda S.A de C.V</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -21,7 +21,7 @@
     <link href="{{asset('assets/plugins/chartist-js/dist/chartist-init.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')}}" rel="stylesheet">
     <link href="{{asset('assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
-    
+
     <link href="{{asset('assets/plugins/switchery/dist/switchery.min.css')}}" rel="stylesheet" />
     <!--This page css - Morris CSS -->
     <link href="{{asset('assets/plugins/c3-master/c3.min.css')}}" rel="stylesheet">
@@ -253,6 +253,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+                        @if(Auth::user()->rol != 'Admin' && Auth::user()->rol != 'Direccion')
                         <li class="nav-small-cap">Reporte de Ventas</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="fas fa-chart-bar"></i>
@@ -266,7 +267,7 @@
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
-
+                        @endif
                         @if(Auth::user()->rol === 'Admin')
                         <li class="nav-small-cap">Usuarios</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
@@ -276,6 +277,22 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{URL::to('/usuarios')}}">Usuarios Activos</a></li>
                                 <li><a href="{{URL::to('/usuariosInactivos')}}">Usuarios Inactivos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-devider"></li>
+                        @endif
+
+                        @if(Auth::user()->rol === 'Direccion' || Auth::user()->rol === 'Admin')
+                        <li class="nav-small-cap">Reportes Direccion</li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fab fa-yelp"></i>
+                                <span class="hide-menu">Reportes</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{URL::to('/reporteSemanal')}}">Reporte Semanal</a></li>
+                                <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
+                                <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
+                                <li><a href="{{URL::to('/reporteAll')}}">Reporte Ventas (Todo)</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
@@ -331,7 +348,7 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- Modal -->
-    <div class="modal fade" id="infoUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal fade" id="infoUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" data-backdrop="static" data-keyboard="false" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-info text-white ">
@@ -367,42 +384,48 @@
                                     </center>
                                     <hr class="m-t-0 m-b-40">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <label class="control-label text-center col-md-12">Nombre:</label>
-                                                <div class="col-md-12">
-                                                    <p class="form-control-static"> {{Auth::user()->name}} </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--/span-->
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <label class="control-label text-center col-md-12">Usuario</label>
-                                                <div class="col-md-12">
-                                                    <p class="form-control-static">{{Auth::user()->email}} </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--/span-->
-                                    </div>
-                                    <!--/row-->
-
-                                    <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <div class="form-group row">
-                                                <label class="control-label text-center col-md-12">Rol</label>
-                                                <div class="col-md-12 text-center">
-                                                    <p class="form-control-static text-center"> {{Auth::user()->rol}} </p>
+                                            <div class="row">
+                                                <div class="form-group col-12">
+                                                    <label class="control-label text-center col-md-12">Nombre:</label>
+                                                    <div class="col-md-12">
+                                                        <p class="form-control-static text-center"> {{Auth::user()->name}} </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--/span-->
                                     </div>
-                                    <!--/row-->
+                                    <div class="row">
+                                        <!--/span-->
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="form-group col-12">
+                                                    <label class="control-label text-center col-md-12">Usuario</label>
+                                                    <div class="col-md-12">
+                                                        <p class="form-control-static text-center" style="white-space: initial; white-space: initial;">{{Auth::user()->email}} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
                                 </div>
-                            </form>
+                                <!--/row-->
+
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="form-group row">
+                                            <label class="control-label text-center col-md-12">Rol</label>
+                                            <div class="col-md-12 text-center">
+                                                <p class="form-control-static text-center"> {{Auth::user()->rol}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/span-->
+                                </div>
+                                <!--/row-->
                         </div>
+                        </form>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -434,7 +457,7 @@
     <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!-- Sweet-Alert  -->
     <script src="{{asset('assets/plugins/sweetalert/sweetalert.min.js')}}"></script>
-    
+
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('assets/plugins/bootstrap-notify/bootstrap-notify.js')}}"></script>
     <script src="{{asset('assets/plugins/bootstrap-notify/notifications.js')}}"></script>
@@ -480,7 +503,7 @@
     <script src="{{asset('js_aplicacion/reportes.js')}}"></script>
 
 
-    
+
     <script src="{{asset('assets/plugins/dropify/dist/js/dropify.min.js')}}"></script>
     <script src="{{asset('assets/plugins/highcharts/highstock.js')}}"></script>
     <script src="{{asset('assets/plugins/highcharts/exporting.js')}}"></script>
@@ -491,7 +514,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.js"></script>
 
- 
+
     <script src="{{asset('assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
     <script src="{{asset('assets/plugins/switchery/dist/switchery.min.js')}}"></script>
 
