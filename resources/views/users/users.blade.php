@@ -193,6 +193,9 @@
                                     <option value="0">Seleccione</option>
                                     <option value="Gerente">Gerente</option>
                                     <option value="Agente">Agente</option>
+                                    @if(Auth::user()->rol === 'Admin')
+                                    <option value="Direccion">Direccion</option>
+                                    @endif
                                 </select>
                             </div>
                             <small id="helpId" class="form-text text-muted">Seleccione el rol al que pertenece este usuario</small>

@@ -40,8 +40,8 @@
             <div class="col-md-9">
 
                 <div class="card">
-                    <div class="card-header">
-                        <h1 class="text-center micro" style="color: #184F4F;"> ENVASES MICROONDA</h1>
+                    <div class="card-header">   
+                        <h1 class="text-center micro" style="color: #184F4F;"> ENVASES MICROONDA S.A DE C.V </h1>
                     </div>
                     <div class="card-body">
                         <center>
@@ -75,14 +75,14 @@
                             <div class="form-group m-t-40">
                                 <div class="col-xs-12">
                                     <label for="txtusuario">Usuario</label>
-                                    <input class="form-control" type="email" required="true" id="txtusuario" autocomplete="username" name="txtusuario" placeholder="Correo">
+                                    <input class="form-control" type="email" required="true" id="txtusuario" autocomplete="off" name="txtusuario" placeholder="Correo">
                                     <small id="helpId" class="form-text text-muted">Introduzca su correo empresarial</small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="txtpassword">Contraseña</label>
-                                    <input class="form-control" type="password" required="true" id="txtpassword" name="txtpassword" autocomplete="current-password" placeholder="Contraseña">
+                                    <input class="form-control" type="password" required="true" id="txtpassword" autocomplete="off" name="txtpassword" autocomplete="current-password" placeholder="Contraseña">
                                     <small id="helpId" class="form-text text-muted">Introduzca su contraseña, diferenciando mayúsculas y minúsculas</small>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                             <br>
                             <br>
                             <a href="javascript:void(0)" class="text-center db">
-                            <center>
+                                <center>
                                     <img src="{{asset('/img/logo_mc2.3.1.png')}}" style="width: 100%; height: 100%;" alt="Home" />
                                 </center>
                             </a>
@@ -123,21 +123,21 @@
                             <div class="form-group m-t-40">
                                 <div class="col-xs-12">
                                     <label for="txtNombre">Nombre</label>
-                                    <input class="form-control" type="text" required="" id="txtNombre" name="txtNombre" placeholder="Nombre">
+                                    <input class="form-control" type="text" required="" id="txtNombre" name="txtNombre" autocomplete="off" placeholder="Nombre">
                                     <small id="helpId" class="form-text text-muted">Introduzca su nombre completo</small>
                                 </div>
                             </div>
                             <div class="form-group m-t-40">
                                 <div class="col-xs-12">
                                     <label for="txtusuario">Usuario</label>
-                                    <input class="form-control" type="email" required="" id="txtusuarioregistro"  autocomplete="username" name="txtusuarioregistro" placeholder="Correo">
+                                    <input class="form-control" type="email" required="" id="txtusuarioregistro" autocomplete="username" autocomplete="off" name="txtusuarioregistro" placeholder="Correo">
                                     <small id="helpId" class="form-text text-muted">Introduzca su correo empresarial</small>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="txtpassword">Contraseña</label>
-                                    <input class="form-control" type="password" required="" id="txtpasswordregistro" autocomplete="current-password" name="txtpasswordregistro" placeholder="Contraseña">
+                                    <input class="form-control" type="password" required="" id="txtpasswordregistro" autocomplete="off" name="txtpasswordregistro" placeholder="Contraseña">
                                     <small id="helpId" class="form-text text-muted">Introduzca su contraseña, diferenciando mayúsculas y minúsculas</small>
                                 </div>
                             </div>
@@ -192,8 +192,8 @@
     <script src="{{asset('/assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!--Custom JavaScript -->
     <script src="{{asset('js/custom.min.js')}}"></script>
-      <!-- This is data table -->
-      <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
+    <!-- This is data table -->
+    <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>

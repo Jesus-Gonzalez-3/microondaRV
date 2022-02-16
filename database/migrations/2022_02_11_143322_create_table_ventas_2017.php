@@ -13,21 +13,21 @@ class CreateTableVentas2017 extends Migration
      */
     public function up()
     {
-        Schema::create('table_ventas_2017', function (Blueprint $table) {
+        Schema::create('ventas_2017', function (Blueprint $table) {
             $table->id();
             $table->integer('LINEA')->nullable();
             $table->string('PRODUCTO', 100)->nullable();
             $table->string('DESCRIPCIÓN')->nullable();
-            $table->integer('CLAVE')->nullable();
+            $table->string('CLAVE',255)->nullable();
             $table->string('CLIENTE', 255)->nullable();
             $table->string('AGENTE')->nullable();
             $table->integer('BODEGA')->nullable();
             $table->integer('SEMANA')->nullable();
-            $table->integer('PERIODO')->nullable();
-            $table->integer('MES')->nullable();
-            $table->integer('DIA')->nullable();
-            $table->integer('ORDEN')->nullable();
-            $table->integer('FACTURA')->nullable();
+            $table->string('PERIODO',255)->nullable();
+            $table->string('MES',255)->nullable();
+            $table->string('DIA',255)->nullable();
+            $table->string('ORDEN',255)->nullable();
+            $table->string('FACTURA',255)->nullable();
             $table->integer('UNIDADES')->nullable();
             $table->double('IMPORTE')->nullable();  
             $table->timestamps();
