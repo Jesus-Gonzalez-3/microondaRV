@@ -29,8 +29,7 @@ class CreateTableVentas2019Otras extends Migration
             $table->string('ORDEN',255)->nullable();
             $table->string('FACTURA',255)->nullable();
             $table->integer('UNIDADES')->nullable();
-            $table->double('IMPORTE')->nullable();  
-            $table->double('IMPORTE')->nullable();  
+            $table->double('IMPORTE')->nullable(); 
             $table->timestamps();
         });
     }
