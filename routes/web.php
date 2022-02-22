@@ -29,7 +29,7 @@ Route::group(['prefix' => 'usuarios/acciones'], function () {
     Route::post('/login', 'UsuarioController@login');
     Route::get('/logout', 'UsuarioController@logout');
 });
-
+Route::get('/top50', 'ReportesController@ObtenerTop50');
 
 try {
     Route::group(['middleware' => ['auth']], function () {
@@ -56,6 +56,7 @@ try {
 
          Route::group(['prefix' => 'direccion/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
+            Route::get('/top50', 'ReportesController@ObtenerTop50');
          });
         
         Route::get('/reportePeriodo', function () {
