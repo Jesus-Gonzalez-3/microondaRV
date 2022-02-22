@@ -83,7 +83,7 @@ const inicializarGraficaTipoPastel = (data) => {
         valores.push(tmp);
     }
 
-    Highcharts.chart('containerVentasSemanalPastel', {
+    Highcharts.chart('containerVentasSemanalOtrasPastel', {
         exporting: {
             enabled: true
         },
