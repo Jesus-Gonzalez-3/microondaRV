@@ -1,7 +1,7 @@
 @extends('layout.layout')
 <? $semanas = 52 ?>
 @section('contenido')
-<div class="card">
+<div class="card" onload="alert('Hola desde el onload');" onloadstart="alert('Hola desde el onloadstart');" onprogress="alert('hola desde el onprogess');">
     <div class="card-body">
         <h2 class="card-title">Reporte de Ventas Semanal</h2>
         <p class="card-text"> ¡Hola {{Auth::user()->name;}}¡ En esta pantalla podrás visualizar un reporte de las ventas realizadas de la semana anterior.</p>
@@ -72,16 +72,16 @@
                         <tfoot>
                             <tr>
                                 <th>Orden</th>
-                                <th>Clave</th>
-                                <th>Nombre del Cliente</th>
-                                <th>Promedio Semanal Acumulado Unidades 2020</th>
-                                <th>Promedio Semanal Acumulado Unidades 2021</th>
-                                <th>Promedio Semanal Acumulado Unidades 2022</th>
-                                <th>Unidades Semana Consultada</th>
-                                <th>Promedio Semanal Acumulado Importe 2020</th>
-                                <th>Promedio Semanal Acumulado Importe 2021</th>
-                                <th>Promedio Semanal Acumulado Importe 2022</th>
-                                <th>Importe Semana Consultada</th>
+                                <th></th>
+                                <th>Total </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -95,6 +95,12 @@
         <div class="tab-pane  p-20" id="graBarraVentasSemanal" role="tabpanel">
             <figure class="highcharts-figure">
                 <div id="containerVentasSemanalBarra"></div>
+            </figure>
+            <br>
+            <hr>
+            <br>
+            <figure class="highcharts-figure">
+                <div id="containerVentasSemanalBarraPromedio"></div>
             </figure>
         </div>
         <div class="tab-pane p-20" id="graCirVentasSemanal" role="tabpanel">

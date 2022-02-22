@@ -1,36 +1,3 @@
-$(document).ready(e => {
-    consultarDatos();
-});
-
-
-const consultarDatos = async () => {
-    $.ajax({
-        url: "/public/reporteunidadgrafica",
-        method: "GET",
-        data: "",
-    })
-        .done(function (res) {
-            //inicializarGraficaInsumosCantidadPastel(res.cantidad_insumos);
-            //inicializarGraficaInsumosCantidadBarra(res.cantidad_insumos);
-            inicializarGraficaTipoPastel(res.producto);
-            inicializarGraficaTipoBarra(res.producto);
-        })
-        .fail(function (res) {
-            console.log(res);
-            swal(
-                {
-                    type: "error",
-                    title: "Error",
-                    text: "Ha ocurrido un error.",
-                    confirmButtonText: "OK",
-                },
-                function () {
-                    location.href = "/public/paginaPrincipal";
-                }
-            );
-        });
-};
-
 const inicializarGraficaTipoBarra = (data) => {
 
     let valores = [];
@@ -39,12 +6,12 @@ const inicializarGraficaTipoBarra = (data) => {
     let tamanio = data.length;
 
     for (let index = 0; index < tamanio; index++) {
-        valores.push(Number(data[index].cantidad_unidades));
-        categoria.push("<b>" + data[index].desc_producto + "</b>");
-        leyenda.push('  cantidad: '+Number(data[index].cantidad_unidades));
+        valores.push(Number(data[index].Unidades));
+        categoria.push("<b>" + data[index].cliente + "</b>");
+        leyenda.push('  cantidad: ' + new Intl.NumberFormat('en').format(Number(data[index].Unidades)));
     }
 
-    Highcharts.chart('containerVentasAllBarra', {
+    Highcharts.chart('containerVentasSemanalBarra', {
         exporting: {
             enabled: true
         },
@@ -52,10 +19,10 @@ const inicializarGraficaTipoBarra = (data) => {
             type: 'column'
         },
         title: {
-            text: 'Unidades vendidas por tipo de producto'
+            text: 'Unidades vendidas por Cliente de Otras Industrias'
         },
         subtitle: {
-            text: 'Total de Unidades vendidas por tipo de producto'
+            text: 'Total de Unidades vendidas por cliente semana consultada'
         },
         accessibility: {
             announceNewData: {
@@ -89,46 +56,18 @@ const inicializarGraficaTipoBarra = (data) => {
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
             pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
+        },credits :{
+            enabled: false
         },
-
         series: [
             {
-                name: 'Unidades vendidas por tipo de producto',
+                name: 'Unidades vendidas por Cliente de Otras Industrias',
                 colorByPoint: true,
                 data: valores
             }
         ]
     });
 
-
-    var config = {
-        displaylogo: false,
-        responsive: true,
-
-    };
-
-
-    TESTER = document.getElementById('tester');
-    Plotly.newPlot(
-        TESTER,
-        [{
-            type: 'bar',
-            x: categoria,
-            y: valores,
-            text: leyenda,
-        }],
-        {
-            showlegend: false,
-            xaxis: {
-                tickangle: -45
-            },
-            yaxis: {
-                zeroline: false,
-                gridwidth: 2
-            },
-            bargap: 0.05
-        },
-        config);
 };
 
 const inicializarGraficaTipoPastel = (data) => {
@@ -136,15 +75,15 @@ const inicializarGraficaTipoPastel = (data) => {
     let tamanio = data.length;
 
     for (let index = 0; index < tamanio; index++) {
-        var tmp = {
-            name: data[index].desc_producto,
+        let tmp = {
+            name: data[index].cliente,
             selected: (Number(index) === 1 ? true : false),
-            y: parseInt(data[index].cantidad_unidades)
+            y: parseInt(data[index].Unidades)
         };
         valores.push(tmp);
     }
 
-    Highcharts.chart('containerVentasAllPastel', {
+    Highcharts.chart('containerVentasSemanalPastel', {
         exporting: {
             enabled: true
         },
@@ -157,7 +96,10 @@ const inicializarGraficaTipoPastel = (data) => {
             }
         },
         title: {
-            text: 'Unidades vendidas por tipo de producto'
+            text: 'Unidades vendidas por cliente de otras industrias'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por cliente Semana consultada'
         },
         accessibility: {
             point: {
@@ -178,15 +120,163 @@ const inicializarGraficaTipoPastel = (data) => {
                 }
             }
         },
+        credits :{
+            enabled: false
+        },
         series: [{
             type: 'pie',
-            name: 'Unidades vendidas por tipo de producto',
+            name: 'Unidades vendidas por cliente de otras industrias',
             data: valores
         }]
     });
 };
 
-function GenerarPDF() {
+const graficosPastelPromedio = (data) => {
+    console.table(data);
+    categoria = [];
+    valores = [];
+    for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        let serie1 = [];
+        categoria.push(element.CLIENTE);
+        serie1.push(parseFloat(element.UNIDADES_ANNIO1.toString().replace(',', '')));
+        serie1.push(parseFloat(element.UNIDADES_ANNIO2.toString().replace(',', '')));
+        serie1.push(parseFloat(element.UNIDADES_ANNIO3.toString().replace(',', '')));
+        valores.push(serie1);
+
+    }
+    let chart = {
+        type: 'column'
+    };
+    let title = {
+        text: 'Unidades Vendidas por Cliente, Otras Industrias'
+    };
+    let subtitle = {
+        text: 'Promedio de Ventas de los Ultimos 3 años'
+    };
+    let xAxis = {
+        categories: ['2020','2021','2022'],
+        title: {
+            text: null
+        }
+    };
+    let yAxis = {
+        min: 0,
+        title: {
+            text: 'Promedio de ventas',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    };
+    let tooltip = {
+        pointFormat: '{series.name}: <b>{point.y}</b>'
+    };
+    let plotOptions = {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y}'
+            }
+        }
+    };
+    let legend = {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: -10,
+        floating: false,
+        borderWidth: 3,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true
+    };
+    let credits = {
+        enabled: false
+    };
+
+    let series = [
+        {
+            name: categoria[0],
+            data: valores[0]
+        },
+        {
+            name: categoria[1],
+            data: valores[1]
+        },{
+            name: categoria[2],
+            data: valores[2]
+        },{
+            name: categoria[3],
+            data: valores[3]
+        },{
+            name: categoria[4],
+            data: valores[4]
+        },{
+            name: categoria[5],
+            data: valores[5]
+        },{
+            name: categoria[6],
+            data: valores[6]
+        },{
+            name: categoria[7],
+            data: valores[7]
+        },{
+            name: categoria[8],
+            data: valores[8]
+        },{
+            name: categoria[9],
+            data: valores[9]
+        },{
+            name: categoria[10],
+            data: valores[10]
+        },{
+            name: categoria[11],
+            data: valores[11]
+        },{
+            name: categoria[12],
+            data: valores[12]
+        },{
+            name: categoria[13],
+            data: valores[13]
+        },{
+            name: categoria[14],
+            data: valores[14]
+        },{
+            name: categoria[15],
+            data: valores[15]
+        },{
+            name: categoria[16],
+            data: valores[16]
+        },{
+            name: categoria[17],
+            data: valores[17]
+        },{
+            name: categoria[18],
+            data: valores[18]
+        },{
+            name: categoria[19],
+            data: valores[19]
+        },
+
+    ];
+    let json = {};
+    json.chart = chart;
+    json.title = title;
+    json.subtitle = subtitle;
+    json.tooltip = tooltip;
+    json.xAxis = xAxis;
+    json.yAxis = yAxis;
+    json.series = series;
+    json.plotOptions = plotOptions;
+    json.legend = legend;
+    json.credits = credits;
+    $('#containerVentasSemanalBarraPromedio').highcharts(json);
+}
+
+/* function GenerarPDF() {
     $('#ventanaCarga').modal('show');
 
     $.ajax({
@@ -194,7 +284,6 @@ function GenerarPDF() {
         method: "GET",
         data: "",
     }).done(function (res) {
-        console.log(res);
 
         let pdf = new jsPDF('p', 'pt', 'letter');
 
@@ -306,8 +395,8 @@ function GenerarPDF() {
         $('#ventanaCarga').modal('toggle');
 
         /*const woorkbook = new ExcelJS.Workbook();
-        woorkbook.xlsx.writeFile('reporte de ventas.xlsx');*/
+        woorkbook.xlsx.writeFile('reporte de ventas.xlsx');
 
         //console.log(woorkbook.output('bloburl'));
     });
-}
+} */
