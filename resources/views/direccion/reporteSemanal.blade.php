@@ -1,19 +1,18 @@
 @extends('layout.layout')
 <? $semanas = 52 ?>
 @section('contenido')
-<div class="card" onload="alert('Hola desde el onload');" onloadstart="alert('Hola desde el onloadstart');" onprogress="alert('hola desde el onprogess');">
+<div class="card">
     <div class="card-body">
         <h2 class="card-title">Reporte de Ventas Semanal</h2>
         <p class="card-text"> ¡Hola {{Auth::user()->name;}}¡ En esta pantalla podrás visualizar un reporte de las ventas realizadas de la semana anterior.</p>
         <hr>
-        <br />
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
                     <label for="cmbSemanaDireccion">Semana</label>
                     <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaDireccion" id="cmbSemanaDireccion">
                         <option value="">Selecione</option>
-                        @forelse(range(1,52) as $dia)
+                        @forelse(range(1,50) as $dia)
                         <option value="{{$dia}}">Semana {{$dia}}</option>
                         @empty
                         @endforelse
@@ -48,7 +47,6 @@
     <div class="tab-content">
         <div class="tab-pane active" id="tablaVentasSemanal" role="tabpanel">
             <div id="ventasSemanalOtrasIndustrias">
-                <br>
                 <hr>
                 <div class="row">
                     <div class="col-11">
@@ -56,13 +54,10 @@
                     </div>
                     <div class="col-1">
                         <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <span class="caret"></span>
+                            <i class="fas fa-angle-down" aria-hidden="true"></i> <span class="caret"></span>
                         </button>
                     </div>
-
                 </div>
-
-                <hr>
                 <div class="table-responsive collapse show" id="collapseExample">
                     <div class="container-fluid">
                         <table id="tblReporteVentasSemanalDireccion" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
@@ -104,6 +99,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div id="ventasSemanalCalzado">
                 <div class="row">
                     <div class="col-11">
@@ -111,7 +107,7 @@
                     </div>
                     <div class="col-1">
                         <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <span class="caret"></span>
+                            <i class="fas fa-angle-down" aria-hidden="true"></i> <span class="caret"></span>
                         </button>
                     </div>
 
@@ -153,82 +149,91 @@
 
                             </tbody>
                         </table>
-                        <br />
                     </div>
                 </div>
             </div>
+            <br>
         </div>
-        <div class="tab-pane  p-10" id="graBarraVentasSemanal" role="tabpanel">
+        <div class="tab-pane" id="graBarraVentasSemanal" role="tabpanel">
             <div>
+                <hr>
                 <div class="row">
                     <div class="col-11">
                         <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>
                     </div>
                     <div class="col-1">
                         <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasOtrasIndustriasBarra" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <span class="caret"></span>
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
                         </button>
                     </div>
-
                 </div>
-                <br>
                 <hr>
-                <br>
-
-                <div class="container-fluid" id="ventasOtrasIndustriasBarra">
-
+                <div class="container-fluid show" id="ventasOtrasIndustriasBarra">
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalBarra"></div>
                     </figure>
-                    <br>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalBarraPromedio"></div>
                     </figure>
                 </div>
+                <hr>
                 <div class="row">
                     <div class="col-11">
                         <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 50 MEJORES CLIENTES DE CALZADO</h3>
                     </div>
                     <div class="col-1">
                         <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasCalzadoBarra" aria-expanded="false" aria-controls="collapseExample">
-                            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> <span class="caret"></span>
+                            <i class="fas fa-angle-down" aria-hidden="true"></i> <span class="caret"></span>
                         </button>
                     </div>
-
                 </div>
-                <div class="container-fluid" id="ventasCalzadoBarra">
+                <div class="container-fluid show" id="ventasCalzadoBarra">
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalBarraCalzado"></div>
                     </figure>
-                    <br>
                     <hr>
-                    <br>
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalBarraPromedioCalzado"></div>
                     </figure>
                 </div>
             </div>
         </div>
-        <div class="tab-pane p-20" id="graCirVentasSemanal" role="tabpanel">
-            <div class="container-fluid" id="ventasOtrasIndustriasPastel">
-                <br>
+        <div class="tab-pane" id="graCirVentasSemanal" role="tabpanel">
+            <div>
                 <hr>
-                <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>
+                <div class="row">
+                    <div class="col-11">
+                        <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasOtrasIndustriasPastel" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="container-fluid show" id="ventasOtrasIndustriasPastel">
+                    <figure class="highcharts-figure" style="width: 100%; height: 100%;">
+                        <div id="containerVentasSemanalOtrasPastel"></div>
+                    </figure>
+                </div>
                 <hr>
-                <figure class="highcharts-figure" style="width: 100%; height: 100%;">
-                    <div id="containerVentasSemanalOtrasPastel"></div>
-                </figure>
-            </div>
-            <div class="container-fluid" id="ventasCalzadoPastel">
-                <br>
-                <hr>
-                <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 50 MEJORES CLIENTES DE CALZADO</h3>
-                <hr>
-                <figure class="highcharts-figure" style="width: 100%; height: 100%;">
-                    <div id="containerVentasSemanalCalzadoPastel"></div>
-                </figure>
+                <div class="row">
+                    <div class="col-11">
+                        <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 50 MEJORES CLIENTES DE CALZADO</h3>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasCalzadoPastel" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i> <span class="caret"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="container-fluid show" id="ventasCalzadoPastel">
+                    <figure class="highcharts-figure" style="width: 100%; height: 100%;">
+                        <div id="containerVentasSemanalCalzadoPastel"></div>
+                    </figure>
+                </div>
             </div>
         </div>
     </div>

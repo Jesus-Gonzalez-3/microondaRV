@@ -45,7 +45,7 @@
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
-    <div class='modal fade' id='ventanaCarga' tabindex='-1' role='dialog' aria-labelledby="vcenter" aria-hidden='true'>
+    <div class='modal fade' id='ventanaCarga' tabindex='-1' role='dialog' aria-labelledby="vcenter" data-backdrop="static" data-keyboard="false" aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
             <div class='modal-content'>
                 <div class="modal-header btn-info text-center">

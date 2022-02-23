@@ -1,3 +1,7 @@
+/**
+ *      Seccion Ventas semanal Direccion Graficos
+ */
+
 const inicializarGraficaTipoBarra = (data) => {
 
     let valores = [];
@@ -132,7 +136,6 @@ const inicializarGraficaTipoPastel = (data) => {
 };
 
 const graficosPastelPromedio = (data) => {
-    console.table(data);
     categoria = [];
     valores = [];
     for (let index = 0; index < data.length; index++) {
@@ -276,7 +279,7 @@ const graficosPastelPromedio = (data) => {
     $('#containerVentasSemanalBarraPromedio').highcharts(json);
 }
 
-/* function GenerarPDF() {
+ function GenerarPDF() {
     $('#ventanaCarga').modal('show');
 
     $.ajax({
@@ -395,8 +398,254 @@ const graficosPastelPromedio = (data) => {
         $('#ventanaCarga').modal('toggle');
 
         /*const woorkbook = new ExcelJS.Workbook();
-        woorkbook.xlsx.writeFile('reporte de ventas.xlsx');
+        woorkbook.xlsx.writeFile('reporte de ventas.xlsx');*/
 
         //console.log(woorkbook.output('bloburl'));
     });
-} */
+} 
+
+
+// *********************************************************************************************
+
+/**
+ * Seccion Ventas semanal Direccion Graficos Calzado
+ */
+
+
+
+ const inicializarGraficaTipoBarraCalzado = (data) => {
+
+    let valores = [];
+    let categoria = [];
+    let leyenda = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        valores.push(Number(data[index].Unidades));
+        categoria.push("<b>" + data[index].cliente + "</b>");
+        leyenda.push('  cantidad: ' + new Intl.NumberFormat('en').format(Number(data[index].Unidades)));
+    }
+
+    Highcharts.chart('containerVentasSemanalBarraCalzado', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Unidades vendidas por Cliente de Calzado'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por cliente semana consultada'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            categories: categoria,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: '<b>Total</b>'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y}'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
+        },credits :{
+            enabled: false
+        },
+        series: [
+            {
+                name: 'Unidades vendidas por Cliente de Calzado',
+                colorByPoint: true,
+                data: valores
+            }
+        ]
+    });
+
+};
+
+const inicializarGraficaTipoPastelCalzado = (data) => {
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: data[index].cliente,
+            selected: (Number(index) === 1 ? true : false),
+            y: parseInt(data[index].Unidades)
+        };
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasSemanalCalzadoPastel', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Unidades vendidas por cliente de calzado'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por cliente Semana consultada'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        credits :{
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Unidades vendidas por cliente de calzado',
+            data: valores
+        }]
+    });
+};
+
+const graficosPastelPromedioCalzado = (data) => {
+    let categoria = [];
+    let valores = [];
+    for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        let serie1 = [];
+        categoria.push(element.CLIENTE);
+        serie1.push(parseFloat(element.UNIDADES_ANNIO1.toString().replace(',', '')));
+        serie1.push(parseFloat(element.UNIDADES_ANNIO2.toString().replace(',', '')));
+        serie1.push(parseFloat(element.UNIDADES_ANNIO3.toString().replace(',', '')));
+        valores.push(serie1);
+
+    }
+    let chart = {
+        type: 'column'
+    };
+    let title = {
+        text: 'Unidades Vendidas por Cliente, Otras Industrias'
+    };
+    let subtitle = {
+        text: 'Promedio de Ventas de los Ultimos 3 años'
+    };
+    let xAxis = {
+        categories: ['2020','2021','2022'],
+        title: {
+            text: null
+        }
+    };
+    let yAxis = {
+        min: 0,
+        title: {
+            text: 'Promedio de ventas',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    };
+    let tooltip = {
+        pointFormat: '{series.name}: <b>{point.y}</b>'
+    };
+    let plotOptions = {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y}'
+            }
+        }
+    };
+    let legend = {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: -10,
+        floating: false,
+        borderWidth: 3,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true
+    };
+    let credits = {
+        enabled: false
+    };
+
+    let serie =[];
+    for (let index = 0; index < categoria.length; index++) {
+        let valor = {
+            name: categoria[index],
+            data: valores[index]
+
+        }
+        serie.push(valor);
+    }
+    
+    let json = {};
+    json.chart = chart;
+    json.title = title;
+    json.subtitle = subtitle;
+    json.tooltip = tooltip;
+    json.xAxis = xAxis;
+    json.yAxis = yAxis;
+    json.series = serie;
+    json.plotOptions = plotOptions;
+    json.legend = legend;
+    json.credits = credits;
+    $('#containerVentasSemanalBarraPromedioCalzado').highcharts(json);
+    return true;
+}
+
+// *********************************************************************************************
+
+/**
+ * Mostrar avance reporte
+ */
+
+
+
+
+
+
+
+// *********************************************************************************************
