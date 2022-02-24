@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
 
 Route::group(['prefix' => 'usuarios/acciones'], function () {
@@ -54,20 +55,23 @@ try {
          * Reportes
          */
 
-         Route::group(['prefix' => 'direccion/reportes'], function () {
+        Route::group(['prefix' => 'direccion/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
             Route::get('/top50', 'ReportesController@ObtenerTop50');
-         });
-        
+        });
+        Route::group(['prefix' => 'gerencia/reportes'], function () {
+            Route::get('/top20', 'ReportesController@ObtenerTop20');
+            Route::get('/top50', 'ReportesController@ObtenerTop50');
+        });
+
+
         Route::get('/reportePeriodo', function () {
             return view('reportes.reportePeriodo');
         });
         Route::get('/reporteAnual', function () {
             return view('reportes.reporteAnual');
         });
-        Route::get('/reporteAll', 'ReportesController@GetAll');
-        Route::get('/reporteunidadgrafica', 'ReportesController@ReporteVentasUnidadGrafica');
-        Route::get('/exportarExcel', 'GeneradorReportesExcel@ExportarExcel2');
+
         Route::get('/reporteSemanalDireccion', function () {
             return view('direccion.reporteSemanal');
         });
@@ -83,6 +87,7 @@ try {
             return view('paginaPrincipal.index');
         });
     });
+
 } catch (Exception $ex) {
-    return view('error.pagenotfound');
+    return view('error.pagenotfound',[],404);
 }

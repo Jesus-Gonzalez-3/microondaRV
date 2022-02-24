@@ -36,15 +36,8 @@
 
 </head>
 
-<body class="fix-header fix-sidebar card-no-border">
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-        </svg>
-    </div>
+<body style="background-color: aqua;" >
+
 
     @yield('contenido')
 
@@ -103,57 +96,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 
     <script src="{{asset('js_aplicacion/general.js')}}"></script>
-    <style>
-
-    </style>
-    <!-- <script>
-        $('#tblReporteVentas').DataTable({
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'copyHtml5',
-                    text: '<i class="fa fa-table"></i>  Copy',
-                    titleAttr: 'copy',
-                    className: 'btn btn-outline-info'
-                }, {
-                    extend: 'excelHtml5',
-                    text: '<i class="fas fa-file-excel"></i>  EXCEL',
-                    titleAttr: 'Excel',
-                    className: 'btn btn-outline-info',
-                    style: 'background-color:#184f4f;'
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: '<i class="fas fa-file-alt"></i>  CSV',
-                    titleAttr: 'CSV',
-                    className: 'btn btn-outline-info'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: '<i class="fas fa-file-pdf"></i>  PDF',
-                    titleAttr: 'PDF',
-                    className: 'btn btn-outline-info'
-                }, {
-                    extend: 'print',
-                    text: '<i class="fas fa-print"></i>  IMPRIMIR',
-                    titleAttr: 'print',
-                    className: 'btn btn-outline-info'
-                }
-            ],
-            "oLanguage": {
-                "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-            },
-            "deferRender": true
-        });
-
-
-        $('#cmbPeriodo').select2({
-            theme: "bootstrap-5",
-            color: "#184f4f",
-            background: "#184f4f",
-            backgroundColor: "184f4f",
-            placeholder: "Seleccione"
-        });
-    </script>-->
 </body>
 
 </html>

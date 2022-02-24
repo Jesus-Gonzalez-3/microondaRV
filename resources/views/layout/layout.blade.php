@@ -253,7 +253,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        @if(Auth::user()->rol != 'Admin' && Auth::user()->rol != 'Direccion')
+                        @if(Auth::user()->rol == 'Gerente')
                         <li class="nav-small-cap">Reporte de Ventas</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="fas fa-chart-bar"></i>
@@ -263,7 +263,20 @@
                                 <li><a href="{{URL::to('/reporteSemanal')}}">Reporte Semanal</a></li>
                                 <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
                                 <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
-                                <li><a href="{{URL::to('/reporteAll')}}">Reporte Ventas (Todo)</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-devider"></li>
+                        @endif
+                        @if(Auth::user()->rol == 'Agente')
+                        <li class="nav-small-cap">Reporte de Ventas</li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="hide-menu">Reportes</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{URL::to('/reporteSemanal')}}">Reporte Semanal</a></li>
+                                <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
+                                <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
@@ -290,9 +303,8 @@
                             </a>
                             <ul aria-expanded="false" class="collapse">
                             <li><a href="{{URL::to('/reporteSemanalDireccion')}}">Reporte Semanal</a></li>
-                                <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
-                                <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
-                                <li><a href="{{URL::to('/reporteAll')}}">Reporte Ventas (Todo)</a></li>
+                                <li><a href="{{URL::to('/reportePeriodoDireccion')}}">Reporte Periodo</a></li>
+                                <li><a href="{{URL::to('/reporteAnualDireccion')}}">Reporte Anual</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
