@@ -45,7 +45,7 @@
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
-    <div class='modal fade' id='ventanaCarga' tabindex='-1' role='dialog' aria-labelledby="vcenter" aria-hidden='true'>
+    <div class='modal fade' id='ventanaCarga' tabindex='-1' role='dialog' aria-labelledby="vcenter" data-backdrop="static" data-keyboard="false" aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
             <div class='modal-content'>
                 <div class="modal-header btn-info text-center">
@@ -253,7 +253,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        @if(Auth::user()->rol != 'Admin' && Auth::user()->rol != 'Direccion')
+                        @if(Auth::user()->rol == 'Gerente')
                         <li class="nav-small-cap">Reporte de Ventas</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="fas fa-chart-bar"></i>
@@ -263,7 +263,20 @@
                                 <li><a href="{{URL::to('/reporteSemanal')}}">Reporte Semanal</a></li>
                                 <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
                                 <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
-                                <li><a href="{{URL::to('/reporteAll')}}">Reporte Ventas (Todo)</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-devider"></li>
+                        @endif
+                        @if(Auth::user()->rol == 'Agente')
+                        <li class="nav-small-cap">Reporte de Ventas</li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="fas fa-chart-bar"></i>
+                                <span class="hide-menu">Reportes</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{URL::to('/reporteSemanal')}}">Reporte Semanal</a></li>
+                                <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
+                                <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
@@ -283,16 +296,15 @@
                         @endif
 
                         @if(Auth::user()->rol === 'Direccion' || Auth::user()->rol === 'Admin')
-                        <li class="nav-small-cap">Reportes Direccion</li>
+                        <li class="nav-small-cap">Reportes Dirección</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="fab fa-yelp"></i>
                                 <span class="hide-menu">Reportes</span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{URL::to('/reporteSemanal')}}">Reporte Semanal</a></li>
-                                <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
-                                <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
-                                <li><a href="{{URL::to('/reporteAll')}}">Reporte Ventas (Todo)</a></li>
+                            <li><a href="{{URL::to('/reporteSemanalDireccion')}}">Reporte Semanal</a></li>
+                                <li><a href="{{URL::to('/reportePeriodoDireccion')}}">Reporte Periodo</a></li>
+                                <li><a href="{{URL::to('/reporteAnualDireccion')}}">Reporte Anual</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
@@ -480,14 +492,14 @@
     <!-- ============================================================== -->
     <!-- This is data table -->
     <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
-    <!-- start - This is for export functionality only -->
+    <!-- start - This is for export functionality only 
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>-->
     <!-- end - This is for export functionality only -->
     <!-- ============================================================== -->
     <!-- Style switcher -->

@@ -1,5 +1,5 @@
 @extends('layout.layout')
-<? $semanas = 52?>
+<? $semanas = 52 ?>
 @section('contenido')
 <div class="card">
     <div class="card-body">
@@ -8,10 +8,10 @@
         <hr>
         <br />
         <div class="row">
-        <div class="col-3">
+            <div class="col-3">
                 <div class="form-group">
-                    <label for="cmbPeriodo">Semana</label>
-                    <select class="js-example-basic-single" style="width: 100%; color:#184f4f; background-color:#184f4f;" name="cmbPeriodo" id="cmbPeriodo">
+                    <label for="cmbSemanaDireccion">Semana</label>
+                    <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaDireccion" id="cmbSemanaDireccion">
                         <option value="">Selecione</option>
                         @forelse(range(1,52) as $dia)
                         <option value="{{$dia}}">Semana {{$dia}}</option>
@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="col-6">
-                <h4 class="card-subtitle"><b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolorem nulla quasi enim, aperiam sint ut minima deleniti sed corrupti sunt distinctio accusamus maiores voluptates, illum, aut laboriosam! Molestias, pariatur?</b></h4>
+                <h4 class="card-subtitle"></h4>
             </div>
             <div class="col-3">
-                <div class="btn-group dropdown ">
+                <div class="btn-group dropdown" hidden>
                     <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-file-excel"></i> Exportar información
                     </button>
@@ -47,36 +47,45 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="tablaVentasSemanal" role="tabpanel">
+            <br>
+            <hr>
+            <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>
+            <hr>
             <div class="table-responsive ">
                 <div class="container-fluid">
-                    <table id="tblReporteVentas" class="table table-striped table-bordered table-condensed table-hover" cellspacing="0" width="100%">
+                    <table id="tblReporteVentasSemanalDireccion" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Cantidad</th>
+                                <th>Orden</th>
+                                <th>Clave</th>
+                                <th>Nombre del Cliente</th>
+                                <th>Promedio Semanal Acumulado Unidades 2020</th>
+                                <th>Promedio Semanal Acumulado Unidades 2021</th>
+                                <th>Promedio Semanal Acumulado Unidades 2022</th>
+                                <th>Unidades Semana Consultada</th>
+                                <th>Promedio Semanal Acumulado Importe 2020</th>
+                                <th>Promedio Semanal Acumulado Importe 2021</th>
+                                <th>Promedio Semanal Acumulado Importe 2022</th>
+                                <th>Importe Semana Consultada</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Código</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Cantidad</th>
+                                <th>Orden</th>
+                                <th>Clave</th>
+                                <th>Nombre del Cliente</th>
+                                <th>Promedio Semanal Acumulado Unidades 2020</th>
+                                <th>Promedio Semanal Acumulado Unidades 2021</th>
+                                <th>Promedio Semanal Acumulado Unidades 2022</th>
+                                <th>Unidades Semana Consultada</th>
+                                <th>Promedio Semanal Acumulado Importe 2020</th>
+                                <th>Promedio Semanal Acumulado Importe 2021</th>
+                                <th>Promedio Semanal Acumulado Importe 2022</th>
+                                <th>Importe Semana Consultada</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @forelse($insumos_compras = [] as $insumo_compra)
-                            <tr>
-                                <td>{{$insumo_compra->codigo}}</td>
-                                <td>{{$insumo_compra->nombre}}</td>
-                                <td>{{$insumo_compra->descripcion}}</td>
-                                <td>{{$insumo_compra->cantidad}}</td>
-                            </tr>
-                            @empty
 
-                            @endforelse
                         </tbody>
                     </table>
                     <br />
@@ -89,7 +98,7 @@
             </figure>
         </div>
         <div class="tab-pane p-20" id="graCirVentasSemanal" role="tabpanel">
-            <figure class="highcharts-figure">
+            <figure class="highcharts-figure" style="width: 100%; height: 100%;">
                 <div id="containerVentasSemanalPastel"></div>
             </figure>
         </div>

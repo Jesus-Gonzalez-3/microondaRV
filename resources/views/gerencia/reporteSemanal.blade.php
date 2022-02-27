@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <label for="cmbSemanaDireccion">Semana</label>
-                    <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaDireccion" id="cmbSemanaDireccion">
+                    <label for="cmbSemanaGerentes">Semana</label>
+                    <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaGerentes" id="cmbSemanaGerentes">
                         <option value="">Selecione</option>
                         @forelse(range(1,50) as $dia)
                         <option value="{{$dia}}">Semana {{$dia}}</option>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="table-responsive collapse show" id="collapseExample">
                     <div class="container-fluid">
-                        <table id="tblReporteVentasSemanalDireccion" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
+                        <table id="tblReporteVentasSemanalGerencia" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Orden</th>
@@ -114,7 +114,7 @@
                 </div>
                 <div class="table-responsive collapse show" id="collapseExample2">
                     <div class="container-fluid">
-                        <table id="tblReporteVentasSemanalDireccionCalzado" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
+                        <table id="tblReporteVentasSemanalGerenciaCalzado" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Orden</th>
