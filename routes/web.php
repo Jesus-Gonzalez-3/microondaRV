@@ -21,16 +21,16 @@ Route::get('/', function () {
     return view('login.login');
 });
 
-
-
-Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
+//Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
 
 Route::group(['prefix' => 'usuarios/acciones'], function () {
     Route::post('/registrar', 'UsuarioController@registrar');
     Route::post('/login', 'UsuarioController@login');
     Route::get('/logout', 'UsuarioController@logout');
 });
-Route::get('/top50', 'ReportesController@ObtenerTop50');
+Route::get('/reporteSemanal', function () {
+    return view('gerencia.reporteSemanal');
+});
 
 try {
     Route::group(['middleware' => ['auth']], function () {
@@ -52,13 +52,24 @@ try {
         Route::get('/usuariosInactivos', 'UsuarioController@GetAllInactivos');
 
         /**
-         * Reportes
+         * Reportes Direccion
          */
+        Route::get('/reporteSemanalDireccion', function () {
+            return view('direccion.reporteSemanal');
+        });
 
         Route::group(['prefix' => 'direccion/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
             Route::get('/top50', 'ReportesController@ObtenerTop50');
         });
+
+        /**
+         * Reportes Gerencia
+         */
+        Route::get('/reporteSemanalGerentes', function () {
+            return view('gerencia.reporteSemanal');
+        });
+
         Route::group(['prefix' => 'gerencia/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
             Route::get('/top50', 'ReportesController@ObtenerTop50');
@@ -72,12 +83,10 @@ try {
             return view('reportes.reporteAnual');
         });
 
-        Route::get('/reporteSemanalDireccion', function () {
-            return view('direccion.reporteSemanal');
-        });
-        Route::get('/reporteSemanal', function () {
+        
+       /* Route::get('/reporteSemanal', function () {
             return view('reportes.reporteSemanal');
-        });
+        });*/
 
         /**
          * Index
@@ -89,5 +98,5 @@ try {
     });
 
 } catch (Exception $ex) {
-    return view('error.pagenotfound',[],404);
+    //return view('error.pagenotfound',[],404);
 }
