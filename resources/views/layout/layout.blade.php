@@ -513,10 +513,7 @@
     <script src="{{asset('js_aplicacion/general.js')}}"></script>
     <script src="{{asset('js_aplicacion/login.js')}}"></script>
     <script src="{{asset('js_aplicacion/reportes.js')}}"></script>
-
     <script src="{{asset('js_aplicacion/direccion.js')}}"></script>
-
-    <script src="{{asset('js_aplicacion/gerencia.js')}}"></script>
 
 
 

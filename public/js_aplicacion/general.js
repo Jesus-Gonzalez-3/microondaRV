@@ -376,45 +376,5 @@ $(document).ready(function () {
     $('.js-switch').each(function () {
         new Switchery($(this)[0], $(this).data());
     });
-
-    if (window.location.href === "http://envasesmicroonda:8081/microondaRV/public/reporteSemanal") {
-        currentdatec = new Date();
-        var one = new Date(currentdatec.getFullYear(), 0, 1);
-        var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
-        var resultado = Math.ceil((currentdatec.getDay() + 1 + numofdays) / 7);
-
-        datos = {
-            semana: resultado - 1
-        }
-        $.ajax({
-            url: "/microondaRV/public/direccion/reportes/top20",
-            method: "GET",
-            data: datos,
-        }).done(function (res) {
-            if (res.includes("¬")) {
-                if (res.split("¬")[0] == "ERROR") {
-
-                }
-            } else {
-                $("tblReporteVentasSemanalDireccion").DataTable().clear().draw(false);
-
-            }
-
-        }).fail(function (res) {
-            swal(
-                {
-                    type: "error",
-                    title: "Error",
-                    text: "Ha ocurrido un error.",
-                    confirmButtonText: "OK",
-                },
-                function () {
-                    location.href = "/microondaRV/public/paginaPrincipal";
-                });
-        })
-    }
-
-    
-
     // *******************************************************************************************************************************************************
 });

@@ -10,7 +10,11 @@ const inicializarGraficaTipoBarra = (data) => {
     let tamanio = data.length;
 
     for (let index = 0; index < tamanio; index++) {
-        valores.push(Number(data[index].Unidades));
+        let tmp = {
+            name: data[index].cliente,
+            y: Number(data[index].Unidades)
+        };
+        valores.push(tmp);
         categoria.push("<b>" + data[index].cliente + "</b>");
         leyenda.push('  cantidad: ' + new Intl.NumberFormat('en').format(Number(data[index].Unidades)));
     }
@@ -24,7 +28,7 @@ const inicializarGraficaTipoBarra = (data) => {
         },
         title: {
             text: 'Unidades vendidas por Cliente de Otras Industrias'
-        },
+        },  
         subtitle: {
             text: 'Total de Unidades vendidas por cliente semana consultada'
         },
@@ -60,7 +64,7 @@ const inicializarGraficaTipoBarra = (data) => {
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
             pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
-        },credits :{
+        }, credits: {
             enabled: false
         },
         series: [
@@ -77,15 +81,14 @@ const inicializarGraficaTipoBarra = (data) => {
 const inicializarGraficaTipoPastel = (data) => {
     let valores = [];
     let tamanio = data.length;
-
     for (let index = 0; index < tamanio; index++) {
         let tmp = {
             name: data[index].cliente,
-            selected: (Number(index) === 1 ? true : false),
             y: parseInt(data[index].Unidades)
         };
         valores.push(tmp);
     }
+    console.log(valores);
 
     Highcharts.chart('containerVentasSemanalOtrasPastel', {
         exporting: {
@@ -93,11 +96,6 @@ const inicializarGraficaTipoPastel = (data) => {
         },
         chart: {
             type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45,
-                beta: 0
-            }
         },
         title: {
             text: 'Unidades vendidas por cliente de otras industrias'
@@ -106,12 +104,18 @@ const inicializarGraficaTipoPastel = (data) => {
             text: 'Total de Unidades vendidas por cliente Semana consultada'
         },
         accessibility: {
+            announceNewData: {
+                enabled: true
+            },
             point: {
                 valueSuffix: '%'
             }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.y}</b>'
+            pointFormat: '{series.name}: <b>{point.y} Unidades</b>',
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}"><b>{point.name}</b></span>: <b>{point.y}</b> Unidades<br/>'
+
         },
         plotOptions: {
             pie: {
@@ -120,15 +124,22 @@ const inicializarGraficaTipoPastel = (data) => {
                 depth: 35,
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}'
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            },
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y:.1f}%'
                 }
             }
         },
-        credits :{
+        credits: {
             enabled: false
         },
         series: [{
             type: 'pie',
+            colorByPoint: true,
             name: 'Unidades vendidas por cliente de otras industrias',
             data: valores
         }]
@@ -158,7 +169,7 @@ const graficosbarrasPromedio = (data) => {
         text: 'Promedio de Ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020','2021','2022'],
+        categories: ['2020', '2021', '2022'],
         title: {
             text: null
         }
@@ -208,58 +219,58 @@ const graficosbarrasPromedio = (data) => {
         {
             name: categoria[1],
             data: valores[1]
-        },{
+        }, {
             name: categoria[2],
             data: valores[2]
-        },{
+        }, {
             name: categoria[3],
             data: valores[3]
-        },{
+        }, {
             name: categoria[4],
             data: valores[4]
-        },{
+        }, {
             name: categoria[5],
             data: valores[5]
-        },{
+        }, {
             name: categoria[6],
             data: valores[6]
-        },{
+        }, {
             name: categoria[7],
             data: valores[7]
-        },{
+        }, {
             name: categoria[8],
             data: valores[8]
-        },{
+        }, {
             name: categoria[9],
             data: valores[9]
-        },{
+        }, {
             name: categoria[10],
             data: valores[10]
-        },{
+        }, {
             name: categoria[11],
             data: valores[11]
-        },{
+        }, {
             name: categoria[12],
             data: valores[12]
-        },{
+        }, {
             name: categoria[13],
             data: valores[13]
-        },{
+        }, {
             name: categoria[14],
             data: valores[14]
-        },{
+        }, {
             name: categoria[15],
             data: valores[15]
-        },{
+        }, {
             name: categoria[16],
             data: valores[16]
-        },{
+        }, {
             name: categoria[17],
             data: valores[17]
-        },{
+        }, {
             name: categoria[18],
             data: valores[18]
-        },{
+        }, {
             name: categoria[19],
             data: valores[19]
         },
@@ -337,7 +348,7 @@ const inicializarGraficaTipoBarraImporte = (data) => {
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
             pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
-        },credits :{
+        }, credits: {
             enabled: false
         },
         series: [
@@ -388,7 +399,7 @@ const inicializarGraficaTipoPastelImporte = (data) => {
             }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.y}</b>'
+            pointFormat: '{series.name}: <b>$ {point.y}</b>'
         },
         plotOptions: {
             pie: {
@@ -397,11 +408,11 @@ const inicializarGraficaTipoPastelImporte = (data) => {
                 depth: 35,
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}'
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                 }
             }
         },
-        credits :{
+        credits: {
             enabled: false
         },
         series: [{
@@ -435,7 +446,7 @@ const graficosbarrasPromedioImporte = (data) => {
         text: 'Importe promedio de ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020','2021','2022'],
+        categories: ['2020', '2021', '2022'],
         title: {
             text: null
         }
@@ -485,58 +496,58 @@ const graficosbarrasPromedioImporte = (data) => {
         {
             name: categoria[1],
             data: valores[1]
-        },{
+        }, {
             name: categoria[2],
             data: valores[2]
-        },{
+        }, {
             name: categoria[3],
             data: valores[3]
-        },{
+        }, {
             name: categoria[4],
             data: valores[4]
-        },{
+        }, {
             name: categoria[5],
             data: valores[5]
-        },{
+        }, {
             name: categoria[6],
             data: valores[6]
-        },{
+        }, {
             name: categoria[7],
             data: valores[7]
-        },{
+        }, {
             name: categoria[8],
             data: valores[8]
-        },{
+        }, {
             name: categoria[9],
             data: valores[9]
-        },{
+        }, {
             name: categoria[10],
             data: valores[10]
-        },{
+        }, {
             name: categoria[11],
             data: valores[11]
-        },{
+        }, {
             name: categoria[12],
             data: valores[12]
-        },{
+        }, {
             name: categoria[13],
             data: valores[13]
-        },{
+        }, {
             name: categoria[14],
             data: valores[14]
-        },{
+        }, {
             name: categoria[15],
             data: valores[15]
-        },{
+        }, {
             name: categoria[16],
             data: valores[16]
-        },{
+        }, {
             name: categoria[17],
             data: valores[17]
-        },{
+        }, {
             name: categoria[18],
             data: valores[18]
-        },{
+        }, {
             name: categoria[19],
             data: valores[19]
         },
@@ -622,7 +633,7 @@ const inicializarGraficaTipoBarraCalzado = (data) => {
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
             pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
-        },credits :{
+        }, credits: {
             enabled: false
         },
         series: [
@@ -673,7 +684,7 @@ const inicializarGraficaTipoPastelCalzado = (data) => {
             }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.y}</b>'
+            pointFormat: '{series.name}: <b>$ {point.y}</b>'
         },
         plotOptions: {
             pie: {
@@ -682,11 +693,11 @@ const inicializarGraficaTipoPastelCalzado = (data) => {
                 depth: 35,
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}'
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                 }
             }
         },
-        credits :{
+        credits: {
             enabled: false
         },
         series: [{
@@ -720,7 +731,7 @@ const graficosbarrasPromedioCalzado = (data) => {
         text: 'Promedio de Ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020','2021','2022'],
+        categories: ['2020', '2021', '2022'],
         title: {
             text: null
         }
@@ -762,7 +773,7 @@ const graficosbarrasPromedioCalzado = (data) => {
         enabled: false
     };
 
-    let serie =[];
+    let serie = [];
     for (let index = 0; index < categoria.length; index++) {
         let valor = {
             name: categoria[index],
@@ -771,7 +782,7 @@ const graficosbarrasPromedioCalzado = (data) => {
         }
         serie.push(valor);
     }
-    
+
     let json = {};
     json.chart = chart;
     json.title = title;
@@ -844,7 +855,7 @@ const inicializarGraficaTipoBarraCalzadoImporte = (data) => {
         tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
             pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
-        },credits :{
+        }, credits: {
             enabled: false
         },
         series: [
@@ -895,7 +906,7 @@ const inicializarGraficaTipoPastelCalzadoImporte = (data) => {
             }
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.y}</b>'
+            pointFormat: '{series.name}: <b>$ {point.y}</b>'
         },
         plotOptions: {
             pie: {
@@ -904,11 +915,11 @@ const inicializarGraficaTipoPastelCalzadoImporte = (data) => {
                 depth: 35,
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}'
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                 }
             }
         },
-        credits :{
+        credits: {
             enabled: false
         },
         series: [{
@@ -942,7 +953,7 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
         text: 'Importe promedio de ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020','2021','2022'],
+        categories: ['2020', '2021', '2022'],
         title: {
             text: null
         }
@@ -984,7 +995,7 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
         enabled: false
     };
 
-    let serie =[];
+    let serie = [];
     for (let index = 0; index < categoria.length; index++) {
         let valor = {
             name: categoria[index],
@@ -993,7 +1004,7 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
         }
         serie.push(valor);
     }
-    
+
     let json = {};
     json.chart = chart;
     json.title = title;
@@ -1010,7 +1021,7 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
 
 // *********************************************************************************************
 
-const GenerarPDF = () =>{
+const GenerarPDF = () => {
     $('#ventanaCarga').modal('show');
 
     $.ajax({

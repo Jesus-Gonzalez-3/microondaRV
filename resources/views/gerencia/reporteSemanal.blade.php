@@ -214,7 +214,7 @@
                     </div>
                 </div>
                 <div class="container-fluid show" id="ventasOtrasIndustriasPastel">
-                    <figure class="highcharts-figure" style="width: 100%; height: 100%;">
+                    <figure class="highcharts-figure">
                         <div id="containerVentasSemanalOtrasPastel"></div>
                     </figure>
                 </div>
@@ -230,7 +230,7 @@
                     </div>
                 </div>
                 <div class="container-fluid show" id="ventasCalzadoPastel">
-                    <figure class="highcharts-figure" style="width: 100%; height: 100%;">
+                    <figure class="highcharts-figure">
                         <div id="containerVentasSemanalCalzadoPastel"></div>
                     </figure>
                 </div>
