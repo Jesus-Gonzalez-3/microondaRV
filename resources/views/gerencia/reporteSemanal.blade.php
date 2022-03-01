@@ -9,8 +9,8 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <label for="cmbSemanaGerentes">Semana</label>
-                    <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaGerentes" id="cmbSemanaGerentes">
+                    <label for="cmbSemanaGerencia">Semana</label>
+                    <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaGerencia" id="cmbSemanaGerencia">
                         <option value="">Selecione</option>
                         @forelse(range(1,50) as $dia)
                         <option value="{{$dia}}">Semana {{$dia}}</option>
@@ -60,12 +60,12 @@
                 </div>
                 <div class="table-responsive collapse show" id="collapseExample">
                     <div class="container-fluid">
-                        <table id="tblReporteVentasSemanalGerencia" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
+                        <table id="tblReporteVentasSemanalGerencia" class="table table-striped table-bordered table-condensed table-hover text-dark display responsive nowrap" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Orden</th>
                                     <th>Clave</th>
-                                    <th>Nombre del Cliente</th>
+                                    <th style="width: 30%;">Nombre del Cliente</th>
                                     <th>Promedio Semanal Acumulado Unidades 2020</th>
                                     <th>Promedio Semanal Acumulado Unidades 2021</th>
                                     <th>Promedio Semanal Acumulado Unidades 2022</th>
@@ -119,7 +119,7 @@
                                 <tr>
                                     <th>Orden</th>
                                     <th>Clave</th>
-                                    <th>Nombre del Cliente</th>
+                                    <th style="width: 30%;">Nombre del Cliente</th>
                                     <th>Promedio Semanal Acumulado Unidades 2020</th>
                                     <th>Promedio Semanal Acumulado Unidades 2021</th>
                                     <th>Promedio Semanal Acumulado Unidades 2022</th>

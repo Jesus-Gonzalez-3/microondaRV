@@ -36,9 +36,7 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            if ($e->getCode() == 404) {
-                return response()->view('error.pagenotfound', [], 404);
-            }
+            
         });
     }
 }

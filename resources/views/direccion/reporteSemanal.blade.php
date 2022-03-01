@@ -65,7 +65,7 @@
                                 <tr>
                                     <th>Orden</th>
                                     <th>Clave</th>
-                                    <th>Nombre del Cliente</th>
+                                    <th style="width: 30%;">Nombre del Cliente</th>
                                     <th>Promedio Semanal Acumulado Unidades 2020</th>
                                     <th>Promedio Semanal Acumulado Unidades 2021</th>
                                     <th>Promedio Semanal Acumulado Unidades 2022</th>
@@ -119,7 +119,7 @@
                                 <tr>
                                     <th>Orden</th>
                                     <th>Clave</th>
-                                    <th>Nombre del Cliente</th>
+                                    <th style="width: 30%;">Nombre del Cliente</th>
                                     <th>Promedio Semanal Acumulado Unidades 2020</th>
                                     <th>Promedio Semanal Acumulado Unidades 2021</th>
                                     <th>Promedio Semanal Acumulado Unidades 2022</th>
@@ -177,6 +177,16 @@
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalBarraPromedio"></div>
                     </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraImporte"></div>
+                    </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraPromedioImporte"></div>
+                    </figure>
                 </div>
                 <hr>
                 <div class="row">
@@ -194,8 +204,19 @@
                         <div id="containerVentasSemanalBarraCalzado"></div>
                     </figure>
                     <hr>
+                    <br>
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalBarraPromedioCalzado"></div>
+                    </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraCalzadoImporte"></div>
+                    </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraPromedioCalzadoImporte"></div>
                     </figure>
                 </div>
             </div>
@@ -217,6 +238,10 @@
                     <figure class="highcharts-figure" style="width: 100%; height: 100%;">
                         <div id="containerVentasSemanalOtrasPastel"></div>
                     </figure>
+                    <hr>
+                    <figure class="highcharts-figure" style="width: 100%; height: 100%;">
+                        <div id="containerVentasSemanalOtrasPastelImporte"></div>
+                    </figure>
                 </div>
                 <hr>
                 <div class="row">
@@ -232,6 +257,10 @@
                 <div class="container-fluid show" id="ventasCalzadoPastel">
                     <figure class="highcharts-figure" style="width: 100%; height: 100%;">
                         <div id="containerVentasSemanalCalzadoPastel"></div>
+                    </figure>
+                    <hr>
+                    <figure class="highcharts-figure" style="width: 100%; height: 100%;">
+                        <div id="containerVentasSemanalCalzadoPastelImporte"></div>
                     </figure>
                 </div>
             </div>

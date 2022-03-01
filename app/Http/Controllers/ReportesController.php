@@ -37,6 +37,7 @@ class ReportesController extends Controller
         try {
             $data = [];
             $data_result = DB::select("CALL GET_TOP20_VENTAS_SEMANAL_OTRAS(" . $request->semana . ")");
+            return $data_result;
             if (sizeof($data_result) != 0) {
                 for ($i = 0; $i < sizeof($data_result); $i++) {
                     $result_annio1 = DB::select("CALL GET_VENTAS_SEMANAL_2020_OTRAS(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
