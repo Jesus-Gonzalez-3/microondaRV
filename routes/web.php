@@ -28,9 +28,8 @@ Route::group(['prefix' => 'usuarios/acciones'], function () {
     Route::post('/login', 'UsuarioController@login');
     Route::get('/logout', 'UsuarioController@logout');
 });
-Route::get('/reporteSemanal', function () {
-    return view('gerencia.reporteSemanal');
-});
+Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
+
 
 try {
     Route::group(['middleware' => ['auth']], function () {
@@ -58,9 +57,14 @@ try {
             return view('direccion.reporteSemanal');
         });
 
+        Route::get('/reporteAnualDireccion', function () {
+            return view('direccion.reporteAnual');
+        });
+
         Route::group(['prefix' => 'direccion/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
             Route::get('/top50', 'ReportesController@ObtenerTop50');
+            Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
         });
 
         /**
@@ -70,9 +74,14 @@ try {
             return view('gerencia.reporteSemanal');
         });
 
+        Route::get('/reporteAnualGerencia', function () {
+            return view('gerencia.reporteAnual');
+        });
+
         Route::group(['prefix' => 'gerencia/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
             Route::get('/top50', 'ReportesController@ObtenerTop50');
+            Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
         });
 
 
@@ -83,8 +92,8 @@ try {
             return view('reportes.reporteAnual');
         });
 
-        
-       /* Route::get('/reporteSemanal', function () {
+
+        /* Route::get('/reporteSemanal', function () {
             return view('reportes.reporteSemanal');
         });*/
 
@@ -96,7 +105,6 @@ try {
             return view('paginaPrincipal.index');
         });
     });
-
 } catch (Exception $ex) {
     //return view('error.pagenotfound',[],404);
 }

@@ -40,8 +40,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
     <script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>
 
-
-
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">

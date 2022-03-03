@@ -88,7 +88,6 @@ const inicializarGraficaTipoPastel = (data) => {
         };
         valores.push(tmp);
     }
-    console.log(valores);
 
     Highcharts.chart('containerVentasSemanalOtrasPastel', {
         exporting: {
@@ -565,6 +564,187 @@ const graficosbarrasPromedioImporte = (data) => {
     json.legend = legend;
     json.credits = credits;
     $('#containerVentasSemanalBarraPromedioImporte').highcharts(json);
+}
+
+const inicializarGraficaPastelAnualAgentes = (data) =>{
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: data[index].cliente,
+            y: Number((data[index].unidades).toString().replace(',','').replace(',',''))
+        };
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasAnualesPastelDireccionUnidades', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Unidades Anuales por Agente'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Agente '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Unidades Anuales por Agente',
+            data: valores
+        }]
+    });
+}
+
+const inicializarGraficaPastelAnualAgentesGerentes = (data) =>{
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: data[index].cliente,
+            y: Number((data[index].unidades).toString().replace(',','').replace(',',''))
+        };
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasAnualesPastelGerenciaUnidades', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Unidades Anuales por Agente'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Agente '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Unidades Anuales por Agente',
+            data: valores
+        }]
+    });
+}
+
+const inicializarGraficaPastelAnualAgentes2 = (data) =>{
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: data[index].cliente,
+            y: Number((data[index].importe).toString().replace(',','').replace(',','').replace(',',''))
+        };
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasAnualesPastelDireccionImporte', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Pesos Anuales por Agente'
+        },
+        subtitle: {
+            text: 'Total en pesos vendidos por Agente '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Pesos Vendidos $ : <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Pesos Anuales por Agente',
+            data: valores
+        }]
+    });
+    return true;
 }
 
 // *********************************************************************************************

@@ -47,7 +47,6 @@
     <div class="tab-content">
         <div class="tab-pane active" id="tablaVentasSemanal" role="tabpanel">
             <div id="ventasSemanalOtrasIndustrias">
-                <hr>
                 <div class="row">
                     <div class="col-11">
                         <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>
@@ -156,7 +155,6 @@
         </div>
         <div class="tab-pane" id="graBarraVentasSemanal" role="tabpanel">
             <div>
-                <hr>
                 <div class="row">
                     <div class="col-11">
                         <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>

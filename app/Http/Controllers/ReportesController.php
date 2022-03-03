@@ -163,4 +163,27 @@ class ReportesController extends Controller
             return "ERROR ¬" . $err;
         }
     }
+
+    /**
+     * Ventas anuales
+     * Parametos:
+     *          $request->annio,
+     *          // Semana de inicio y de fin.
+     *          $request->inicio
+     *          $request->fin
+     */
+    public function ventasAnuales(Request $request)
+    {
+        try {
+            if (isset($request->inicio) && isset($request->fin)) {
+                $resultado = DB::select("SELECT AGENTE, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) as IMPORTE FROM ventas_" . $request->annio . " WHERE SEMANA BETWEEN " . $request->inicio . " AND " . $request->fin . " GROUP BY AGENTE");
+                return $resultado;
+            } else {
+                $resultado = DB::select("SELECT AGENTE, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) as IMPORTE FROM ventas_" . $request->annio . " GROUP BY AGENTE");
+                return $resultado;
+            }
+        } catch (Exception $ex) {
+            return 'ERROR¬' . $ex;
+        }
+    }
 }
