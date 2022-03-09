@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UsuarioController;
 use Facade\FlareClient\Report;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,14 +27,12 @@ Route::get('/', function () {
 Route::group(['prefix' => 'usuarios/acciones'], function () {
     Route::post('/registrar', 'UsuarioController@registrar');
     Route::post('/login', 'UsuarioController@login');
-    Route::get('/logout', 'UsuarioController@logout');
 });
-Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
+Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');
 
 
 try {
     Route::group(['middleware' => ['auth']], function () {
-
         /**
          * Gestión de Usuarios
          */
@@ -60,11 +59,15 @@ try {
         Route::get('/reporteAnualDireccion', function () {
             return view('direccion.reporteAnual');
         });
+        Route::get('/reportePeriodoDireccion', function () {
+            return view('direccion.reportePeriodo');
+        });
 
         Route::group(['prefix' => 'direccion/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
             Route::get('/top50', 'ReportesController@ObtenerTop50');
             Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
+            Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');
         });
 
         /**
@@ -77,11 +80,15 @@ try {
         Route::get('/reporteAnualGerencia', function () {
             return view('gerencia.reporteAnual');
         });
+        Route::get('/reportePeriodoGerencia', function () {
+            return view('gerencia.reportePeriodo');
+        });
 
         Route::group(['prefix' => 'gerencia/reportes'], function () {
             Route::get('/top20', 'ReportesController@ObtenerTop20');
             Route::get('/top50', 'ReportesController@ObtenerTop50');
             Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
+            Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');
         });
 
 
@@ -100,7 +107,6 @@ try {
         /**
          * Index
          */
-
         Route::get('/paginaPrincipal', function () {
             return view('paginaPrincipal.index');
         });

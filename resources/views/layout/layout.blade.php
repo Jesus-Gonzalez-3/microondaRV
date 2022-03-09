@@ -279,7 +279,7 @@
                         </li>
                         <li class="nav-devider"></li>
                         @endif
-                        @if(Auth::user()->rol === 'Admin')
+                        @if(Auth::user()->rol === 'Admin' || Auth::user()->rol === 'Direccion')
                         <li class="nav-small-cap">Usuarios</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                                 <i class="fas fa-user-circle"></i>

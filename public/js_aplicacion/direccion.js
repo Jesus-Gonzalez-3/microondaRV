@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    /**
+     * Despliege de información reporte semanal 
+     */
 
     let TablaVentasSemanalDireccion = $("#tblReporteVentasSemanalDireccion").DataTable({
         dom: 'Bfrtip',
@@ -812,7 +815,6 @@ $(document).ready(function () {
 
     }
 
-
     $('#cmbSemanaDireccion').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -841,12 +843,6 @@ $(document).ready(function () {
         consultarInformacionSemanalCalzadoGerencia();
 
     });
-
-    // *******************************************************************************************************************************************************
-
-    /**
-     * Carga de Datos Gerencia
-     */
 
     const consultarInformacionSemanalOtrasGerencia = () => {
         let resultado = $('#cmbSemanaGerencia').val();
@@ -1024,10 +1020,6 @@ $(document).ready(function () {
                 });
         });
     };
-
-    /**
-    * Carga de datos Direccion General
-    */
 
     const consultarInformacionSemanalOtras = () => {
         resultado = $('#cmbSemanaDireccion').val();
@@ -1232,7 +1224,12 @@ $(document).ready(function () {
         });
     };
 
+    // *******************************************************************************************************************************************************
 
+    /**
+     * Despliege de información Reporte anual
+     * 
+     */
 
     $('#cmbAnioDirección').select2({
         theme: "bootstrap-5",
@@ -1314,16 +1311,70 @@ $(document).ready(function () {
                 }, 0);
 
             $(api.column(1).footer()).html(
-                '$ ' + total
+                '$ ' + total.toFixed(2)
             );
             $(api.column(2).footer()).html(
-                '$ ' + total1
+                '$ ' + total1.toFixed(2)
             );
             $(api.column(3).footer()).html(
-                total2.toFixed(2) + ' %'
+                total2.toFixed(0) + ' %'
             );
             $(api.column(4).footer()).html(
-                total3.toFixed(2) + ' %'
+                total3.toFixed(0) + ' %'
+            );
+        }
+    });
+
+    let tableVentasAnualesGerencia = $('#tblReporteVentasAnualesGerencia').DataTable({
+        dom: 'Bfrtip',
+        "processing": true,
+        "oLanguage": {
+            "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+        },
+        "deferRender": false,
+        "paging": true,
+        "info": false,
+        /*"order": [
+            [0, "desc"]
+        ],*/
+        columnDefs: [{
+            orderable: false,
+            targets: 0
+        }],
+        "aoColumnDefs": [{
+            "bVisible": false,
+            "aTargets": [3]
+        }],
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(),
+                data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            total = api
+                .column(1)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total2 = api
+                .column(3)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            $(api.column(1).footer()).html(
+                '$ ' + total.toFixed(2)
+            );
+            $(api.column(2).footer()).html(
+                total2.toFixed(0) + ' %'
             );
         }
     });
@@ -1623,7 +1674,6 @@ $(document).ready(function () {
         }
     });
 
-
     $('#cmbAnioGerencia').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -1644,60 +1694,6 @@ $(document).ready(function () {
         background: "#184f4f",
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
-    });
-
-    let tableVentasAnualesGerencia = $('#tblReporteVentasAnualesGerencia').DataTable({
-        dom: 'Bfrtip',
-        "processing": true,
-        "oLanguage": {
-            "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-        },
-        "deferRender": false,
-        "paging": true,
-        "info": false,
-        /*"order": [
-            [0, "desc"]
-        ],*/
-        columnDefs: [{
-            orderable: false,
-            targets: 0
-        }],
-        "aoColumnDefs": [{
-            "bVisible": false,
-            "aTargets": [3]
-        }],
-        "footerCallback": function (row, data, start, end, display) {
-            var api = this.api(),
-                data;
-
-            // Remove the formatting to get integer data for summation
-            var intVal = function (i) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '') * 1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
-
-            total = api
-                .column(1)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total2 = api
-                .column(3)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-
-            $(api.column(1).footer()).html(
-                '$ ' + total
-            );
-            $(api.column(2).footer()).html(
-                total2 +' %'
-            );
-        }
     });
 
     const consultarInformacionAnualGerentes = (par1) => {
@@ -1978,4 +1974,1088 @@ $(document).ready(function () {
             return;
         }
     });
-})
+
+    // *******************************************************************************************************************************************************
+
+    /**
+     * Despliege de información Reporte por Periodo
+     * 
+     */
+    $('#cmbAnioDireccionPeriodo').select2({
+        theme: "bootstrap-5",
+        color: "#184f4f",
+        background: "#184f4f",
+        backgroundColor: "184f4f",
+        placeholder: "Seleccione"
+    });
+
+    $('#cmbAnioDirecciónSemanaInicioPeriodo').select2({
+        theme: "bootstrap-5",
+        color: "#184f4f",
+        background: "#184f4f",
+        backgroundColor: "184f4f",
+        placeholder: "Seleccione"
+    });
+    $('#cmbAnioDirecciónSemanaFinPeriodo').select2({
+        theme: "bootstrap-5",
+        color: "#184f4f",
+        background: "#184f4f",
+        backgroundColor: "184f4f",
+        placeholder: "Seleccione"
+    });
+
+
+    let datatableVentasPeriodoDireccion = $('#tblReporteVentasPeriodoDireccion').DataTable({
+        dom: 'Bfrtip',
+        "processing": true,
+        "oLanguage": {
+            "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+        },
+        "deferRender": false,
+        "paging": true,
+        "info": false,
+        /*"order": [
+            [0, "desc"]
+        ],*/
+        columnDefs: [{
+            orderable: false,
+            targets: 0
+        }],
+        "aoColumnDefs": [{
+            "bVisible": false,
+            "aTargets": [9]
+        }],
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(),
+                data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            total = api
+                .column(1)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total2 = api
+                .column(2)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total3 = api
+                .column(3)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total4 = api
+                .column(4)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total5 = api
+                .column(5)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total6 = api
+                .column(6)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total7 = api
+                .column(7)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total8 = api
+                .column(8)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            $(api.column(1).footer()).html(
+                total.toFixed(0) + " <br/>Unidades" + "<br/><br/>" + (Number(total / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(2).footer()).html(
+                total2.toFixed(0) + " <br/>Unidades" + "<br/><br/>" + (Number(total2 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(3).footer()).html(
+                total3.toFixed(0) + " <br/>Unidades" + "<br/><br/>" + (Number(total3 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(4).footer()).html(
+                total4.toFixed(0) + "<br/> Unidades" + "<br/><br/>" + (Number(total4 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(5).footer()).html(
+                total5.toFixed(0) + " <br/>Unidades" + "<br/><br/>" + (Number(total5 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(6).footer()).html(
+                total6.toFixed(0) + " <br/>Unidades" + "<br/><br/>" + (Number(total6 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(7).footer()).html(
+                total7.toFixed(0) + "<br/> Unidades" + "<br/><br/>" + (Number(total7 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(8).footer()).html(
+                "<br/><br/><br/>" + total8.toFixed(0) + " %"
+            );
+        }
+    });
+
+    let datatableVentasPeriodoDireccionImporte = $('#tblReporteVentasPeriodoDireccionImporte').DataTable({
+        dom: 'Bfrtip',
+        "processing": true,
+        "oLanguage": {
+            "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
+        },
+        "deferRender": false,
+        "paging": true,
+        "info": false,
+        /*"order": [
+            [0, "desc"]
+        ],*/
+        columnDefs: [{
+            orderable: false,
+            targets: 0
+        }],
+        "aoColumnDefs": [{
+            "bVisible": false,
+            "aTargets": [9]
+        }],
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(),
+                data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            total = api
+                .column(1)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total2 = api
+                .column(2)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total3 = api
+                .column(3)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total4 = api
+                .column(4)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total5 = api
+                .column(5)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total6 = api
+                .column(6)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total7 = api
+                .column(7)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total8 = api
+                .column(8)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            $(api.column(1).footer()).html(
+                "$<br/> " + total.toFixed(2) + "<br/><br/>" + (Number(total / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(2).footer()).html(
+                "$ <br/>" + total2.toFixed(2) + "<br/><br/>" + (Number(total2 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(3).footer()).html(
+                "$<br/> " + total3.toFixed(2) + "<br/><br/>" + (Number(total3 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(4).footer()).html(
+                "$<br/> " + total4.toFixed(2) + "<br/><br/>" + (Number(total4 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(5).footer()).html(
+                "$<br/>" + total5.toFixed(2) + "<br/><br/>" + (Number(total5 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(6).footer()).html(
+                "$ <br/>" + total6.toFixed(2) + "<br/><br/>" + (Number(total6 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(7).footer()).html(
+                "$<br/> " + total7.toFixed(2) + "<br/><br/>" + (Number(total7 / total7) * 100).toFixed(0) + " %"
+            );
+            $(api.column(8).footer()).html(
+                "<br/><br/><br/>" + total8.toFixed(0) + " %"
+            );
+        }
+    });
+
+    function convertirImporte(numero) {
+        let decimal = numero.toString().split(".")[1];
+        numero = numero.toString().split(".")[0] + "";
+        var op = numero.split("").reverse();
+        var new1 = "";
+        for (let i = 0; i < op.length; i++) {
+            if (i % 3 == 0 && i != 0)
+                new1 = "," + new1;
+
+            new1 = op[i] + new1;
+        }
+        return new1 + "." + decimal;
+    }
+
+
+    function convertirUnidades(numero) {
+        numero = numero + "";
+        var op = numero.split("").reverse();
+        var new1 = "";
+        for (let i = 0; i < op.length; i++) {
+            if (i % 3 == 0 && i != 0)
+                new1 = "," + new1;
+
+            new1 = op[i] + new1;
+        }
+        return new1;
+    }
+
+    const consultarInfomacionVentasPeriodoDireccion = (annio = 0, inicio = 0, fin = 0) => {
+        if (inicio == 0 && fin == 0) {
+            datos = {
+                annio: annio
+            };
+
+            $.ajax({
+                method: "GET",
+                data: datos,
+                url: '/public/direccion/reportes/ventasPeriodo'
+            }).done((res) => {
+                if (!res.includes('¬')) {
+                    datatableVentasPeriodoDireccion.clear().draw(false);
+                    datatableVentasPeriodoDireccionImporte.clear().draw(false);
+                    let tabledata = [];
+                    let calzado = res[0].Calzado;
+                    let alimentos = res[1].Alimentos;
+                    let autopartes = res[2].Autopartes;
+                    let electro = res[3].Electrodomesticos;
+                    let caja = res[4].Caja;
+                    let varios = res[5].Varios;
+                    let sumaCalzado = 0;
+                    let sumaAlimentos = 0;
+                    let sumaAutopartes = 0;
+                    let sumaElectrodomesticos = 0;
+                    let sumaCaja = 0;
+                    let sumaVarios = 0;
+
+                    let totalPeriodo1Unidades = 0;
+                    let totalPeriodo2Unidades = 0;
+                    let totalPeriodo3Unidades = 0;
+                    let totalPeriodo4Unidades = 0;
+                    let totalPeriodo5Unidades = 0;
+                    let totalPeriodo1Importe = 0;
+                    let totalPeriodo2Importe = 0;
+                    let totalPeriodo3Importe = 0;
+                    let totalPeriodo4Importe = 0;
+                    let totalPeriodo5Importe = 0;
+                    let totaltotalUnidades = 0;
+                    let totalTotalImporte = 0
+
+                    for (let index = 0; index < res[0].Calzado.length; index++) {
+                        let element = calzado[index];
+                        let element1 = alimentos[index];
+                        let element2 = autopartes[index];
+                        let element3 = electro[index];
+                        let element4 = caja[index];
+                        let element5 = varios[index];
+
+                        let valores = {};
+
+                        switch (element.PERIODO) {
+                            case "01-10":
+                                totalPeriodo1Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo1Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo1Unidades;
+                                totalTotalImporte += totalPeriodo1Importe;
+
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo1Unidades,
+                                    TotalImporte: totalPeriodo1Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "11-20":
+                                totalPeriodo2Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo2Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo2Unidades;
+                                totalTotalImporte += totalPeriodo2Importe;
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo2Unidades,
+                                    TotalImporte: totalPeriodo2Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "21-30":
+                                totalPeriodo3Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo3Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo3Unidades;
+                                totalTotalImporte += totalPeriodo3Importe;
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo3Unidades,
+                                    TotalImporte: totalPeriodo3Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "31-40":
+                                totalPeriodo4Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo4Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                totaltotalUnidades += totalPeriodo4Unidades;
+                                totalTotalImporte += totalPeriodo4Importe;
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo4Unidades,
+                                    TotalImporte: totalPeriodo4Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "41-50":
+                                totalPeriodo5Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo5Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo5Unidades;
+                                totalTotalImporte += totalPeriodo5Importe;
+
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo5Unidades,
+                                    TotalImporte: totalPeriodo5Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                        }
+
+
+                    }
+                    for (let index = 0; index < tabledata.length; index++) {
+                        tabledata[index].porcentajeUnidades = ((tabledata[index].TotalUnidades / totaltotalUnidades) * 100).toFixed(2);
+                        tabledata[index].porcentajeImporte = ((tabledata[index].TotalImporte / totalTotalImporte) * 100).toFixed(2);
+                        tabledata[index].TotalUnidades = convertirUnidades(tabledata[index].TotalUnidades);
+                        tabledata[index].TotalImporte = convertirImporte(tabledata[index].TotalImporte);
+                    }
+                    console.table(tabledata);
+
+                    $.each(tabledata, (index, periodo) => {
+                        datatableVentasPeriodoDireccion.row.add([
+                            periodo.periodo,
+                            periodo.UnidadesCalzado,
+                            periodo.UnidadesAlimentos,
+                            periodo.UnidadesAutopartes,
+                            periodo.UnidadesElectrodomesticos,
+                            periodo.UnidadesCajas,
+                            periodo.UnidadesVarios,
+                            periodo.TotalUnidades,
+                            periodo.porcentajeUnidades,
+                            null
+                        ]).draw(false);
+
+                        datatableVentasPeriodoDireccionImporte.row.add([
+                            periodo.periodo,
+                            periodo.ImporteCalzado,
+                            periodo.ImporteAlimentos,
+                            periodo.ImporteAutoparttes,
+                            periodo.ImporteElectrodomesticos,
+                            periodo.ImporteCajas,
+                            periodo.ImporteVarios,
+                            convertirImporte(Number(periodo.TotalImporte.toString().replace(',', '').replace(',', '').replace(',', '')).toFixed(2)),
+                            periodo.porcentajeImporte,
+                            null
+                        ]).draw(false);
+                    });
+                    /*console.log(Number(totalTotalImporte.toFixed(2)));
+                    console.log(totaltotalUnidades);*/
+
+                } else {
+                    switch (res.toString().split('¬')[0]) {
+                        case "Error1":
+                            swal({
+                                type: "info",
+                                title: "Atención",
+                                text: res.toString().split('¬')[1],
+                                confirmButtonText: "OK",
+                            },
+                                function () {
+                                    location.href = "/public/paginaPrincipal";
+                                });
+                            break;
+                        case "Error":
+                            swal({
+                                type: "error",
+                                title: "Error",
+                                text: "Ha ocurrido un error al procesar su petición. Intente más Tarde.",
+                                confirmButtonText: "OK",
+                            },
+                                function () {
+                                    location.href = "/public/paginaPrincipal";
+                                });
+                            break;
+                    }
+                }
+            }).fail((res) => {
+                swal({
+                    type: "error",
+                    title: "Error",
+                    text: "Ha ocurrido un error.",
+                    confirmButtonText: "OK",
+                },
+                    function () {
+                        location.href = "/public/paginaPrincipal";
+                    });
+            });
+        } else {
+            datos = {
+                annio: annio,
+                inicio: inicio,
+                fin: fin
+            }
+            $.ajax({
+                method: "GET",
+                data: datos,
+                url: '/public/direccion/reportes/ventasPeriodo'
+            }).done((res) => {
+                if (!res.includes('¬')) {
+                    datatableVentasPeriodoDireccion.clear().draw(false);
+                    datatableVentasPeriodoDireccionImporte.clear().draw(false);
+                    let tabledata = [];
+                    let calzado = res[0].Calzado;
+                    let alimentos = res[1].Alimentos;
+                    let autopartes = res[2].Autopartes;
+                    let electro = res[3].Electrodomesticos;
+                    let caja = res[4].Caja;
+                    let varios = res[5].Varios;
+                    let sumaCalzado = 0;
+                    let sumaAlimentos = 0;
+                    let sumaAutopartes = 0;
+                    let sumaElectrodomesticos = 0;
+                    let sumaCaja = 0;
+                    let sumaVarios = 0;
+
+                    let totalPeriodo1Unidades = 0;
+                    let totalPeriodo2Unidades = 0;
+                    let totalPeriodo3Unidades = 0;
+                    let totalPeriodo4Unidades = 0;
+                    let totalPeriodo5Unidades = 0;
+                    let totalPeriodo1Importe = 0;
+                    let totalPeriodo2Importe = 0;
+                    let totalPeriodo3Importe = 0;
+                    let totalPeriodo4Importe = 0;
+                    let totalPeriodo5Importe = 0;
+                    let totaltotalUnidades = 0;
+                    let totalTotalImporte = 0
+
+                    for (let index = 0; index < res[0].Calzado.length; index++) {
+                        let element = calzado[index];
+                        let element1 = alimentos[index];
+                        let element2 = autopartes[index];
+                        let element3 = electro[index];
+                        let element4 = caja[index];
+                        let element5 = varios[index];
+
+                        let valores = {};
+
+                        switch (element.PERIODO) {
+                            case "01-10":
+                                totalPeriodo1Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo1Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo1Unidades;
+                                totalTotalImporte += totalPeriodo1Importe;
+
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo1Unidades,
+                                    TotalImporte: totalPeriodo1Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "11-20":
+                                totalPeriodo2Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo2Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo2Unidades;
+                                totalTotalImporte += totalPeriodo2Importe;
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo2Unidades,
+                                    TotalImporte: totalPeriodo2Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "21-30":
+                                totalPeriodo3Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo3Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo3Unidades;
+                                totalTotalImporte += totalPeriodo3Importe;
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo3Unidades,
+                                    TotalImporte: totalPeriodo3Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "31-40":
+                                totalPeriodo4Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo4Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                totaltotalUnidades += totalPeriodo4Unidades;
+                                totalTotalImporte += totalPeriodo4Importe;
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo4Unidades,
+                                    TotalImporte: totalPeriodo4Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                            case "41-50":
+                                totalPeriodo5Unidades = (Number(element.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.UNIDADES.toString().replace(',', '').replace(',', '')));
+
+                                totalPeriodo5Importe = (Number(element.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element1.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element2.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element3.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element4.IMPORTE.toString().replace(',', '').replace(',', ''))
+                                    + Number(element5.IMPORTE.toString().replace(',', '').replace(',', '')));
+
+                                sumaCalzado += Number(element.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAlimentos += Number(element1.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaAutopartes += Number(element2.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaElectrodomesticos += Number(element3.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaCaja += Number(element4.UNIDADES.toString().replace(',', '').replace(',', ''));
+                                sumaVarios += Number(element5.UNIDADES.toString().replace(',', '').replace(',', ''));
+
+                                totaltotalUnidades += totalPeriodo5Unidades;
+                                totalTotalImporte += totalPeriodo5Importe;
+
+                                valores = {
+                                    periodo: element.PERIODO,
+                                    UnidadesCalzado: element.UNIDADES,
+                                    ImporteCalzado: element.IMPORTE,
+                                    UnidadesAlimentos: element1.UNIDADES,
+                                    ImporteAlimentos: element1.IMPORTE,
+                                    UnidadesAutopartes: element2.UNIDADES,
+                                    ImporteAutoparttes: element2.IMPORTE,
+                                    UnidadesElectrodomesticos: element3.UNIDADES,
+                                    ImporteElectrodomesticos: element3.IMPORTE,
+                                    UnidadesCajas: element4.UNIDADES,
+                                    ImporteCajas: element4.IMPORTE,
+                                    UnidadesVarios: element5.UNIDADES,
+                                    ImporteVarios: element5.IMPORTE,
+                                    TotalUnidades: totalPeriodo5Unidades,
+                                    TotalImporte: totalPeriodo5Importe,
+                                    porcentajeUnidades: null,
+                                    porcentajeImporte: null
+                                }
+                                tabledata.push(valores);
+                                break;
+                        }
+
+
+                    }
+                    for (let index = 0; index < tabledata.length; index++) {
+                        tabledata[index].porcentajeUnidades = ((tabledata[index].TotalUnidades / totaltotalUnidades) * 100).toFixed(2);
+                        tabledata[index].porcentajeImporte = ((tabledata[index].TotalImporte / totalTotalImporte) * 100).toFixed(2);
+                        tabledata[index].TotalUnidades = convertirUnidades(tabledata[index].TotalUnidades);
+                        tabledata[index].TotalImporte = convertirImporte(tabledata[index].TotalImporte);
+                    }
+                    console.table(tabledata);
+
+                    $.each(tabledata, (index, periodo) => {
+                        datatableVentasPeriodoDireccion.row.add([
+                            periodo.periodo,
+                            periodo.UnidadesCalzado,
+                            periodo.UnidadesAlimentos,
+                            periodo.UnidadesAutopartes,
+                            periodo.UnidadesElectrodomesticos,
+                            periodo.UnidadesCajas,
+                            periodo.UnidadesVarios,
+                            periodo.TotalUnidades,
+                            periodo.porcentajeUnidades,
+                            null
+                        ]).draw(false);
+
+                        datatableVentasPeriodoDireccionImporte.row.add([
+                            periodo.periodo,
+                            periodo.ImporteCalzado,
+                            periodo.ImporteAlimentos,
+                            periodo.ImporteAutoparttes,
+                            periodo.ImporteElectrodomesticos,
+                            periodo.ImporteCajas,
+                            periodo.ImporteVarios,
+                            convertirImporte(Number(periodo.TotalImporte.toString().replace(',', '').replace(',', '').replace(',', '')).toFixed(2)),
+                            periodo.porcentajeImporte,
+                            null
+                        ]).draw(false);
+                    });
+                    /*console.log(Number(totalTotalImporte.toFixed(2)));
+                    console.log(totaltotalUnidades);*/
+
+                } else {
+                    switch (res.toString().split('¬')[0]) {
+                        case "Error1":
+                            swal({
+                                type: "info",
+                                title: "Atención",
+                                text: res.toString().split('¬')[1],
+                                confirmButtonText: "OK",
+                            },
+                                function () {
+                                    location.href = "/public/paginaPrincipal";
+                                });
+                            break;
+                        case "Error":
+                            swal({
+                                type: "error",
+                                title: "Error",
+                                text: "Ha ocurrido un error al procesar su petición. Intente más Tarde.",
+                                confirmButtonText: "OK",
+                            },
+                                function () {
+                                    location.href = "/public/paginaPrincipal";
+                                });
+                            break;
+                    }
+                }
+            }).fail((res) => {
+                swal({
+                    type: "error",
+                    title: "Error",
+                    text: "Ha ocurrido un error.",
+                    confirmButtonText: "OK",
+                },
+                    function () {
+                        location.href = "/public/paginaPrincipal";
+                    });
+            });
+        }
+    }
+
+
+    if (window.location.href == "http://envasesmicroonda:8081/public/reportePeriodoDireccion" || window.location.href == "http://192.168.5.200:8081/public/reportePeriodoDireccion") {
+        let currentdatec = new Date();
+        consultarInfomacionVentasPeriodoDireccion(currentdatec.getFullYear() - 1);
+    };
+
+    $(document).on('click', '#btnBuscarDireccionPeriodo', (e) => {
+
+        let currentyear = new Date();
+        let annio = $('#cmbAnioDireccionPeriodo').val();
+        let inicio = $('#cmbAnioDirecciónSemanaInicioPeriodo').val();
+        let fin = $('#cmbAnioDirecciónSemanaFinPeriodo').val();
+
+        if (currentyear.getFullYear() < annio) {
+            swal(
+                {
+                    type: "info",
+                    title: "Alerta",
+                    text: "No puedes consultar valores de años prosperos!",
+                    confirmButtonText: "OK",
+                });
+            return;
+        }
+
+        if (annio != 0) {
+            if (inicio != 0 && fin != 0) {
+                if (fin > inicio) {
+                    swal({
+                        type: 'info',
+                        text: "Generando informe, espere un momento",
+                        title: 'Generando Reporte',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        didOpen: () => {
+                            swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+
+                    });
+                    consultarInfomacionVentasPeriodoDireccion(annio, inicio, fin);
+                } else {
+                    swal(
+                        {
+                            type: "info",
+                            title: "Atención",
+                            text: "La semana final no puede ser menor a la de inicio, compuebe!",
+                            confirmButtonText: "OK",
+                        }, function () {
+                            //$('#ventanaCarga').modal('toggle');
+                        });
+                }
+            } else {
+                swal({
+                    type: 'info',
+                    text: "Generando informe, espere un momento",
+                    title: 'Generando Reporte',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            b.textContent = Swal.getTimerLeft()
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+
+                });
+                consultarInfomacionVentasPeriodoDireccion(annio);
+
+            }
+        } else {
+            swal(
+                {
+                    type: "info",
+                    title: "Alerta",
+                    text: "Debe seleccionar algun filtro valido para consultar, compuebe!",
+                    confirmButtonText: "OK",
+                });
+
+            return;
+        }
+    });
+
+});

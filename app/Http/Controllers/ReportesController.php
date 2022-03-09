@@ -10,7 +10,7 @@ use phpDocumentor\Reflection\Types\Null_;
 use PhpParser\Node\Expr\Cast\Array_;
 
 class ReportesController extends Controller
-{
+{/* 
     public function GetAll()
     {
         $ventas = VentasReportesModel::where('documento', '=', 'Factura Directa')
@@ -30,7 +30,7 @@ class ReportesController extends Controller
             ->get();
 
         return $data;
-    }
+    } */
 
     public function ObtenerTop20(Request $request)
     {
@@ -184,6 +184,47 @@ class ReportesController extends Controller
             }
         } catch (Exception $ex) {
             return 'ERROR¬' . $ex;
+        }
+    }
+
+    public function ventasPeriodo(Request $request)
+    {
+        try {
+            $result = [];
+            $lineaCalzado = NULL;
+            $lineaAlimentos = NULL;
+            $lineaAutopartes = NULL;
+            $lineaElectrodomesticos = NULL;
+            $lineaVariosCaja = NULL;
+            $lineaVarios = NULL;
+            if (isset($request->annio)) {
+                if (isset($request->inicio) && isset($request->fin)) {
+                    $lineaCalzado = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 1 AND SEMANA BETWEEN " . $request->inicio . " AND " . $request->fin . " GROUP BY PERIODO;");
+                    $lineaAlimentos = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 2 AND SEMANA BETWEEN " . $request->inicio . " AND " . $request->fin . " GROUP BY PERIODO;");
+                    $lineaAutopartes = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 3 AND SEMANA BETWEEN " . $request->inicio . " AND " . $request->fin . " GROUP BY PERIODO;");
+                    $lineaElectrodomesticos = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 4 AND SEMANA BETWEEN " . $request->inicio . " AND " . $request->fin . " GROUP BY PERIODO;");
+                    $lineaVariosCaja = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 5 AND SEMANA BETWEEN " . $request->inicio . " AND " . $request->fin . " GROUP BY PERIODO;");
+                    $lineaVarios = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 6 AND SEMANA BETWEEN " . $request->inicio . " AND " . $request->fin . " GROUP BY PERIODO;");
+                } else {
+                    $lineaCalzado = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 1 GROUP BY PERIODO;");
+                    $lineaAlimentos = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 2 GROUP BY PERIODO;");
+                    $lineaAutopartes = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 3 GROUP BY PERIODO;");
+                    $lineaElectrodomesticos = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 4 GROUP BY PERIODO;");
+                    $lineaVariosCaja = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 5 GROUP BY PERIODO;");
+                    $lineaVarios = DB::select("SELECT PERIODO, FORMAT(SUM(UNIDADES),0) AS UNIDADES, FORMAT(SUM(IMPORTE),2) AS IMPORTE FROM ventas_" . $request->annio . " WHERE LINEA = 6 GROUP BY PERIODO;");
+                }
+                array_push($result, ["Calzado" => $lineaCalzado]);
+                array_push($result, ["Alimentos" => $lineaAlimentos]);
+                array_push($result, ["Autopartes" => $lineaAutopartes]);
+                array_push($result, ["Electrodomesticos" => $lineaElectrodomesticos]);
+                array_push($result, ["Caja" => $lineaVariosCaja]);
+                array_push($result, ["Varios" => $lineaVarios]);
+                return $result;
+            } else {
+                return "Error1¬No ha seleccionado un año de consulta, compruebe!";
+            }
+        } catch (Exception $err) {
+            return "Error¬" . $err;
         }
     }
 }
