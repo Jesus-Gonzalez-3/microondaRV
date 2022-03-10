@@ -79,7 +79,7 @@
                                 <tr>
                                     <th>Orden</th>
                                     <th></th>
-                                    <th>Total</th>
+                                    <th class="text-right">Total</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>

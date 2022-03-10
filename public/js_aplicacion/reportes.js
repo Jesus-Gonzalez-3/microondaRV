@@ -28,7 +28,7 @@ const inicializarGraficaTipoBarra = (data) => {
         },
         title: {
             text: 'Unidades vendidas por Cliente de Otras Industrias'
-        },  
+        },
         subtitle: {
             text: 'Total de Unidades vendidas por cliente semana consultada'
         },
@@ -146,6 +146,7 @@ const inicializarGraficaTipoPastel = (data) => {
 };
 
 const graficosbarrasPromedio = (data) => {
+    let fecha = new Date();
     categoria = [];
     valores = [];
     for (let index = 0; index < data.length; index++) {
@@ -168,7 +169,7 @@ const graficosbarrasPromedio = (data) => {
         text: 'Promedio de Ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020', '2021', '2022'],
+        categories: [(fecha.getFullYear()) - 2, (fecha.getFullYear()) - 1, (fecha.getFullYear())],
         title: {
             text: null
         }
@@ -423,6 +424,7 @@ const inicializarGraficaTipoPastelImporte = (data) => {
 };
 
 const graficosbarrasPromedioImporte = (data) => {
+    let fecha = new Date();
     categoria = [];
     valores = [];
     for (let index = 0; index < data.length; index++) {
@@ -445,7 +447,7 @@ const graficosbarrasPromedioImporte = (data) => {
         text: 'Importe promedio de ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020', '2021', '2022'],
+        categories: [(fecha.getFullYear()) - 2, (fecha.getFullYear()) - 1, (fecha.getFullYear())],
         title: {
             text: null
         }
@@ -564,187 +566,6 @@ const graficosbarrasPromedioImporte = (data) => {
     json.legend = legend;
     json.credits = credits;
     $('#containerVentasSemanalBarraPromedioImporte').highcharts(json);
-}
-
-const inicializarGraficaPastelAnualAgentes = (data) =>{
-    let valores = [];
-    let tamanio = data.length;
-
-    for (let index = 0; index < tamanio; index++) {
-        let tmp = {
-            name: data[index].cliente,
-            y: Number((data[index].unidades).toString().replace(',','').replace(',',''))
-        };
-        valores.push(tmp);
-    }
-
-    Highcharts.chart('containerVentasAnualesPastelDireccionUnidades', {
-        exporting: {
-            enabled: true
-        },
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45,
-                beta: 0
-            }
-        },
-        title: {
-            text: 'Ventas en Unidades Anuales por Agente'
-        },
-        subtitle: {
-            text: 'Total de Unidades vendidas por Agente '
-        },
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 35,
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            type: 'pie',
-            name: 'Ventas en Unidades Anuales por Agente',
-            data: valores
-        }]
-    });
-}
-
-const inicializarGraficaPastelAnualAgentesGerentes = (data) =>{
-    let valores = [];
-    let tamanio = data.length;
-
-    for (let index = 0; index < tamanio; index++) {
-        let tmp = {
-            name: data[index].cliente,
-            y: Number((data[index].unidades).toString().replace(',','').replace(',',''))
-        };
-        valores.push(tmp);
-    }
-
-    Highcharts.chart('containerVentasAnualesPastelGerenciaUnidades', {
-        exporting: {
-            enabled: true
-        },
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45,
-                beta: 0
-            }
-        },
-        title: {
-            text: 'Ventas en Unidades Anuales por Agente'
-        },
-        subtitle: {
-            text: 'Total de Unidades vendidas por Agente '
-        },
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 35,
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            type: 'pie',
-            name: 'Ventas en Unidades Anuales por Agente',
-            data: valores
-        }]
-    });
-}
-
-const inicializarGraficaPastelAnualAgentes2 = (data) =>{
-    let valores = [];
-    let tamanio = data.length;
-
-    for (let index = 0; index < tamanio; index++) {
-        let tmp = {
-            name: data[index].cliente,
-            y: Number((data[index].importe).toString().replace(',','').replace(',','').replace(',',''))
-        };
-        valores.push(tmp);
-    }
-
-    Highcharts.chart('containerVentasAnualesPastelDireccionImporte', {
-        exporting: {
-            enabled: true
-        },
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45,
-                beta: 0
-            }
-        },
-        title: {
-            text: 'Ventas en Pesos Anuales por Agente'
-        },
-        subtitle: {
-            text: 'Total en pesos vendidos por Agente '
-        },
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        tooltip: {
-            pointFormat: 'Pesos Vendidos $ : <b> {point.y}</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 35,
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            type: 'pie',
-            name: 'Ventas en Pesos Anuales por Agente',
-            data: valores
-        }]
-    });
-    return true;
 }
 
 // *********************************************************************************************
@@ -889,6 +710,7 @@ const inicializarGraficaTipoPastelCalzado = (data) => {
 };
 
 const graficosbarrasPromedioCalzado = (data) => {
+    let fecha = new Date()
     let categoria = [];
     let valores = [];
     for (let index = 0; index < data.length; index++) {
@@ -911,7 +733,7 @@ const graficosbarrasPromedioCalzado = (data) => {
         text: 'Promedio de Ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020', '2021', '2022'],
+        categories: [(fecha.getFullYear()) - 2, (fecha.getFullYear()) - 1, (fecha.getFullYear())],
         title: {
             text: null
         }
@@ -1111,6 +933,7 @@ const inicializarGraficaTipoPastelCalzadoImporte = (data) => {
 };
 
 const graficosbarrasPromedioCalzadoImporte = (data) => {
+    let fecha = new Date();
     let categoria = [];
     let valores = [];
     for (let index = 0; index < data.length; index++) {
@@ -1133,7 +956,7 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
         text: 'Importe promedio de ventas de los Ultimos 3 años'
     };
     let xAxis = {
-        categories: ['2020', '2021', '2022'],
+        categories: [(fecha.getFullYear()) - 2, (fecha.getFullYear()) - 1, (fecha.getFullYear())],
         title: {
             text: null
         }
@@ -1199,6 +1022,383 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
     $('#containerVentasSemanalBarraPromedioCalzadoImporte').highcharts(json);
 }
 
+
+const incializarGraficaBarrasVentasPeriodoBarra = (data) => {
+    //console.log(data);
+    let valores = [];
+    let categoria = [];
+    let leyenda = [];
+    let tamanio = data.length;
+    let valores1 = [];
+    let categoria1 = [];
+    let leyenda1 = [];
+
+    for (let index = 0; index < tamanio; index++) {
+        valores.push(Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', '')));
+        categoria.push("<b>" + data[index].periodo + "</b>");
+        leyenda.push((data[index].totalUnidades) + " Unidades vendidas en el Periodo " + data[index].periodo);
+        valores1.push(Number(Number((data[index].TotalImporte).toString().replace(',', '').replace(',', '').replace(',', '')).toFixed(2)));
+        categoria1.push("<b>" + data[index].periodo + "</b>");
+        leyenda1.push((data[index].TotalImporte) + " Ventas en Pesos en el Periodo " + data[index].periodo);
+    }
+    Highcharts.chart('containerVentasPeriodoBarra', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Unidades vendidas por Periodo de Trabajo'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Periodo de Trabajo'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            categories: categoria,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: '<b>Total</b>'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y}'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
+        }, credits: {
+            enabled: false
+        },
+        series: [
+            {
+                name: 'Unidades vendidas por Periodo de Trabajo',
+                colorByPoint: true,
+                data: valores
+            }
+        ]
+    });
+    Highcharts.chart('containerVentasPeriodoBarraImporte', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Ventas en Pesos por Periodo de Trabajo'
+        },
+        subtitle: {
+            text: 'Total en Pesos vendidos por Periodo de Trabajo'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            categories: categoria1,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: '<b>Total</b>'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y}'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
+        }, credits: {
+            enabled: false
+        },
+        series: [
+            {
+                name: 'Ventas en Pesos por Periodo de Trabajo',
+                colorByPoint: true,
+                data: valores1
+            }
+        ]
+    });
+}
+
+const incializarGraficaBarrasVentasPeriodoGerentes = (data) => {
+    //console.log(data);
+    let valores = [];
+    let categoria = [];
+    let leyenda = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        valores.push(Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', '')));
+        categoria.push("<b>" + data[index].periodo + "</b>");
+        leyenda.push((data[index].totalUnidades) + " Unidades vendidas en el Periodo " + data[index].periodo);
+    }
+    Highcharts.chart('containerVentasPeriodoBarra', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Unidades vendidas por Periodo de Trabajo'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Periodo de Trabajo'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            categories: categoria,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: '<b>Total</b>'
+            }
+
+        },
+        legend: {
+            enabled: true
+            , data: leyenda
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y}'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
+        }, credits: {
+            enabled: false
+        },
+        series: [
+            {
+                name: 'Unidades vendidas por Periodo de Trabajo',
+                colorByPoint: true,
+                data: valores
+            }
+        ]
+    });
+}
+
+const incializarGraficaBarrasVentasPeriodoPastel = (data) => {
+    let valores = [];
+    let valores1 = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: "Periodo : "+data[index].periodo+"<br>",
+            y: Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', ''))
+        }; 
+
+        let tmp1 = {
+            name: "Periodo : "+ data[index].periodo +"<br>",
+            y: Number(Number((data[index].TotalImporte).toString().replace(',', '').replace(',', '').replace(',', '')).toFixed(2))
+        };
+        valores.push(tmp);
+        valores1.push(tmp1);
+    }
+
+    Highcharts.chart('containerVentasPeriodoPie', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Unidades Periodo'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Periodo '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Unidades Por Periodo',
+            data: valores
+        }]
+    });
+
+    Highcharts.chart('containerVentasPeriodoPieImporte', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Pesos por Periodo'
+        },
+        subtitle: {
+            text: 'Total en pesos vendidos por Periodo '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Ventas en Pesos : $ <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Pesos Por Periodo',
+            data: valores1
+        }]
+    });
+}
+
+const incializarGraficaBarrasVentasPeriodoPastelGerentes = (data) => {
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: "Periodo : "+data[index].periodo+"<br>",
+            y: Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', ''))
+        }; 
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasPeriodoPie', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Unidades Periodo'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Periodo '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Unidades Por Periodo',
+            data: valores
+        }]
+    });
+}
 // *********************************************************************************************
 
 const GenerarPDF = () => {
@@ -1324,4 +1524,192 @@ const GenerarPDF = () => {
 
         //console.log(woorkbook.output('bloburl'));
     });
-} 
+}
+
+/**
+ * Graficos ventas anuales
+ * @param {Array} data 
+ */
+
+const inicializarGraficaPastelAnualAgentes = (data) => {
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: data[index].cliente,
+            y: Number((data[index].unidades).toString().replace(',', '').replace(',', ''))
+        };
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasAnualesPastelDireccionUnidades', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Unidades Anuales por Agente'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Agente '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Unidades Anuales por Agente',
+            data: valores
+        }]
+    });
+}
+
+const inicializarGraficaPastelAnualAgentesGerentes = (data) => {
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: data[index].cliente,
+            y: Number((data[index].unidades).toString().replace(',', '').replace(',', ''))
+        };
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasAnualesPastelGerenciaUnidades', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Unidades Anuales por Agente'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por Agente '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Unidades Anuales por Agente',
+            data: valores
+        }]
+    });
+}
+
+const inicializarGraficaPastelAnualAgentes2 = (data) => {
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        let tmp = {
+            name: data[index].cliente,
+            y: Number((data[index].importe).toString().replace(',', '').replace(',', '').replace(',', ''))
+        };
+        valores.push(tmp);
+    }
+
+    Highcharts.chart('containerVentasAnualesPastelDireccionImporte', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Pesos Anuales por Agente'
+        },
+        subtitle: {
+            text: 'Total en pesos vendidos por Agente '
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Pesos Vendidos $ : <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Pesos Anuales por Agente',
+            data: valores
+        }]
+    });
+    return true;
+}
+
+// *********************************************************************************************
