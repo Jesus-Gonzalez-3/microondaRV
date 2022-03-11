@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\VentasReportesModel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Null_;
 use PhpParser\Node\Expr\Cast\Array_;
 
 class ReportesController extends Controller
-{/* 
+{
+    /* 
     public function GetAll()
     {
         $ventas = VentasReportesModel::where('documento', '=', 'Factura Directa')
@@ -222,6 +224,24 @@ class ReportesController extends Controller
                 return $result;
             } else {
                 return "Error1¬No ha seleccionado un año de consulta, compruebe!";
+            }
+        } catch (Exception $err) {
+            return "Error¬" . $err;
+        }
+    }
+
+    public function VentasSemanalesAgentes(Request $request)
+    {
+        try {
+            if (isset($request->annio) && isset($request->semana)) {
+                $dataVentas = [];
+                $ventasAgente = DB::select('SELECT PRODUCTO, DESCRIPCION, CLIENTE, AGENTE, SUM(UNIDADES) AS UNIDADES FROM ventas_' . $request->annio . ' where Semana = '.$request->semana.' and Agente= "'.strtoupper(Auth::user()->name).'" Group by  PRODUCTO, AGENTE');
+
+                array_push($dataVentas, $ventasAgente);
+
+                return $dataVentas;
+            } else {
+                return "Error1¬Debe seleccionar un año de consulta para desplegar información, compruebe";
             }
         } catch (Exception $err) {
             return "Error¬" . $err;

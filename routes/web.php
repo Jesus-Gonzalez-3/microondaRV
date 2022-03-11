@@ -92,17 +92,32 @@ try {
         });
 
 
-        Route::get('/reportePeriodo', function () {
+        
+
+        /**
+         * Reportes Agentes
+         */
+
+        Route::get('/reporteSemanalAgentes', function () {
+            return view('reportes.reporteSemanal');
+        });
+
+        Route::get('/reportePeriodoAgentes', function () {
             return view('reportes.reportePeriodo');
         });
-        Route::get('/reporteAnual', function () {
+
+        Route::get('/reporteAnualAgentes', function () {
             return view('reportes.reporteAnual');
         });
 
+        Route::group(['prefix' => 'agentes/reportes'], function () {
+            Route::get('/ventasSemanales', 'ReportesController@VentasSemanalesAgentes');
+            /*Route::get('/top50', 'ReportesController@ObtenerTop50');
+            Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
+            Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');*/
+        });
 
-        /* Route::get('/reporteSemanal', function () {
-            return view('reportes.reporteSemanal');
-        });*/
+        //
 
         /**
          * Index

@@ -250,6 +250,7 @@ const RegistrarUsuarioAdmin = () => {
                 method: "POST",
                 data: datos,
             }).done(function (res) {
+                console.log(res);
                 if (res == "OK") {
                     swal(
                         {
@@ -276,6 +277,8 @@ const RegistrarUsuarioAdmin = () => {
                     );
                 }
             }).fail(function (res) {
+
+                console.log(res);
                 swal(
                     {
                         type: "error",
@@ -409,7 +412,7 @@ const updatedatauser = () => {
                 method: "POST",
                 data: datos,
             }).done(function (res) {
-                 
+
                 if (res == "OK") {
                     swal(
                         {
@@ -436,7 +439,7 @@ const updatedatauser = () => {
                     );
                 }
             }).fail(function (res) {
-                 
+
                 swal(
                     {
                         type: "error",
@@ -519,7 +522,7 @@ const eliminarUsuario = (uid) => {
 
 }
 
-const ActivarUsuario = (uid) =>{
+const ActivarUsuario = (uid) => {
     datos = {
         id: uid,
         _token: $('input[name="_token"]').val(),

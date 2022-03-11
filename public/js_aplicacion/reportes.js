@@ -1233,12 +1233,12 @@ const incializarGraficaBarrasVentasPeriodoPastel = (data) => {
 
     for (let index = 0; index < tamanio; index++) {
         let tmp = {
-            name: "Periodo : "+data[index].periodo+"<br>",
+            name: "Periodo : " + data[index].periodo + "<br>",
             y: Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', ''))
-        }; 
+        };
 
         let tmp1 = {
-            name: "Periodo : "+ data[index].periodo +"<br>",
+            name: "Periodo : " + data[index].periodo + "<br>",
             y: Number(Number((data[index].TotalImporte).toString().replace(',', '').replace(',', '').replace(',', '')).toFixed(2))
         };
         valores.push(tmp);
@@ -1346,9 +1346,9 @@ const incializarGraficaBarrasVentasPeriodoPastelGerentes = (data) => {
 
     for (let index = 0; index < tamanio; index++) {
         let tmp = {
-            name: "Periodo : "+data[index].periodo+"<br>",
+            name: "Periodo : " + data[index].periodo + "<br>",
             y: Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', ''))
-        }; 
+        };
         valores.push(tmp);
     }
 
@@ -1713,3 +1713,144 @@ const inicializarGraficaPastelAnualAgentes2 = (data) => {
 }
 
 // *********************************************************************************************
+
+/**
+*
+*   Despliege de ventas semanal Agentes 
+*
+*/
+
+const iniciarGraficaBarrasAgentesSemanal = (data) => {
+    let valores = [];
+    let categoria = [];
+    let leyenda = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        if (data[index].UNIDADES > 0) {
+            valores.push(Number((data[index].UNIDADES).toString().replace(',', '').replace(',', '').replace(',', '')));
+            categoria.push("<b>" + data[index].DESCRIPCION + "</b>");
+            leyenda.push((data[index].UNIDADES) + " Unidades vendidas");
+        }
+    }
+    Highcharts.chart('containerVentasSemanalBarraAgentes', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Ventas en Unidades'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas por semana'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            categories: categoria,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: '<b>Total</b>'
+            }
+
+        },
+        legend: {
+            enabled: true
+            , data: leyenda
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y}'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
+        }, credits: {
+            enabled: false
+        },
+        series: [
+            {
+                name: 'Unidades vendidas semana',
+                colorByPoint: true,
+                data: valores
+            }
+        ]
+    });
+
+}
+
+const iniciarGraficaPasteAgentesSemanal = (data) => {
+    let valores = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        if (data[index].UNIDADES > 0) {
+            let tmp = {
+                name: data[index].DESCRIPCION,
+                y: Number((data[index].UNIDADES))
+            };
+            valores.push(tmp);
+        }
+    }
+
+    Highcharts.chart('containerVentasSemanalPastelAgentes', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Ventas en Unidades'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas a la semana consultada'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        tooltip: {
+            pointFormat: 'Numero de Unidades Vendidas: <b> {point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: <br/> {point.percentage:.2f} %'
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'pie',
+            name: 'Ventas en Unidades',
+            data: valores
+        }]
+    });
+}

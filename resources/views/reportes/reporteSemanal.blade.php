@@ -10,9 +10,9 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <label for="cmbSemanaDireccion">Semana</label>
-                    <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaDireccion" id="cmbSemanaDireccion">
-                        <option value="">Selecione</option>
+                    <label for="cmbSemanaAgentes">Semana</label>
+                    <select class="js-example-basic-single" style="width: 100%;" name="cmbSemanaAgentes" id="cmbSemanaAgentes">
+                        <option value="0">Selecione</option>
                         @forelse(range(1,52) as $dia)
                         <option value="{{$dia}}">Semana {{$dia}}</option>
                         @empty
@@ -40,67 +40,91 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs customtab" role="tablist">
             <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tablaVentasSemanal" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-table-large"></i></span> <span class="hidden-xs-down"> <i class="mdi mdi-table-large"></i> Tabla</span></a> </li>
-            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#graBarraVentasSemanal" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-chart-bar"></i></span> <span class="hidden-xs-down"> <i class="mdi mdi-chart-bar"></i> Gráfica de barras</span></a> </li>
-            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#graCirVentasSemanal" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-chart-pie"></i></span> <span class="hidden-xs-down"> <i class="mdi mdi-chart-pie"></i> Gráfica de pastel</span></a> </li>
+            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#graBarraVentasSemanal" role="tab"><span class="hidden-sm-up"><i class="mdi mdi-chart-bar"></i><i class="mdi mdi-chart-pie"></i></span> <span class="hidden-xs-down"> <i class="mdi mdi-chart-bar"></i><i class="mdi mdi-chart-pie"></i> Gráficos</span></a> </li>
         </ul>
     </div>
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="tablaVentasSemanal" role="tabpanel">
-            <br>
-            <hr>
-            <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>
-            <hr>
-            <div class="table-responsive ">
-                <div class="container-fluid">
-                    <table id="tblReporteVentasSemanalDireccion" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Orden</th>
-                                <th>Clave</th>
-                                <th>Nombre del Cliente</th>
-                                <th>Promedio Semanal Acumulado Unidades 2020</th>
-                                <th>Promedio Semanal Acumulado Unidades 2021</th>
-                                <th>Promedio Semanal Acumulado Unidades 2022</th>
-                                <th>Unidades Semana Consultada</th>
-                                <th>Promedio Semanal Acumulado Importe 2020</th>
-                                <th>Promedio Semanal Acumulado Importe 2021</th>
-                                <th>Promedio Semanal Acumulado Importe 2022</th>
-                                <th>Importe Semana Consultada</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Orden</th>
-                                <th>Clave</th>
-                                <th>Nombre del Cliente</th>
-                                <th>Promedio Semanal Acumulado Unidades 2020</th>
-                                <th>Promedio Semanal Acumulado Unidades 2021</th>
-                                <th>Promedio Semanal Acumulado Unidades 2022</th>
-                                <th>Unidades Semana Consultada</th>
-                                <th>Promedio Semanal Acumulado Importe 2020</th>
-                                <th>Promedio Semanal Acumulado Importe 2021</th>
-                                <th>Promedio Semanal Acumulado Importe 2022</th>
-                                <th>Importe Semana Consultada</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
+            <div>
+                <div class="row">
+                    <div class="col-11">
+                        <h3 class="card-title text-center">VENTAS SEMANALES {{strtoupper(Auth::user()->name)}}</h3>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i> <span class="caret"></span>
+                        </button>
+                    </div>
+                </div>
 
-                        </tbody>
-                    </table>
-                    <br />
+                <hr>
+                <div class="table-responsive collapse show" id="collapseExample">
+                    <div class="container-fluid">
+                        <table id="tableVentasSemanalAgentes" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Clave Producto</th>
+                                    <th style="width: 30%;">Producto</th>
+                                    <th style="width: 30%;">Cliente</th>
+                                    <th>Unidades Vendidad </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="text-right">Total</th>
+                                    <th></th>
+
+                                </tr>
+                            </tfoot>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <br />
+                    </div>
                 </div>
             </div>
         </div>
         <div class="tab-pane  p-20" id="graBarraVentasSemanal" role="tabpanel">
-            <figure class="highcharts-figure">
-                <div id="containerVentasSemanalBarra"></div>
-            </figure>
-        </div>
-        <div class="tab-pane p-20" id="graCirVentasSemanal" role="tabpanel">
-            <figure class="highcharts-figure" style="width: 100%; height: 100%;">
-                <div id="containerVentasSemanalPastel"></div>
-            </figure>
+            <div class="row">
+                <div class="col-11">
+                    <h3 class="card-title text-center">VENTAS SEMANALES {{strtoupper(Auth::user()->name)}}</h3>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasSemanalAgentesBarra" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-1 offset-2 collapse show" id="ventasSemanalAgentesBarra">
+                    <figure class="highcharts-figure">
+                        <center>
+                            <div id="containerVentasSemanalBarraAgentes">
+                            </div>
+                        </center>
+                    </figure>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-11">
+                    <h3 class="card-title text-center">VENTAS SEMANALES {{strtoupper(Auth::user()->name)}}</h3>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasSemanalAgentesPastel" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-1 offset-2 collapse show" id="ventasSemanalAgentesPastel">
+                <figure class="highcharts-figure" style="width: 100%; height: 100%;">
+                    <center>
+                        <div id="containerVentasSemanalPastelAgentes"></div>
+                    </center>
+                </figure>
+            </div>
         </div>
     </div>
 </div>

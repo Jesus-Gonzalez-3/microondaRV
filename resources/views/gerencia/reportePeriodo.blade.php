@@ -180,7 +180,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="tab-pane  p-20" id="graBarraVentasPeriodo" role="tabpanel">
             <div>
@@ -200,8 +199,7 @@
                         <div id="containerVentasPeriodoBarra"></div>
                     </figure>
                 </div>
-                <hr>
-                <div class="row">
+                <div class="row" hidden>
                     <div class="col-11">
                         <h3 class="card-title text-center">VENTAS EN PESOS POR PERIODO</h3>
                     </div>
@@ -219,12 +217,42 @@
                 </div>
             </div>
         </div>
+        <div class="tab-pane p-20" id="graCirVentasPeriodo" role="tabpanel">
+            <div>
+                <div class="row">
+                    <div class="col-11">
+                        <h3 class="card-title text-center">VENTAS EN UNIDADES POR PERIODO</h3>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasOtrasIndustriasBarra" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <hr>
+                <div class="container-fluid show" id="ventasOtrasIndustriasBarra">
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasPeriodoPie"></div>
+                    </figure>
+                </div>
+                <div class="row" hidden>
+                    <div class="col-11">
+                        <h3 class="card-title text-center">VENTAS EN PESOS POR PERIODO</h3>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ventasCalzadoBarra" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i> <span class="caret"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="container-fluid show" id="ventasCalzadoBarra">
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasPeriodoPieImporte"></div>
+                    </figure>
+
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="tab-pane p-20" id="graCirVentasPeriodo" role="tabpanel">
-        <figure class="highcharts-figure">
-            <div id="containerVentasPeriodoPastel"></div>
-        </figure>
-    </div>
-</div>
 </div>
 @endsection

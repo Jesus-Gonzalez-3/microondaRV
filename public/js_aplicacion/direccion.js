@@ -1236,6 +1236,7 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+
     $('#cmbAnioDirecciónSemanaInicio').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -1243,6 +1244,7 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+    
     $('#cmbAnioDirecciónSemanaFin').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -1679,6 +1681,7 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+
     $('#cmbAnioGerenciaSemanaInicio').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -1686,6 +1689,7 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+
     $('#cmbAnioGerenciaSemanaFin').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -1994,6 +1998,7 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+
     $('#cmbAnioDirecciónSemanaFinPeriodo').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -2525,8 +2530,6 @@ $(document).ready(function () {
                                 tabledata.push(valores);
                                 break;
                         }
-
-
                     }
                     for (let index = 0; index < tabledata.length; index++) {
                         tabledata[index].porcentajeUnidades = ((tabledata[index].TotalUnidades / totaltotalUnidades) * 100).toFixed(2);
@@ -3073,6 +3076,7 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+
     $('#cmbAnioGerenciaSemanaFinPeriodo').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -3080,12 +3084,13 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
+
     $(document).on('click', '#btnBuscarGerenciaPeriodo', (e) => {
 
         let currentyear = new Date();
-        let annio = $('#cmbAnioDireccionPeriodo').val();
-        let inicio = $('#cmbAnioDirecciónSemanaInicioPeriodo').val();
-        let fin = $('#cmbAnioDirecciónSemanaFinPeriodo').val();
+        let annio = $('#cmbAnioGerenciaPeriodo').val();
+        let inicio = $('#cmbAnioGerenciaSemanaInicioPeriodo').val();
+        let fin = $('#cmbAnioGerenciaSemanaFinPeriodo').val();
 
         if (currentyear.getFullYear() < annio) {
             swal(
@@ -4098,7 +4103,6 @@ $(document).ready(function () {
             });
         }
     }
-
 
     if (window.location.href == "http://envasesmicroonda:8081/public/reportePeriodoGerencia" || window.location.href == "http://192.168.5.200:8081/public/reportePeriodoGerenciad") {
         let currentdatec = new Date();

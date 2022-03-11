@@ -272,7 +272,7 @@
                                 <span class="hide-menu">Reportes</span>
                             </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{URL::to('/reporteSemanal')}}">Reporte Semanal</a></li>
+                                <li><a href="{{URL::to('/reporteSemanalAgentes')}}">Reporte Semanal</a></li>
                                 <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
                                 <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
                             </ul>
@@ -512,6 +512,7 @@
     <script src="{{asset('js_aplicacion/login.js')}}"></script>
     <script src="{{asset('js_aplicacion/reportes.js')}}"></script>
     <script src="{{asset('js_aplicacion/direccion.js')}}"></script>
+    <script src="{{asset('js_aplicacion/agentes.js')}}"></script>
 
 
 
