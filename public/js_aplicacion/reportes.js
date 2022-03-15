@@ -12,7 +12,7 @@ const inicializarGraficaTipoBarra = (data) => {
     for (let index = 0; index < tamanio; index++) {
         let tmp = {
             name: data[index].cliente,
-            y: Number(data[index].Unidades)
+            data: [Number(data[index].Unidades)]
         };
         valores.push(tmp);
         categoria.push("<b>" + data[index].cliente + "</b>");
@@ -67,13 +67,7 @@ const inicializarGraficaTipoBarra = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Unidades vendidas por Cliente de Otras Industrias',
-                colorByPoint: true,
-                data: valores
-            }
-        ]
+        series: valores
     });
 
 };
@@ -298,7 +292,11 @@ const inicializarGraficaTipoBarraImporte = (data) => {
     let tamanio = data.length;
 
     for (let index = 0; index < tamanio; index++) {
-        valores.push(Number(data[index].IMPORTE_ACTUAL));
+        let tem = {
+            name: data[index].cliente,
+            data: [Number(data[index].IMPORTE_ACTUAL)]
+        }
+        valores.push(tem);
         categoria.push("<b>" + data[index].cliente + "</b>");
         leyenda.push('  cantidad: ' + data[index].IMPORTE_ACTUAL);
     }
@@ -351,13 +349,7 @@ const inicializarGraficaTipoBarraImporte = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Importe de ventas por Cliente de Otras Industrias',
-                colorByPoint: true,
-                data: valores
-            }
-        ]
+        series: valores
     });
 
 };
@@ -584,7 +576,11 @@ const inicializarGraficaTipoBarraCalzado = (data) => {
     let tamanio = data.length;
 
     for (let index = 0; index < tamanio; index++) {
-        valores.push(Number(data[index].Unidades));
+        let tem = {
+            name: data[index].cliente,
+            data: [Number(data[index].Unidades)]
+        }
+        valores.push(tem);
         categoria.push("<b>" + data[index].cliente + "</b>");
         leyenda.push('  cantidad: ' + new Intl.NumberFormat('en').format(Number(data[index].Unidades)));
     }
@@ -637,13 +633,7 @@ const inicializarGraficaTipoBarraCalzado = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Unidades vendidas por Cliente de Calzado',
-                colorByPoint: true,
-                data: valores
-            }
-        ]
+        series: valores
     });
 
 };
@@ -807,7 +797,11 @@ const inicializarGraficaTipoBarraCalzadoImporte = (data) => {
     let tamanio = data.length;
 
     for (let index = 0; index < tamanio; index++) {
-        valores.push(Number(data[index].IMPORTE_ACTUAL));
+        let tem = {
+            name: data[index].cliente,
+            data: [Number(data[index].IMPORTE_ACTUAL)]
+        }
+        valores.push(tem);
         categoria.push("<b>" + data[index].cliente + "</b>");
         leyenda.push('  cantidad: ' + Number(data[index].IMPORTE_ACTUAL));
     }
@@ -860,13 +854,7 @@ const inicializarGraficaTipoBarraCalzadoImporte = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Importe de ventas por Cliente de Calzado',
-                colorByPoint: true,
-                data: valores
-            }
-        ]
+        series: valores
     });
 
 };
@@ -1034,10 +1022,18 @@ const incializarGraficaBarrasVentasPeriodoBarra = (data) => {
     let leyenda1 = [];
 
     for (let index = 0; index < tamanio; index++) {
-        valores.push(Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', '')));
+        let tem = {
+            name: "Periodo: " + data[index].periodo,
+            data: [Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', ''))]
+        }
+        let tem2 = {
+            name: "Periodo: " + data[index].periodo,
+            data: [Number(Number((data[index].TotalImporte).toString().replace(',', '').replace(',', '').replace(',', '')).toFixed(2))]
+        }
+        valores.push(tem);
         categoria.push("<b>" + data[index].periodo + "</b>");
         leyenda.push((data[index].totalUnidades) + " Unidades vendidas en el Periodo " + data[index].periodo);
-        valores1.push(Number(Number((data[index].TotalImporte).toString().replace(',', '').replace(',', '').replace(',', '')).toFixed(2)));
+        valores1.push(tem2);
         categoria1.push("<b>" + data[index].periodo + "</b>");
         leyenda1.push((data[index].TotalImporte) + " Ventas en Pesos en el Periodo " + data[index].periodo);
     }
@@ -1089,13 +1085,7 @@ const incializarGraficaBarrasVentasPeriodoBarra = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Unidades vendidas por Periodo de Trabajo',
-                colorByPoint: true,
-                data: valores
-            }
-        ]
+        series: valores
     });
     Highcharts.chart('containerVentasPeriodoBarraImporte', {
         exporting: {
@@ -1145,13 +1135,7 @@ const incializarGraficaBarrasVentasPeriodoBarra = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Ventas en Pesos por Periodo de Trabajo',
-                colorByPoint: true,
-                data: valores1
-            }
-        ]
+        series: valores1
     });
 }
 
@@ -1163,7 +1147,11 @@ const incializarGraficaBarrasVentasPeriodoGerentes = (data) => {
     let tamanio = data.length;
 
     for (let index = 0; index < tamanio; index++) {
-        valores.push(Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', '')));
+        let tem = {
+            name: data[index].periodo,
+            data: [Number((data[index].TotalUnidades).toString().replace(',', '').replace(',', '').replace(',', ''))]
+        }
+        valores.push(tem);
         categoria.push("<b>" + data[index].periodo + "</b>");
         leyenda.push((data[index].totalUnidades) + " Unidades vendidas en el Periodo " + data[index].periodo);
     }
@@ -1216,13 +1204,7 @@ const incializarGraficaBarrasVentasPeriodoGerentes = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Unidades vendidas por Periodo de Trabajo',
-                colorByPoint: true,
-                data: valores
-            }
-        ]
+        series: valores
     });
 }
 
@@ -1728,7 +1710,11 @@ const iniciarGraficaBarrasAgentesSemanal = (data) => {
 
     for (let index = 0; index < tamanio; index++) {
         if (data[index].UNIDADES > 0) {
-            valores.push(Number((data[index].UNIDADES).toString().replace(',', '').replace(',', '').replace(',', '')));
+            let val = {
+                name: data[index].DESCRIPCION,
+                data: [Number((data[index].UNIDADES).toString().replace(',', '').replace(',', '').replace(',', ''))]
+            }
+            valores.push(val);
             categoria.push("<b>" + data[index].DESCRIPCION + "</b>");
             leyenda.push((data[index].UNIDADES) + " Unidades vendidas");
         }
@@ -1782,13 +1768,7 @@ const iniciarGraficaBarrasAgentesSemanal = (data) => {
         }, credits: {
             enabled: false
         },
-        series: [
-            {
-                name: 'Unidades vendidas semana',
-                colorByPoint: true,
-                data: valores
-            }
-        ]
+        series: valores
     });
 
 }
@@ -1852,5 +1832,80 @@ const iniciarGraficaPasteAgentesSemanal = (data) => {
             name: 'Ventas en Unidades',
             data: valores
         }]
+    });
+}
+
+/**
+DESPLIEGE DE VENTAS ANUALES AGENTES
+*/
+const inicializarGraficaBarrasAnualAgentes = (data) => {
+    let valores = [];
+    let categoria = [];
+    let leyenda = [];
+    let tamanio = data.length;
+
+    for (let index = 0; index < tamanio; index++) {
+        if (data[index].UNIDADES > 0) {
+            let val = {
+                name: data[index].DESCRIPCION,
+                data: [Number((data[index].UNIDADES))]
+            }
+            valores.push(val);
+            categoria.push("<b>" + data[index].DESCRIPCION + "</b>");
+            leyenda.push((data[index].UNIDADES) + " Unidades vendidas");
+        }
+    }
+
+    console.log(categoria);
+    console.log(valores);
+    Highcharts.chart('containerVentasAnualesPastelAgentesUnidades', {
+        exporting: {
+            enabled: true
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Ventas en Unidades'
+        },
+        subtitle: {
+            text: 'Total de Unidades vendidas Anualmente'
+        },
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            categories: categoria,
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: '<b>Total</b>'
+            }
+
+        },
+        legend: {
+            enabled: true
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y}'
+                }
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}"><b>{point.y}</b><br/>'
+        }, credits: {
+            enabled: false
+        },
+        series: valores
     });
 }

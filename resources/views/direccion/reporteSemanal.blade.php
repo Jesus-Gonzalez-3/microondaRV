@@ -168,22 +168,22 @@
                 <hr>
                 <div class="container-fluid show" id="ventasOtrasIndustriasBarra">
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarra"></div>
+                        <div id="containerVentasSemanalBarra" style="height: 600px;"></div>
                     </figure>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraPromedio"></div>
+                        <div id="containerVentasSemanalBarraPromedio" style="height: 800px;"></div>
                     </figure>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraImporte"></div>
+                        <div id="containerVentasSemanalBarraImporte" style="height: 600px;"></div>
                     </figure>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraPromedioImporte"></div>
+                        <div id="containerVentasSemanalBarraPromedioImporte" style="height: 800px;"></div>
                     </figure>
                 </div>
                 <hr>
@@ -199,22 +199,22 @@
                 </div>
                 <div class="container-fluid show" id="ventasCalzadoBarra">
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraCalzado"></div>
+                        <div id="containerVentasSemanalBarraCalzado" style="height: 600px;"></div>
                     </figure>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraPromedioCalzado"></div>
+                        <div id="containerVentasSemanalBarraPromedioCalzado" style="height: 800px;"></div>
                     </figure>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraCalzadoImporte"></div>
+                        <div id="containerVentasSemanalBarraCalzadoImporte" style="height: 600px;"></div>
                     </figure>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraPromedioCalzadoImporte"></div>
+                        <div id="containerVentasSemanalBarraPromedioCalzadoImporte" style="height: 800px;"></div>
                     </figure>
                 </div>
             </div>
