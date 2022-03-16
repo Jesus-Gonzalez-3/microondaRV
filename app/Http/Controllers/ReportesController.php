@@ -235,13 +235,51 @@ class ReportesController extends Controller
         try {
             if (isset($request->annio) && isset($request->semana)) {
                 $dataVentas = [];
-                $ventasAgente = DB::select('SELECT PRODUCTO, DESCRIPCION, CLIENTE, AGENTE, SUM(UNIDADES) AS UNIDADES FROM ventas_' . $request->annio . ' where Semana = '.$request->semana.' and Agente= "'.strtoupper(Auth::user()->name).'" Group by  PRODUCTO, AGENTE');
+                $ventasAgente = DB::select('SELECT PRODUCTO, DESCRIPCION, CLIENTE, AGENTE, SUM(UNIDADES) AS UNIDADES FROM ventas_' . $request->annio . ' where Semana = ' . $request->semana . ' and Agente= "' . strtoupper(Auth::user()->name) . '" Group by  PRODUCTO, AGENTE');
 
                 array_push($dataVentas, $ventasAgente);
 
                 return $dataVentas;
             } else {
                 return "Error1¬Debe seleccionar un año de consulta para desplegar información, compruebe";
+            }
+        } catch (Exception $err) {
+            return "Error¬" . $err;
+        }
+    }
+
+    public function VentasAnualesAgentes(Request $request)
+    {
+        try {
+            if (isset($request->annio)) {
+                $dataArray = [];
+                if (isset($request->inicio) && isset($request->fin)) {
+                    $ventasAnuales = DB::select('SELECT PRODUCTO, DESCRIPCION, CLIENTE, AGENTE, SUM(UNIDADES) AS UNIDADES FROM ventas_' . $request->annio . ' WHERE SEMANA BETWEEN '.$request->inicio.' AND '.$request->fin.' AND AGENTE = "' . Auth::user()->name . '" GROUP BY  PRODUCTO, AGENTE;');
+                    array_push($dataArray, $ventasAnuales);
+                } else {
+                    $ventasAnuales = DB::select('SELECT PRODUCTO, DESCRIPCION, CLIENTE, AGENTE, SUM(UNIDADES) AS UNIDADES FROM ventas_' . $request->annio . ' WHERE AGENTE = "' . Auth::user()->name . '" GROUP BY  PRODUCTO, AGENTE;');
+                    array_push($dataArray, $ventasAnuales);
+                }
+                return $dataArray;
+            } else {
+                return "Error1¬ Debe Seleccionar un año para poder consultar, compruebe!";
+            }
+        } catch (Exception $err) {
+            return "Error¬" . $err;
+        }
+    }
+
+    public function VentasPeriodoAgente(Request $request)
+    {
+        try {
+            if (isset($request->annio)) {
+                if (isset($request->inicio) && isset($request->fin)) {
+                    $ventasPeriodo = DB::select('SELECT PERIODO,PRODUCTO, DESCRIPCION, CLIENTE, AGENTE,SUM(UNIDADES) AS UNIDADES FROM ventas_' . $request->annio . ' WHERE SEMANA BETWEEN ' . $request->inicio . ' AND ' . $request->fin . ' AND AGENTE = "' . Auth::user()->name . '" GROUP BY PERIODO, PRODUCTO;');
+                } else {
+                    $ventasPeriodo = DB::select('SELECT PERIODO,PRODUCTO, DESCRIPCION, CLIENTE, AGENTE,SUM(UNIDADES) AS UNIDADES FROM ventas_' . $request->annio . ' WHERE AGENTE = "' . Auth::user()->name . '" GROUP BY PERIODO, PRODUCTO;');
+                }
+            } else {
+                return "Error1¬Debe seleccionar un año para la consulta, compruebe";
             }
         } catch (Exception $err) {
             return "Error¬" . $err;

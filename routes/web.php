@@ -112,8 +112,9 @@ try {
 
         Route::group(['prefix' => 'agentes/reportes'], function () {
             Route::get('/ventasSemanales', 'ReportesController@VentasSemanalesAgentes');
+            Route::get('/ventasAnuales', 'ReportesController@VentasAnualesAgentes');
             /*Route::get('/top50', 'ReportesController@ObtenerTop50');
-            Route::get('/ventasAnuales', 'ReportesController@ventasAnuales');
+            
             Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');*/
         });
 

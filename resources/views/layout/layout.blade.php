@@ -273,8 +273,8 @@
                             </a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{URL::to('/reporteSemanalAgentes')}}">Reporte Semanal</a></li>
-                                <li><a href="{{URL::to('/reportePeriodo')}}">Reporte Periodo</a></li>
-                                <li><a href="{{URL::to('/reporteAnual')}}">Reporte Anual</a></li>
+                                <li><a href="{{URL::to('/reportePeriodo')}}" hidden>Reporte Periodo</a></li>
+                                <li><a href="{{URL::to('/reporteAnualAgentes')}}">Reporte Anual</a></li>
                             </ul>
                         </li>
                         <li class="nav-devider"></li>
