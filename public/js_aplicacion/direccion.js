@@ -619,7 +619,7 @@ $(document).ready(function () {
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
         let resultado = Math.ceil((currentdatec.getDay() + 1 + numofdays) / 7)-1;
-        resultado -= 2;
+        resultado -= 1;
         if (resultado > 50) {
             resultado = 50;
         }
@@ -2537,7 +2537,6 @@ $(document).ready(function () {
                         tabledata[index].TotalUnidades = convertirUnidades(tabledata[index].TotalUnidades);
                         tabledata[index].TotalImporte = convertirImporte(tabledata[index].TotalImporte);
                     }
-                    console.table(tabledata);
 
                     $.each(tabledata, (index, periodo) => {
                         datatableVentasPeriodoDireccion.row.add([
@@ -2894,7 +2893,6 @@ $(document).ready(function () {
                         tabledata[index].TotalUnidades = convertirUnidades(tabledata[index].TotalUnidades);
                         tabledata[index].TotalImporte = convertirImporte(tabledata[index].TotalImporte);
                     }
-                    console.table(tabledata);
 
                     $.each(tabledata, (index, periodo) => {
                         datatableVentasPeriodoDireccion.row.add([
@@ -2970,7 +2968,7 @@ $(document).ready(function () {
 
     if (window.location.href == "http://envasesmicroonda:8081/public/reportePeriodoDireccion" || window.location.href == "http://192.168.5.200:8081/public/reportePeriodoDireccion") {
         let currentdatec = new Date();
-        consultarInfomacionVentasPeriodoDireccion(currentdatec.getFullYear() - 1);
+        consultarInfomacionVentasPeriodoDireccion(currentdatec.getFullYear());
     };
 
     $(document).on('click', '#btnBuscarDireccionPeriodo', (e) => {
@@ -4106,7 +4104,7 @@ $(document).ready(function () {
 
     if (window.location.href == "http://envasesmicroonda:8081/public/reportePeriodoGerencia" || window.location.href == "http://192.168.5.200:8081/public/reportePeriodoGerenciad") {
         let currentdatec = new Date();
-        consultarInfomacionVentasPeriodoGerencia(currentdatec.getFullYear() - 1);
+        consultarInfomacionVentasPeriodoGerencia(currentdatec.getFullYear());
     };
 
 });

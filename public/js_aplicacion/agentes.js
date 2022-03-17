@@ -70,7 +70,6 @@ $(document).ready(() => {
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
         let resultado = Math.ceil((currentdatec.getDay() + 1 + numofdays) / 7) - 1;
-        alert(resultado);
         resultado -= 1;
         if (resultado > 50) {
             resultado = 50;
@@ -279,13 +278,11 @@ $(document).ready(() => {
                     annio: param1,
                 };
             }
-            console.log(datos);
             $.ajax({
                 method: "GET",
                 url: "/public/agentes/reportes/ventasAnuales",
                 data: datos
             }).done((res) => {
-                console.log(res);
                 datatableVentasAnualesAgentes.clear().draw(false);
                 if (!res.includes('¬')) {
                     res.forEach(element => {
@@ -355,7 +352,6 @@ $(document).ready(() => {
             url: "/public/agentes/reportes/ventasAnuales",
             data: datos
         }).done((res) => {
-            console.log(res);
             datatableVentasAnualesAgentes.clear().draw(false);
             if (!res.includes('¬')) {
                 res.forEach(element => {
