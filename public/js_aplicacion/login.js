@@ -141,7 +141,6 @@ const iniciarSesion = () => {
             _token: $('input[name="_token"]').val(),
         };
 
-        console.log(datos);
         $.ajax({
             url: "/public/usuarios/acciones/login",
             method: "POST",
@@ -250,7 +249,6 @@ const RegistrarUsuarioAdmin = () => {
                 method: "POST",
                 data: datos,
             }).done(function (res) {
-                console.log(res);
                 if (res == "OK") {
                     swal(
                         {
@@ -278,7 +276,6 @@ const RegistrarUsuarioAdmin = () => {
                 }
             }).fail(function (res) {
 
-                console.log(res);
                 swal(
                     {
                         type: "error",
