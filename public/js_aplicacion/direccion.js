@@ -614,7 +614,7 @@ $(document).ready(function () {
         });
     };
 
-    if (window.location.href === "http://envasesmicroonda:8081/public/reporteSemanalDireccion" || window.location.href === "http://192.168.5.200:8081/public/reporteSemanalDireccion") {
+   /* if (window.location.href === "http://envasesmicroonda:8081/public/reporteSemanalDireccion" || window.location.href === "http://192.168.5.200:8081/public/reporteSemanalDireccion") {
         let currentdatec = new Date();
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
@@ -811,7 +811,7 @@ $(document).ready(function () {
                 });
         });
 
-    }
+    }*/
 
     $('#cmbSemanaDireccion').select2({
         theme: "bootstrap-5",
