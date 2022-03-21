@@ -1012,7 +1012,7 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
 
 
 const incializarGraficaBarrasVentasPeriodoBarra = (data) => {
-    //console.log(data);
+    
     let valores = [];
     let categoria = [];
     let leyenda = [];
@@ -1140,7 +1140,6 @@ const incializarGraficaBarrasVentasPeriodoBarra = (data) => {
 }
 
 const incializarGraficaBarrasVentasPeriodoGerentes = (data) => {
-    //console.log(data);
     let valores = [];
     let categoria = [];
     let leyenda = [];
@@ -1504,7 +1503,6 @@ const GenerarPDF = () => {
         /*const woorkbook = new ExcelJS.Workbook();
         woorkbook.xlsx.writeFile('reporte de ventas.xlsx');*/
 
-        //console.log(woorkbook.output('bloburl'));
     });
 }
 
@@ -1855,9 +1853,6 @@ const inicializarGraficaBarrasAnualAgentes = (data) => {
             leyenda.push((data[index].UNIDADES) + " Unidades vendidas");
         }
     }
-
-    console.log(categoria);
-    console.log(valores);
     Highcharts.chart('containerVentasAnualesPastelAgentesUnidades', {
         exporting: {
             enabled: true

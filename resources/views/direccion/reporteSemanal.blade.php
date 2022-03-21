@@ -1,6 +1,7 @@
 @extends('layout.layout')
 <? $semanas = 52 ?>
 @section('contenido')
+@if(Auth::user()->rol =="Direccion" || Auth::user()->rol == "Admin")
 <div class="card">
     <div class="card-body">
         <h2 class="card-title">Reporte de Ventas Semanal</h2>
@@ -265,4 +266,16 @@
         </div>
     </div>
 </div>
+@else
+<div class="card">
+    <center>
+        <img class="card-img-top" src="{{asset('/img/logo_mc2.3.1.png')}}" style="width: 30%; height: 100%;" alt="Home" />
+    </center>
+    <div class="card-body text-center">
+        <h4 class="card-title">Recurso no Disponible</h4>
+        <p class="card-text">Usted no tiene permiso de visualizar este contenido</p>
+        <a href="{{URL::to('/paginaPrincipal')}}" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Volver a casa</a>
+    </div>
+</div>
+@endif
 @endsection
