@@ -148,6 +148,7 @@ $(document).ready(() => {
                 data: datos,
                 url: "/public/agentes/reportes/ventasSemanales"
             }).done((res) => {
+                console.log(res);
                 datatableVentasSemanalesAgentes.clear().draw(false);
                 res.forEach(element => {
                     $.each(element, (index, venta) => {
