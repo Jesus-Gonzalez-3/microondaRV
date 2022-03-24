@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('contenido')
-<div class="card">
+<div class="card text-dark">
     <div class="card-body">
         <h2 class="card-title">Ctrl. de Usuarios </h2>
         <p class="card-text"> ¡Hola {{Auth::user()->name}}. En esta pantalla podrás visualizar los usuarios activos del sistema</p>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="container-fluid">
-            <table id="tblUsuarios" class="table table-striped table-bordered table-condensed table-hover text-center" cellspacing="0" width="100%">
+            <table id="tblUsuarios" class="table table-striped table-bordered table-condensed table-hover text-center text-dark" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Nombre de usuario</th>
@@ -44,7 +44,7 @@
                     <tr>
                         <td>{{$usuario->name}}</td>
                         <td>{{$usuario->email}}</td>
-                        <td> <i class="fa fa-check-circle" aria-hidden="true"></i> {{$usuario->estatus}}</td>
+                        <td> <i class="fa fa-check-circle text-gray" aria-hidden="true"></i> {{$usuario->estatus}}</td>
                         <td>{{$usuario->rol}}</td>
 
                         <form action="" method="POST">
@@ -81,8 +81,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container-fluid">
-                    <form class="form-horizontal form-material" id="registerform" action="#">
+                <div class="container-fluid text-dark">
+                    <form class="form-horizontal form-material text-dark" id="registerform" action="#">
                         @csrf
                         <div class="row">
                             <div class="col-md-2 offset-2">
@@ -145,9 +145,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <form class="form-horizontal form-material" id="registerform" action="#">
+            <div class="modal-body text-dark">
+                <div class="container-fluid text-dark">
+                    <form class="form-horizontal form-material text-dark" id="registerform" action="#">
                         @csrf
                         <div class="row">
                             <div class="col-md-2 offset-2">

@@ -241,7 +241,7 @@ $(document).ready(function () {
         "autoWidth": false,
         "aoColumnDefs": [{
             "bVisible": false,
-            "aTargets": [0, 7, 8, 9, 10],
+            //"aTargets": [0, 7, 8, 9, 10],
         }],
         "footerCallback": function (row, data, start, end, display) {
             let api = this.api();
@@ -351,7 +351,7 @@ $(document).ready(function () {
         }],
         "aoColumnDefs": [{
             "bVisible": false,
-            "aTargets": [0, 7, 8, 9, 10]
+            //"aTargets": [0, 7, 8, 9, 10]
         }],
         "footerCallback": function (row, data, start, end, display) {
             let api = this.api();
@@ -614,11 +614,11 @@ $(document).ready(function () {
         });
     };
 
-   /* if (window.location.href === "http://envasesmicroonda:8081/public/reporteSemanalDireccion" || window.location.href === "http://192.168.5.200:8081/public/reporteSemanalDireccion") {
+    if (window.location.href === "http://envasesmicroonda:8081/public/reporteSemanalDireccion" || window.location.href === "http://192.168.5.200:8081/public/reporteSemanalDireccion") {
         let currentdatec = new Date();
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
-        let resultado = Math.ceil((currentdatec.getDay() + 1 + numofdays) / 7)-1;
+        let resultado = Math.ceil((currentdatec.getDay() + 1 + numofdays) / 7) - 1;
         resultado -= 1;
         if (resultado > 50) {
             resultado = 50;
@@ -811,7 +811,7 @@ $(document).ready(function () {
                 });
         });
 
-    }*/
+    }
 
     $('#cmbSemanaDireccion').select2({
         theme: "bootstrap-5",
@@ -902,17 +902,31 @@ $(document).ready(function () {
                 });
 
                 data = [];
+                data2 = []
                 for (let index = 0; index < res.length; index++) {
                     const element = {
-                        "Unidades": Number(res[index].UNIDADES_ACTUALES.toString().replace(',', '').toString()),
+                        "Unidades": Number(res[index].UNIDADES_ACTUALES.replace(',', '').replace(',', '').toString()),
                         "cliente": res[index].CLIENTE
                     };
                     data.push(element);
+
+                }
+
+                for (let index = 0; index < res.length; index++) {
+                    const element = {
+                        "IMPORTE_ACTUAL": Number(res[index].IMPORTE_ACTUAL.replace(',', '').replace(',', '').toString()),
+                        "cliente": res[index].CLIENTE
+                    };
+                    data2.push(element);
+
                 }
 
                 inicializarGraficaTipoBarra(data);
                 inicializarGraficaTipoPastel(data);
                 graficosbarrasPromedio(res);
+                inicializarGraficaTipoBarraImporte(data2);
+                inicializarGraficaTipoPastelImporte(data2);
+                graficosbarrasPromedioImporte(res);
             }
 
         }).fail(function (res) {
@@ -988,6 +1002,7 @@ $(document).ready(function () {
                 });
 
                 data = [];
+                data2 = [];
                 for (let index = 0; index < res.length; index++) {
                     const element = {
                         "Unidades": Number(res[index].UNIDADES_ACTUALES.toString().replace(',', '').toString()),
@@ -996,8 +1011,19 @@ $(document).ready(function () {
                     data.push(element);
                 }
 
+                for (let index = 0; index < res.length; index++) {
+                    const element = {
+                        "IMPORTE_ACTUAL": Number(res[index].IMPORTE_ACTUAL.toString().replace(',', '').toString()),
+                        "cliente": res[index].CLIENTE
+                    };
+                    data2.push(element);
+                }
+
                 inicializarGraficaTipoBarraCalzado(data);
                 inicializarGraficaTipoPastelCalzado(data);
+                graficosbarrasPromedioCalzadoImporte(res);
+                inicializarGraficaTipoBarraCalzadoImporte(data2);
+                inicializarGraficaTipoPastelCalzadoImporte(data2);
                 let salida = graficosbarrasPromedioCalzado(res);
 
                 if (salida) {
@@ -1244,7 +1270,7 @@ $(document).ready(function () {
         backgroundColor: "184f4f",
         placeholder: "Seleccione"
     });
-    
+
     $('#cmbAnioDirecciónSemanaFin').select2({
         theme: "bootstrap-5",
         color: "#184f4f",
@@ -1343,7 +1369,7 @@ $(document).ready(function () {
         }],
         "aoColumnDefs": [{
             "bVisible": false,
-            "aTargets": [3]
+            "aTargets": [5, 6]
         }],
         "footerCallback": function (row, data, start, end, display) {
             var api = this.api(),
@@ -1364,17 +1390,34 @@ $(document).ready(function () {
                     return intVal(a) + intVal(b);
                 }, 0);
             total2 = api
-                .column(3)
+                .column(2)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total3 = api
+                .column(5)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            total4 = api
+                .column(6)
                 .data()
                 .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
 
             $(api.column(1).footer()).html(
-                '$ ' + convertirImporte(total.toFixed(2))
+                convertirUnidades(total.toFixed(2)) + ' Unidades'
             );
             $(api.column(2).footer()).html(
-                total2.toFixed(0) + ' %'
+                '$ ' + convertirImporte(total2.toFixed(2))
+            );
+            $(api.column(3).footer()).html(
+                 total3.toFixed(0) + ' %'
+            ); $(api.column(4).footer()).html(
+                 total4.toFixed(0)+ ' %'
             );
         }
     });
@@ -1753,8 +1796,11 @@ $(document).ready(function () {
                     let venta = {
                         cliente: res[index].AGENTE,
                         unidades: res[index].UNIDADES,
+                        importe: res[index].IMPORTE,
                         porUnidades: "" + ((Number(res[index].UNIDADES.toString().replace(',', '').replace(',', '')) / sumaUnidades) * 100).toFixed(2) + "%",
+                        porImporte: "" + ((Number(res[index].IMPORTE.toString().replace(',', '').replace(',', '').replace(',', '')) / sumaImporte) * 100).toFixed(2) + "%",
                         porUnidades1: ((Number(res[index].UNIDADES.toString().replace(',', '').replace(',', '')) / sumaUnidades) * 100).toFixed(2),
+                        porImporte1: ((Number(res[index].IMPORTE.toString().replace(',', '').replace(',', '').replace(',', '')) / sumaImporte) * 100).toFixed(2),
                     };
                     datos.push(venta);
 
@@ -1764,12 +1810,16 @@ $(document).ready(function () {
                     tableVentasAnualesGerencia.row.add([
                         venta.cliente,
                         venta.unidades,
+                        venta.importe,
                         venta.porUnidades,
-                        venta.porUnidades1
+                        venta.porImporte,
+                        venta.porUnidades1,
+                        venta.porImporte1
                     ]).draw(false);
                 });
 
-                inicializarGraficaPastelAnualAgentesGerentes(datos);
+                inicializarGraficaPastelAnualAgentes(datos);
+                inicializarGraficaPastelAnualAgentes2(datos);
             }
 
         }).fail(function (res) {
@@ -1840,33 +1890,41 @@ $(document).ready(function () {
                 let sumaImporte = 0;
 
                 let datos = [];
+                let datosBarras = [];
+                let datosPastel = [];
                 for (let index = 0; index < res.length; index++) {
                     sumaUnidades += Number(res[index].UNIDADES.toString().replace(',', '').replace(',', ''));
                     sumaImporte += Number(res[index].IMPORTE.toString().replace(',', '').replace(',', '').replace(',', ''));
                 }
+
                 for (let index = 0; index < res.length; index++) {
                     let venta = {
                         cliente: res[index].AGENTE,
                         unidades: res[index].UNIDADES,
+                        importe: res[index].IMPORTE,
                         porUnidades: "" + ((Number(res[index].UNIDADES.toString().replace(',', '').replace(',', '')) / sumaUnidades) * 100).toFixed(2) + "%",
-                        porUnidades1: parseFloat((Number(res[index].UNIDADES.toString().replace(',', '').replace(',', '')) / sumaUnidades) * 100).toFixed(2),
+                        porImporte: "" + ((Number(res[index].IMPORTE.toString().replace(',', '').replace(',', '').replace(',', '')) / sumaImporte) * 100).toFixed(2) + "%",
+                        porUnidades1: ((Number(res[index].UNIDADES.toString().replace(',', '').replace(',', '')) / sumaUnidades) * 100).toFixed(2),
+                        porImporte1: ((Number(res[index].IMPORTE.toString().replace(',', '').replace(',', '').replace(',', '')) / sumaImporte) * 100).toFixed(2),
                     };
                     datos.push(venta);
 
                 }
 
                 $.each(datos, function (index, venta) {
-                    if (venta.cliente != "") {
-                        tableVentasAnualesGerencia.row.add([
-                            venta.cliente,
-                            venta.unidades,
-                            venta.porUnidades,
-                            venta.porUnidades1
-                        ]).draw(false);
-                    }
+                    tableVentasAnualesGerencia.row.add([
+                        venta.cliente,
+                        venta.unidades,
+                        venta.importe,
+                        venta.porUnidades,
+                        venta.porImporte,
+                        venta.porUnidades1,
+                        venta.porImporte1
+                    ]).draw(false);
                 });
 
-                inicializarGraficaPastelAnualAgentesGerentes(datos);
+                inicializarGraficaPastelAnualAgentes(datos);
+                inicializarGraficaPastelAnualAgentes2(datos);
             }
 
         }).fail(function (res) {
@@ -2565,7 +2623,7 @@ $(document).ready(function () {
                             null
                         ]).draw(false);
                     });
-                    
+
                     incializarGraficaBarrasVentasPeriodoBarra(tabledata);
                     incializarGraficaBarrasVentasPeriodoPastel(tabledata);
 
@@ -2921,7 +2979,7 @@ $(document).ready(function () {
                             null
                         ]).draw(false);
                     });
-                    
+
                     incializarGraficaBarrasVentasPeriodoBarra(tabledata);
                     incializarGraficaBarrasVentasPeriodoPastel(tabledata);
 
@@ -3171,223 +3229,6 @@ $(document).ready(function () {
         }
     });
 
-    let datatableVentasPeriodoGerencia = $('#tblReporteVentasPeriodoGerencia').DataTable({
-        dom: 'Bfrtip',
-        "processing": true,
-        "oLanguage": {
-            "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-        },
-        "deferRender": false,
-        "paging": true,
-        "info": false,
-        /*"order": [
-            [0, "desc"]
-        ],*/
-        columnDefs: [{
-            orderable: false,
-            targets: 0
-        }],
-        "aoColumnDefs": [{
-            "bVisible": false,
-            "aTargets": [9]
-        }],
-        "footerCallback": function (row, data, start, end, display) {
-            var api = this.api(),
-                data;
-
-            // Remove the formatting to get integer data for summation
-            var intVal = function (i) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '') * 1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
-
-            total = api
-                .column(1)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total2 = api
-                .column(2)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total3 = api
-                .column(3)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total4 = api
-                .column(4)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total5 = api
-                .column(5)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total6 = api
-                .column(6)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total7 = api
-                .column(7)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total8 = api
-                .column(8)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-
-            $(api.column(1).footer()).html(
-                convertirUnidades(total.toFixed(0)) + " <br/>Unidades" + "<br/><br/>" + (Number(total / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(2).footer()).html(
-                convertirUnidades(total2.toFixed(0)) + " <br/>Unidades" + "<br/><br/>" + (Number(total2 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(3).footer()).html(
-                convertirUnidades(total3.toFixed(0)) + " <br/>Unidades" + "<br/><br/>" + (Number(total3 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(4).footer()).html(
-                convertirUnidades(total4.toFixed(0)) + "<br/> Unidades" + "<br/><br/>" + (Number(total4 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(5).footer()).html(
-                convertirUnidades(total5.toFixed(0)) + " <br/>Unidades" + "<br/><br/>" + (Number(total5 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(6).footer()).html(
-                convertirUnidades(total6.toFixed(0)) + " <br/>Unidades" + "<br/><br/>" + (Number(total6 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(7).footer()).html(
-                convertirUnidades(total7.toFixed(0)) + "<br/> Unidades" + "<br/><br/>" + (Number(total7 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(8).footer()).html(
-                "<br/><br/><br/>" + total8.toFixed(0) + " %"
-            );
-        }
-    });
-
-    let datatableVentasPeriodoGerenciaImporte = $('#tblReporteVentasPeriodoGerenciaImporte').DataTable({
-        dom: 'Bfrtip',
-        "processing": true,
-        "oLanguage": {
-            "sUrl": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-        },
-        "deferRender": false,
-        "paging": true,
-        "info": false,
-        /*"order": [
-            [0, "desc"]
-        ],*/
-        columnDefs: [{
-            orderable: false,
-            targets: 0
-        }],
-        "aoColumnDefs": [{
-            "bVisible": false,
-            "aTargets": [9]
-        }],
-        "footerCallback": function (row, data, start, end, display) {
-            var api = this.api(),
-                data;
-
-            // Remove the formatting to get integer data for summation
-            var intVal = function (i) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '') * 1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
-
-            total = api
-                .column(1)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total2 = api
-                .column(2)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total3 = api
-                .column(3)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total4 = api
-                .column(4)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total5 = api
-                .column(5)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total6 = api
-                .column(6)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total7 = api
-                .column(7)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-            total8 = api
-                .column(8)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
-
-            $(api.column(1).footer()).html(
-                "$<br/> " + convertirImporte(total.toFixed(2)) + "<br/><br/>" + (Number(total / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(2).footer()).html(
-                "$ <br/>" + convertirImporte(total2.toFixed(2)) + "<br/><br/>" + (Number(total2 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(3).footer()).html(
-                "$<br/> " + convertirImporte(total3.toFixed(2)) + "<br/><br/>" + (Number(total3 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(4).footer()).html(
-                "$<br/> " + convertirImporte(total4.toFixed(2)) + "<br/><br/>" + (Number(total4 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(5).footer()).html(
-                "$<br/>" + convertirImporte(total5.toFixed(2)) + "<br/><br/>" + (Number(total5 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(6).footer()).html(
-                "$ <br/>" + convertirImporte(total6.toFixed(2)) + "<br/><br/>" + (Number(total6 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(7).footer()).html(
-                "$<br/> " + convertirImporte(total7.toFixed(2)) + "<br/><br/>" + (Number(total7 / total7) * 100).toFixed(0) + " %"
-            );
-            $(api.column(8).footer()).html(
-                "<br/><br/><br/>" + total8.toFixed(0) + " %"
-            );
-        }
-    });
-
-    
     const consultarInfomacionVentasPeriodoGerencia = (annio = 0, inicio = 0, fin = 0) => {
         if (inicio == 0 && fin == 0) {
             datos = {
@@ -3400,8 +3241,8 @@ $(document).ready(function () {
                 url: '/public/gerencia/reportes/ventasPeriodo'
             }).done((res) => {
                 if (!res.includes('¬')) {
-                    datatableVentasPeriodoGerencia.clear().draw(false);
-                    datatableVentasPeriodoGerenciaImporte.clear().draw(false);
+                    datatableVentasPeriodoDireccion.clear().draw(false);
+                    datatableVentasPeriodoDireccionImporte.clear().draw(false);
                     let tabledata = [];
                     let calzado = res[0].Calzado;
                     let alimentos = res[1].Alimentos;
@@ -3666,8 +3507,6 @@ $(document).ready(function () {
                                 tabledata.push(valores);
                                 break;
                         }
-
-
                     }
                     for (let index = 0; index < tabledata.length; index++) {
                         tabledata[index].porcentajeUnidades = ((tabledata[index].TotalUnidades / totaltotalUnidades) * 100).toFixed(2);
@@ -3677,7 +3516,7 @@ $(document).ready(function () {
                     }
 
                     $.each(tabledata, (index, periodo) => {
-                        datatableVentasPeriodoGerencia.row.add([
+                        datatableVentasPeriodoDireccion.row.add([
                             periodo.periodo,
                             periodo.UnidadesCalzado,
                             periodo.UnidadesAlimentos,
@@ -3690,7 +3529,7 @@ $(document).ready(function () {
                             null
                         ]).draw(false);
 
-                        datatableVentasPeriodoGerenciaImporte.row.add([
+                        datatableVentasPeriodoDireccionImporte.row.add([
                             periodo.periodo,
                             periodo.ImporteCalzado,
                             periodo.ImporteAlimentos,
@@ -3703,9 +3542,9 @@ $(document).ready(function () {
                             null
                         ]).draw(false);
                     });
-                    
-                    incializarGraficaBarrasVentasPeriodoGerentes(tabledata);
-                    incializarGraficaBarrasVentasPeriodoPastelGerentes(tabledata);
+
+                    incializarGraficaBarrasVentasPeriodoBarra(tabledata);
+                    incializarGraficaBarrasVentasPeriodoPastel(tabledata);
 
                 } else {
                     switch (res.toString().split('¬')[0]) {
@@ -3756,8 +3595,8 @@ $(document).ready(function () {
                 url: '/public/gerencia/reportes/ventasPeriodo'
             }).done((res) => {
                 if (!res.includes('¬')) {
-                    datatableVentasPeriodoGerencia.clear().draw(false);
-                    datatableVentasPeriodoGerenciaImporte.clear().draw(false);
+                    datatableVentasPeriodoDireccion.clear().draw(false);
+                    datatableVentasPeriodoDireccionImporte.clear().draw(false);
                     let tabledata = [];
                     let calzado = res[0].Calzado;
                     let alimentos = res[1].Alimentos;
@@ -4033,7 +3872,7 @@ $(document).ready(function () {
                     }
 
                     $.each(tabledata, (index, periodo) => {
-                        datatableVentasPeriodoGerencia.row.add([
+                        datatableVentasPeriodoDireccion.row.add([
                             periodo.periodo,
                             periodo.UnidadesCalzado,
                             periodo.UnidadesAlimentos,
@@ -4046,7 +3885,7 @@ $(document).ready(function () {
                             null
                         ]).draw(false);
 
-                        datatableVentasPeriodoGerenciaImporte.row.add([
+                        datatableVentasPeriodoDireccionImporte.row.add([
                             periodo.periodo,
                             periodo.ImporteCalzado,
                             periodo.ImporteAlimentos,
@@ -4059,8 +3898,9 @@ $(document).ready(function () {
                             null
                         ]).draw(false);
                     });
-                    incializarGraficaBarrasVentasPeriodoGerentes(tabledata);
-                    incializarGraficaBarrasVentasPeriodoPastelGerentes(tabledata);
+
+                    incializarGraficaBarrasVentasPeriodoBarra(tabledata);
+                    incializarGraficaBarrasVentasPeriodoPastel(tabledata);
 
                 } else {
                     switch (res.toString().split('¬')[0]) {

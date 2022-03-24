@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('contenido')
-@if(Auth::user()->rol =="Gerente")
+@if(Auth::user()->rol =="Agente")
 <div class="card">
     <div class="card-body">
         <h2 class="card-title">Reporte de Ventas Anuales</h2>

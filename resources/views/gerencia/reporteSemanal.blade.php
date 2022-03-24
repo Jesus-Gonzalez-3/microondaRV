@@ -155,7 +155,6 @@
         </div>
         <div class="tab-pane" id="graBarraVentasSemanal" role="tabpanel">
             <div>
-                <hr>
                 <div class="row">
                     <div class="col-11">
                         <h3 class="card-title text-center">VENTAS SEMANALES DE LOS 20 MEJORES CLIENTES DE OTRAS INDUSTRIAS</h3>
@@ -169,12 +168,22 @@
                 <hr>
                 <div class="container-fluid show" id="ventasOtrasIndustriasBarra">
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarra"></div>
+                        <div id="containerVentasSemanalBarra" style="height: 600px;"></div>
                     </figure>
                     <hr>
                     <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraPromedio"></div>
+                        <div id="containerVentasSemanalBarraPromedio" style="height: 800px;"></div>
+                    </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraImporte" style="height: 600px;"></div>
+                    </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraPromedioImporte" style="height: 800px;"></div>
                     </figure>
                 </div>
                 <hr>
@@ -190,11 +199,22 @@
                 </div>
                 <div class="container-fluid show" id="ventasCalzadoBarra">
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraCalzado"></div>
+                        <div id="containerVentasSemanalBarraCalzado" style="height: 600px;"></div>
                     </figure>
                     <hr>
+                    <br>
                     <figure class="highcharts-figure">
-                        <div id="containerVentasSemanalBarraPromedioCalzado"></div>
+                        <div id="containerVentasSemanalBarraPromedioCalzado" style="height: 800px;"></div>
+                    </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraCalzadoImporte" style="height: 600px;"></div>
+                    </figure>
+                    <hr>
+                    <br>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalBarraPromedioCalzadoImporte" style="height: 800px;"></div>
                     </figure>
                 </div>
             </div>
@@ -216,6 +236,10 @@
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalOtrasPastel"></div>
                     </figure>
+                    <hr>
+                    <figure class="highcharts-figure">
+                        <div id="containerVentasSemanalOtrasPastelImporte"></div>
+                    </figure>
                 </div>
                 <hr>
                 <div class="row">
@@ -231,6 +255,10 @@
                 <div class="container-fluid show" id="ventasCalzadoPastel">
                     <figure class="highcharts-figure">
                         <div id="containerVentasSemanalCalzadoPastel"></div>
+                    </figure>
+                    <hr>
+                    <figure class="highcharts-figure">
+                        <div class="containerChar" id="containerVentasSemanalCalzadoPastelImporte" style="height: 200%;"></div>
                     </figure>
                 </div>
             </div>

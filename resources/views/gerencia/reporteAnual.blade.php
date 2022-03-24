@@ -99,15 +99,21 @@
                     <table id="tblReporteVentasAnualesGerencia" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th style="width: 30%;">Nombre del Agente</th>
-                                <th style="width: 30%;">Unidades</th>
-                                <th style="width: 30%;">Participación Unidades %</th>
+                                <th style="width: 40%;">Nombre del Agente</th>
+                                <th style="width: 15%;">Unidades</th>
+                                <th style="width: 15%;">Importe</th>
                                 <th>Participación Unidades %</th>
+                                <th>Participación Importe %</th>
+                                <th>Participación Unidades %</th>
+                                <th>Participación Importe %</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th class="text-right">Total</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -126,7 +132,7 @@
             </figure>
         </div>
         <div class="tab-pane p-20" id="graCirVentasAnuales" role="tabpanel">
-            <div class="row">
+        <div class="row">
                 <div class="col-11">
                     <h3 class="card-title text-center">VENTAS ANUALES EFECTUADAS POR AGENTE</h3>
                 </div>
@@ -138,7 +144,11 @@
             </div>
             <div class="container-fluid show" id="ventasAnualesAgentes">
                 <figure class="highcharts-figure">
-                    <div id="containerVentasAnualesPastelGerenciaUnidades"></div>
+                    <div id="containerVentasAnualesPastelDireccionUnidades"></div>
+                </figure>
+                <hr>
+                <figure class="highcharts-figure">
+                    <div id="containerVentasAnualesPastelDireccionImporte"></div>
                 </figure>
             </div>
         </div>

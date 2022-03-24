@@ -94,7 +94,7 @@
                 </div>
                 <div class="table-responsive collapse show" id="collapseExample">
                     <div class="container-fluid">
-                        <table id="tblReporteVentasPeriodoGerencia" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
+                        <table id="tblReporteVentasPeriodoDireccion" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th style="width: 20%;">Periodo</th>
@@ -111,7 +111,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th class="text-right">Total <br /> <br /> <br />% de Participación</th>
+                                    <th>Total <br /> <br /> <br />% de Participación</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -131,7 +131,7 @@
                 </div>
             </div>
             <hr>
-            <div id="ventasSemanalCalzado" hidden>
+            <div id="ventasSemanalCalzado">
                 <div class="row">
                     <div class="col-11">
                         <h3 class="card-title text-center">VENTAS EN PESOS POR PERIODO</h3>
@@ -145,7 +145,7 @@
                 </div>
                 <div class="table-responsive collapse show" id="collapseExample2">
                     <div class="container-fluid">
-                        <table id="tblReporteVentasPeriodoGerenciaImporte" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
+                        <table id="tblReporteVentasPeriodoDireccionImporte" class="table table-striped table-bordered table-condensed table-hover text-dark" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th style="width: 20%;">Periodo</th>
