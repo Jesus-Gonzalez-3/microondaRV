@@ -93,7 +93,7 @@ class ReportesController extends Controller
                 }
                 return $data;
             } else {
-                return "ERROR1¬No se encuentra información diponible para la semana seleccionada";
+                return "ERROR1¬No se encuentra información disponible para la semana seleccionada";
             }
         } catch (Exception $err) {
             return "ERROR ¬" . $err;

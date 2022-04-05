@@ -85,16 +85,16 @@ $(document).ready(function () {
                 }, 0);
 
             $(api.column(3).footer()).html(
-                '$ ' + convertirImporte(total1.toFixed(2))
+                convertirImporte(total1.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(4).footer()).html(
-                '$ ' + convertirImporte(total2.toFixed(2))
+                convertirImporte(total2.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(5).footer()).html(
-                '$ ' + convertirImporte(total3.toFixed(2))
+                convertirImporte(total3.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(6).footer()).html(
-                '$ ' + convertirImporte(total4.toFixed(2))
+                convertirImporte(total4.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(7).footer()).html(
                 '$ ' + convertirImporte(total5.toFixed(2))
@@ -194,16 +194,16 @@ $(document).ready(function () {
                 }, 0);
 
             $(api.column(3).footer()).html(
-                '$ ' + convertirImporte(total1.toFixed(2))
+                convertirImporte(total1.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(4).footer()).html(
-                '$ ' + convertirImporte(total2.toFixed(2))
+                convertirImporte(total2.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(5).footer()).html(
-                '$ ' + convertirImporte(total3.toFixed(2))
+                convertirImporte(total3.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(6).footer()).html(
-                '$ ' + convertirImporte(total4.toFixed(2))
+                convertirImporte(total4.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(7).footer()).html(
                 '$ ' + convertirImporte(total5.toFixed(2))
@@ -305,16 +305,16 @@ $(document).ready(function () {
                 }, 0);
 
             $(api.column(3).footer()).html(
-                '$ ' + convertirImporte(total1.toFixed(2))
+                convertirImporte(total1.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(4).footer()).html(
-                '$ ' + convertirImporte(total2.toFixed(2))
+                convertirImporte(total2.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(5).footer()).html(
-                '$ ' + convertirImporte(total3.toFixed(2))
+                convertirImporte(total3.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(6).footer()).html(
-                '$ ' + convertirImporte(total4.toFixed(2))
+                convertirImporte(total4.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(7).footer()).html(
                 '$ ' + convertirImporte(total5.toFixed(2))
@@ -415,16 +415,16 @@ $(document).ready(function () {
                 }, 0);
 
             $(api.column(3).footer()).html(
-                '$ ' + convertirImporte(total1.toFixed(2))
+                convertirImporte(total1.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(4).footer()).html(
-                '$ ' + convertirImporte(total2.toFixed(2))
+                convertirImporte(total2.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(5).footer()).html(
-                '$ ' + convertirImporte(total3.toFixed(2))
+                convertirImporte(total3.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(6).footer()).html(
-                '$ ' + convertirImporte(total4.toFixed(2))
+                convertirImporte(total4.toFixed(2))+ "<br> Unidades"
             );
             $(api.column(7).footer()).html(
                 '$ ' + convertirImporte(total5.toFixed(2))
@@ -443,12 +443,14 @@ $(document).ready(function () {
 
     });
 
-    if (window.location.href == "http://envasesmicroonda:8081/public/reporteSemanalGerentes" || window.location.href == "http://192.168.5.200:8081/public/reporteSemanalGerentes") {
+    if (window.location.href == window.location.origin+"/public/reporteSemanalGerentes") {
         let currentdatec = new Date();
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
         var resultado = Math.ceil((currentdatec.getDay() + 1 + numofdays) / 7) - 1;
-        resultado -= 1;
+        if (currentdatec.getDay() >= 3) {
+            resultado -= 1;
+        }
         if (resultado > 50) {
             resultado = 50;
         }
@@ -614,12 +616,15 @@ $(document).ready(function () {
         });
     };
 
-    if (window.location.href === "http://envasesmicroonda:8081/public/reporteSemanalDireccion" || window.location.href === "http://192.168.5.200:8081/public/reporteSemanalDireccion") {
+    if (window.location.href == window.location.origin+"/public/reporteSemanalDireccion") {
         let currentdatec = new Date();
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
         let resultado = Math.ceil((currentdatec.getDay() + 1 + numofdays) / 7) - 1;
-        resultado -= 1;
+        if (currentdatec.getDay() >= 3) {
+            resultado -= 1;
+        }
+
         if (resultado > 50) {
             resultado = 50;
         }
@@ -1337,7 +1342,7 @@ $(document).ready(function () {
                 }, 0);
 
             $(api.column(1).footer()).html(
-                '$ ' + convertirImporte(total.toFixed(2))
+                convertirUnidades(total)+ "<br> Unidades"
             );
             $(api.column(2).footer()).html(
                 '$ ' + convertirImporte(total1.toFixed(2))
@@ -1409,15 +1414,15 @@ $(document).ready(function () {
                 }, 0);
 
             $(api.column(1).footer()).html(
-                convertirUnidades(total.toFixed(2)) + ' Unidades'
+                convertirUnidades(total) + ' Unidades'
             );
             $(api.column(2).footer()).html(
                 '$ ' + convertirImporte(total2.toFixed(2))
             );
             $(api.column(3).footer()).html(
-                 total3.toFixed(0) + ' %'
+                total3.toFixed(0) + ' %'
             ); $(api.column(4).footer()).html(
-                 total4.toFixed(0)+ ' %'
+                total4.toFixed(0) + ' %'
             );
         }
     });
@@ -1622,7 +1627,7 @@ $(document).ready(function () {
 
     }
 
-    if (window.location.href == "http://envasesmicroonda:8081/public/reporteAnualDireccion" || window.location.href == "http://192.168.5.200:8081/public/reporteAnualDireccion") {
+    if (window.location.href == window.location.origin+"/public/reporteAnualDireccion") {
         let currentdatec = new Date();
         consultarInformacionAnualDireccion(currentdatec.getFullYear());
     };
@@ -1942,7 +1947,7 @@ $(document).ready(function () {
 
     }
 
-    if (window.location.href == "http://envasesmicroonda:8081/public/reporteAnualGerencia" || window.location.href == "http://192.168.5.200:8081/public/reporteAnualGerencia") {
+    if (window.location.href == window.location.origin+"/public/reporteAnualGerencia") {
         let currentdatec = new Date();
         consultarInformacionAnualGerentes(currentdatec.getFullYear());
     };
@@ -3024,7 +3029,7 @@ $(document).ready(function () {
     }
 
 
-    if (window.location.href == "http://envasesmicroonda:8081/public/reportePeriodoDireccion" || window.location.href == "http://192.168.5.200:8081/public/reportePeriodoDireccion") {
+    if (window.location.href == window.location.origin+"/public/reportePeriodoDireccion") {
         let currentdatec = new Date();
         consultarInfomacionVentasPeriodoDireccion(currentdatec.getFullYear());
     };
@@ -3942,7 +3947,7 @@ $(document).ready(function () {
         }
     }
 
-    if (window.location.href == "http://envasesmicroonda:8081/public/reportePeriodoGerencia" || window.location.href == "http://192.168.5.200:8081/public/reportePeriodoGerenciad") {
+    if (window.location.href == window.location.origin+"/public/reportePeriodoGerencia") {
         let currentdatec = new Date();
         consultarInfomacionVentasPeriodoGerencia(currentdatec.getFullYear());
     };
