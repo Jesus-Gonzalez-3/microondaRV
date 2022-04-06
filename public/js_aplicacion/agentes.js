@@ -65,7 +65,7 @@ $(document).ready(() => {
         return new1;
     }
 
-    if (window.location.href == "http://envasesmicroonda:8081/public/reporteSemanalAgentes" || window.location.href == "http://192.168.5.200:8081/public/reporteSemanalAgentes") {
+    if (window.location.href == window.location.origin+"/reporteSemanalAgentes") {
         let currentdatec = new Date();
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
@@ -81,7 +81,7 @@ $(document).ready(() => {
         $.ajax({
             method: "GET",
             data: datos,
-            url: "/public/agentes/reportes/ventasSemanales"
+            url: "/agentes/reportes/ventasSemanales"
         }).done((res) => {
             if (!res.includes('¬')) {
                 datatableVentasSemanalesAgentes.clear().draw(false);
@@ -109,7 +109,7 @@ $(document).ready(() => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     });
             } else if (res.split('¬')[0] == "Error1") {
                 swal(
@@ -120,7 +120,7 @@ $(document).ready(() => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     });
             }
         }).fail((res) => {
@@ -132,7 +132,7 @@ $(document).ready(() => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
     }
@@ -146,7 +146,7 @@ $(document).ready(() => {
             $.ajax({
                 method: "GET",
                 data: datos,
-                url: "/public/agentes/reportes/ventasSemanales"
+                url: "/agentes/reportes/ventasSemanales"
             }).done((res) => {
                 console.log(res);
                 datatableVentasSemanalesAgentes.clear().draw(false);
@@ -174,7 +174,7 @@ $(document).ready(() => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     });
             });
         } else {
@@ -281,7 +281,7 @@ $(document).ready(() => {
             }
             $.ajax({
                 method: "GET",
-                url: "/public/agentes/reportes/ventasAnuales",
+                url: "/agentes/reportes/ventasAnuales",
                 data: datos
             }).done((res) => {
                 datatableVentasAnualesAgentes.clear().draw(false);
@@ -307,7 +307,7 @@ $(document).ready(() => {
                         text: "Ha ocurrido un error",
                         confirmButtonText: "OK",
                     }, () => {
-                        location.href = "/public/paginaPrincipal"
+                        location.href = "/paginaPrincipal"
                     });
                 } else if (res.split('¬')[0] == "Error1") {
                     swal({
@@ -316,7 +316,7 @@ $(document).ready(() => {
                         text: res.split('¬')[1],
                         confirmButtonText: "OK",
                     }, () => {
-                        location.href = "/public/paginaPrincipal"
+                        location.href = "/paginaPrincipal"
                     });
                 }
             }).fail((res) => {
@@ -326,7 +326,7 @@ $(document).ready(() => {
                     text: "Ha ocurrido un error",
                     confirmButtonText: "OK",
                 }, () => {
-                    location.href = "/public/paginaPrincipal"
+                    location.href = "/paginaPrincipal"
                 });
             });
 
@@ -344,13 +344,13 @@ $(document).ready(() => {
         consultarInformacionVentasAnualesAgentes($('#cmbAnioAgentes').val(), $('#cmbAnioAgentesSemanaInicio').val(), $('#cmbAnioAgentesSemanaFin').val());
     });
 
-    if (window.location.href == "http://envasesmicroonda:8081/public/reporteAnualAgentes" || window.location.href == "http://192.168.5.200:8081/public/reporteAnualAgentes") {
+    if (window.location.href == window.location.origin+"reporteAnualAgentes") {
         datos = {
             annio: new Date().getFullYear()
         }
         $.ajax({
             method: "GET",
-            url: "/public/agentes/reportes/ventasAnuales",
+            url: "/agentes/reportes/ventasAnuales",
             data: datos
         }).done((res) => {
             datatableVentasAnualesAgentes.clear().draw(false);
@@ -375,7 +375,7 @@ $(document).ready(() => {
                     text: "Ha ocurrido un error",
                     confirmButtonText: "OK",
                 }, () => {
-                    location.href = "/public/paginaPrincipal"
+                    location.href = "/paginaPrincipal"
                 });
             } else if (res.split('¬')[0] == "Error1") {
                 swal({
@@ -384,7 +384,7 @@ $(document).ready(() => {
                     text: res.split('¬')[1],
                     confirmButtonText: "OK",
                 }, () => {
-                    location.href = "/public/paginaPrincipal"
+                    location.href = "/paginaPrincipal"
                 });
             }
         }).fail((res) => {
@@ -394,7 +394,7 @@ $(document).ready(() => {
                 text: "Ha ocurrido un error",
                 confirmButtonText: "OK",
             }, () => {
-                location.href = "/public/paginaPrincipal"
+                location.href = "/paginaPrincipal"
             });
         });
     }

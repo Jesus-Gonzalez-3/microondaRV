@@ -68,7 +68,7 @@ const registrarUsuario = () => {
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-                url: "/public/usuarios/acciones/registrar",
+                url: "/usuarios/acciones/registrar",
                 method: "POST",
                 data: datos,
             }).done(function (res) {
@@ -81,7 +81,7 @@ const registrarUsuario = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public";
+                            location.href = window.location.origin;
                         }
                     );
                 } else {
@@ -93,7 +93,7 @@ const registrarUsuario = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public";
+                            location.href = window.location.origin;
                         }
                     );
                 }
@@ -106,7 +106,7 @@ const registrarUsuario = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public";
+                        location.href = window.location.origin;
                     }
                 );
             });
@@ -142,7 +142,7 @@ const iniciarSesion = () => {
         };
 
         $.ajax({
-            url: "/public/usuarios/acciones/login",
+            url: "/usuarios/acciones/login",
             method: "POST",
             data: datos,
         }).done(function (res) {
@@ -155,7 +155,7 @@ const iniciarSesion = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     }
                 );
             } else {
@@ -167,7 +167,7 @@ const iniciarSesion = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public";
+                        location.href = window.location.origin;
                     }
                 );
             }
@@ -180,7 +180,7 @@ const iniciarSesion = () => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public";
+                    location.href =window.location.origin;
                 }
             );
         });
@@ -245,7 +245,7 @@ const RegistrarUsuarioAdmin = () => {
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-                url: "/public/usuarios/acciones/agregar",
+                url: "/usuarios/acciones/agregar",
                 method: "POST",
                 data: datos,
             }).done(function (res) {
@@ -258,7 +258,7 @@ const RegistrarUsuarioAdmin = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/usuarios";
                         }
                     );
                 } else {
@@ -270,7 +270,7 @@ const RegistrarUsuarioAdmin = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/usuarios";
                         }
                     );
                 }
@@ -284,7 +284,7 @@ const RegistrarUsuarioAdmin = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/usuarios";
                     }
                 );
             });
@@ -299,7 +299,7 @@ const detalleUsuario = (uid) => {
     };
 
     $.ajax({
-        url: "/public/usuarios/acciones/consultar",
+        url: "/usuarios/acciones/consultar",
         method: "POST",
         data: datos,
     }).done(function (res) {
@@ -326,7 +326,7 @@ const detalleUsuario = (uid) => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/usuarios";
+                    location.href = "/usuarios";
                 }
             );
         }
@@ -339,7 +339,7 @@ const detalleUsuario = (uid) => {
                 confirmButtonText: "OK",
             },
             function () {
-                location.href = "/public/usuarios";
+                location.href = "/usuarios";
             }
         );
     });
@@ -405,7 +405,7 @@ const updatedatauser = () => {
             showLoaderOnConfirm: true,
         }, function () {
             $.ajax({
-                url: "/public/usuarios/acciones/updateDataUser",
+                url: "/usuarios/acciones/updateDataUser",
                 method: "POST",
                 data: datos,
             }).done(function (res) {
@@ -419,7 +419,7 @@ const updatedatauser = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/usuarios";
                         }
                     );
                 } else {
@@ -431,7 +431,7 @@ const updatedatauser = () => {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/usuarios";
+                            location.href = "/usuarios";
                         }
                     );
                 }
@@ -445,7 +445,7 @@ const updatedatauser = () => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/usuarios";
                     }
                 );
             });
@@ -473,7 +473,7 @@ const eliminarUsuario = (uid) => {
         showLoaderOnConfirm: true,
     }, function () {
         $.ajax({
-            url: "/public/usuarios/acciones/delete",
+            url: "/usuarios/acciones/delete",
             method: "POST",
             data: datos,
         }).done(function (res) {
@@ -486,7 +486,7 @@ const eliminarUsuario = (uid) => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/usuarios";
                     }
                 );
             } else {
@@ -498,7 +498,7 @@ const eliminarUsuario = (uid) => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/usuarios";
                     }
                 );
             }
@@ -511,7 +511,7 @@ const eliminarUsuario = (uid) => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/usuarios";
+                    location.href = "/usuarios";
                 }
             );
         });
@@ -538,7 +538,7 @@ const ActivarUsuario = (uid) => {
         showLoaderOnConfirm: true,
     }, function () {
         $.ajax({
-            url: "/public/usuarios/acciones/active",
+            url: "/usuarios/acciones/active",
             method: "POST",
             data: datos,
         }).done(function (res) {
@@ -551,7 +551,7 @@ const ActivarUsuario = (uid) => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/usuarios";
                     }
                 );
             } else {
@@ -563,7 +563,7 @@ const ActivarUsuario = (uid) => {
                         confirmButtonText: "OK",
                     },
                     function () {
-                        location.href = "/public/usuarios";
+                        location.href = "/usuarios";
                     }
                 );
             }
@@ -576,7 +576,7 @@ const ActivarUsuario = (uid) => {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/usuarios";
+                    location.href = "/usuarios";
                 }
             );
         });

@@ -41,9 +41,9 @@ class ReportesController extends Controller
             $data_result = DB::select("CALL GET_TOP20_VENTAS_SEMANAL_OTRAS(" . $request->semana . ")");
             if (sizeof($data_result) != 0) {
                 for ($i = 0; $i < sizeof($data_result); $i++) {
-                    $result_annio1 = DB::select("CALL GET_VENTAS_SEMANAL_2020_OTRAS(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
-                    $result_annio2 = DB::select("CALL GET_VENTAS_SEMANAL_2021_OTRAS(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
-                    $result_annio3 = DB::select("CALL GET_VENTAS_SEMANAL_2022_OTRAS(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
+                    $result_annio1 = DB::select("CALL GET_VENTAS_SEMANAL_ANNIO1_OTRAS(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
+                    $result_annio2 = DB::select("CALL GET_VENTAS_SEMANAL_ANNIO2_OTRAS(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
+                    $result_annio3 = DB::select("CALL GET_VENTAS_SEMANAL_ANNIO3_OTRAS(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
                     $unidades_annio1 = 0;
                     $unidades_annio2 = 0;
                     $unidades_annio3 = 0;
@@ -107,9 +107,9 @@ class ReportesController extends Controller
             $data_result = DB::select("CALL GET_TOP50_VENTAS_SEMANAL(" . $request->semana . ")");
             if (sizeof($data_result) != 0) {
                 for ($i = 0; $i < sizeof($data_result); $i++) {
-                    $result_annio1 = DB::select("CALL GET_VENTAS_SEMANAL_2020(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
-                    $result_annio2 = DB::select("CALL GET_VENTAS_SEMANAL_2021(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
-                    $result_annio3 = DB::select("CALL GET_VENTAS_SEMANAL_2022(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
+                    $result_annio1 = DB::select("CALL GET_VENTAS_SEMANAL_ANNIO1(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
+                    $result_annio2 = DB::select("CALL GET_VENTAS_SEMANAL_ANNIO2(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
+                    $result_annio3 = DB::select("CALL GET_VENTAS_SEMANAL_ANNIO3(" . $request->semana . ", '" . $data_result[$i]->CLAVE . "')");
                     $unidades_annio1 = 0;
                     $unidades_annio2 = 0;
                     $unidades_annio3 = 0;

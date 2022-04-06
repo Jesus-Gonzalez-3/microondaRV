@@ -443,7 +443,7 @@ $(document).ready(function () {
 
     });
 
-    if (window.location.href == window.location.origin+"/public/reporteSemanalGerentes") {
+    if (window.location.href == window.location.origin+"/reporteSemanalGerentes") {
         let currentdatec = new Date();
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
@@ -459,7 +459,7 @@ $(document).ready(function () {
             semana: resultado
         }
         $.ajax({
-            url: "/public/gerencia/reportes/top20",
+            url: "/gerencia/reportes/top20",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -475,7 +475,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -488,7 +488,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -533,12 +533,12 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
 
         $.ajax({
-            url: "/public/gerencia/reportes/top50",
+            url: "/gerencia/reportes/top50",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -554,7 +554,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -566,7 +566,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -611,12 +611,12 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
     };
 
-    if (window.location.href == window.location.origin+"/public/reporteSemanalDireccion") {
+    if (window.location.href == window.location.origin+"/reporteSemanalDireccion") {
         let currentdatec = new Date();
         var one = new Date(currentdatec.getFullYear(), 0, 1);
         var numofdays = Math.floor((currentdatec - one) / (24 * 60 * 60 * 1000));
@@ -634,7 +634,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "/public/direccion/reportes/top20",
+            url: "/direccion/reportes/top20",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -650,7 +650,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -663,7 +663,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -722,12 +722,12 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
 
         $.ajax({
-            url: "/public/direccion/reportes/top50",
+            url: "/direccion/reportes/top50",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -743,7 +743,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -755,7 +755,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -812,7 +812,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
 
@@ -853,7 +853,7 @@ $(document).ready(function () {
             semana: resultado
         }
         $.ajax({
-            url: "/public/gerencia/reportes/top20",
+            url: "/gerencia/reportes/top20",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -870,7 +870,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -884,7 +884,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -943,7 +943,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
     };
@@ -954,7 +954,7 @@ $(document).ready(function () {
             semana: resultado
         }
         $.ajax({
-            url: "/public/gerencia/reportes/top50",
+            url: "/gerencia/reportes/top50",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -971,7 +971,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -984,7 +984,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1045,7 +1045,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
     };
@@ -1056,7 +1056,7 @@ $(document).ready(function () {
             semana: resultado
         }
         $.ajax({
-            url: "/public/direccion/reportes/top20",
+            url: "/direccion/reportes/top20",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -1073,7 +1073,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1087,7 +1087,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1146,7 +1146,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         })
     };
@@ -1157,7 +1157,7 @@ $(document).ready(function () {
             semana: resultado
         }
         $.ajax({
-            url: "/public/direccion/reportes/top50",
+            url: "/direccion/reportes/top50",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -1174,7 +1174,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -1187,7 +1187,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1248,7 +1248,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
     };
@@ -1433,7 +1433,7 @@ $(document).ready(function () {
             annio: par1
         }
         $.ajax({
-            url: "/public/direccion/reportes/ventasAnuales",
+            url: "/direccion/reportes/ventasAnuales",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -1449,7 +1449,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -1461,7 +1461,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1517,7 +1517,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
 
@@ -1538,7 +1538,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "/public/direccion/reportes/ventasAnuales",
+            url: "/direccion/reportes/ventasAnuales",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -1554,7 +1554,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -1566,7 +1566,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1621,13 +1621,13 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
 
     }
 
-    if (window.location.href == window.location.origin+"/public/reporteAnualDireccion") {
+    if (window.location.href == window.location.origin+"/reporteAnualDireccion") {
         let currentdatec = new Date();
         consultarInformacionAnualDireccion(currentdatec.getFullYear());
     };
@@ -1752,7 +1752,7 @@ $(document).ready(function () {
             annio: par1
         }
         $.ajax({
-            url: "/public/gerencia/reportes/ventasAnuales",
+            url: "/gerencia/reportes/ventasAnuales",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -1768,7 +1768,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -1780,7 +1780,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1836,7 +1836,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
 
@@ -1857,7 +1857,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "/public/gerencia/reportes/ventasAnuales",
+            url: "/gerencia/reportes/ventasAnuales",
             method: "GET",
             data: datos,
         }).done(function (res) {
@@ -1873,7 +1873,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 } else if (respuesta == "ERROR1") {
@@ -1885,7 +1885,7 @@ $(document).ready(function () {
                             confirmButtonText: "OK",
                         },
                         function () {
-                            location.href = "/public/paginaPrincipal";
+                            location.href = "/paginaPrincipal";
                         }
                     );
                 }
@@ -1941,13 +1941,13 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                 function () {
-                    location.href = "/public/paginaPrincipal";
+                    location.href = "/paginaPrincipal";
                 });
         });
 
     }
 
-    if (window.location.href == window.location.origin+"/public/reporteAnualGerencia") {
+    if (window.location.href == window.location.origin+"/reporteAnualGerencia") {
         let currentdatec = new Date();
         consultarInformacionAnualGerentes(currentdatec.getFullYear());
     };
@@ -2324,7 +2324,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 data: datos,
-                url: '/public/direccion/reportes/ventasPeriodo'
+                url: '/direccion/reportes/ventasPeriodo'
             }).done((res) => {
                 if (!res.includes('¬')) {
                     datatableVentasPeriodoDireccion.clear().draw(false);
@@ -2642,7 +2642,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                         case "Error":
@@ -2653,7 +2653,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                     }
@@ -2666,7 +2666,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     });
             });
         } else {
@@ -2678,7 +2678,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 data: datos,
-                url: '/public/direccion/reportes/ventasPeriodo'
+                url: '/direccion/reportes/ventasPeriodo'
             }).done((res) => {
                 if (!res.includes('¬')) {
                     datatableVentasPeriodoDireccion.clear().draw(false);
@@ -2998,7 +2998,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                         case "Error":
@@ -3009,7 +3009,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                     }
@@ -3022,14 +3022,14 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     });
             });
         }
     }
 
 
-    if (window.location.href == window.location.origin+"/public/reportePeriodoDireccion") {
+    if (window.location.href == window.location.origin+"/reportePeriodoDireccion") {
         let currentdatec = new Date();
         consultarInfomacionVentasPeriodoDireccion(currentdatec.getFullYear());
     };
@@ -3243,7 +3243,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 data: datos,
-                url: '/public/gerencia/reportes/ventasPeriodo'
+                url: '/gerencia/reportes/ventasPeriodo'
             }).done((res) => {
                 if (!res.includes('¬')) {
                     datatableVentasPeriodoDireccion.clear().draw(false);
@@ -3561,7 +3561,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                         case "Error":
@@ -3572,7 +3572,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                     }
@@ -3585,7 +3585,7 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     });
             });
         } else {
@@ -3597,7 +3597,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 data: datos,
-                url: '/public/gerencia/reportes/ventasPeriodo'
+                url: '/gerencia/reportes/ventasPeriodo'
             }).done((res) => {
                 if (!res.includes('¬')) {
                     datatableVentasPeriodoDireccion.clear().draw(false);
@@ -3917,7 +3917,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                         case "Error":
@@ -3928,7 +3928,7 @@ $(document).ready(function () {
                                 confirmButtonText: "OK",
                             },
                                 function () {
-                                    location.href = "/public/paginaPrincipal";
+                                    location.href = "/paginaPrincipal";
                                 });
                             break;
                     }
@@ -3941,13 +3941,13 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                 },
                     function () {
-                        location.href = "/public/paginaPrincipal";
+                        location.href = "/paginaPrincipal";
                     });
             });
         }
     }
 
-    if (window.location.href == window.location.origin+"/public/reportePeriodoGerencia") {
+    if (window.location.href == window.location.origin+"/reportePeriodoGerencia") {
         let currentdatec = new Date();
         consultarInfomacionVentasPeriodoGerencia(currentdatec.getFullYear());
     };
