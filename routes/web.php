@@ -16,20 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Esta ruta no hay que moverla para nada
 Route::get('/iniciarSesion', 'UsuarioController@showlogin')->name('login');
 
 Route::get('/', function () {
     return view('login.login');
 });
 
-//Route::get('/reportepdf', 'GeneradorReportesExcel@GenerarReportePDF');
-
 Route::group(['prefix' => 'usuarios/acciones'], function () {
     Route::post('/registrar', 'UsuarioController@registrar');
     Route::post('/login', 'UsuarioController@login');
 });
 Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');
-
 
 try {
     Route::group(['middleware' => ['auth']], function () {
@@ -91,13 +89,9 @@ try {
             Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');
         });
 
-
-        
-
         /**
          * Reportes Agentes
          */
-
         Route::get('/reporteSemanalAgentes', function () {
             return view('reportes.reporteSemanal');
         });
@@ -114,7 +108,6 @@ try {
             Route::get('/ventasSemanales', 'ReportesController@VentasSemanalesAgentes');
             Route::get('/ventasAnuales', 'ReportesController@VentasAnualesAgentes');
             /*Route::get('/top50', 'ReportesController@ObtenerTop50');
-            
             Route::get('/ventasPeriodo', 'ReportesController@ventasPeriodo');*/
         });
 
@@ -128,5 +121,5 @@ try {
         });
     });
 } catch (Exception $ex) {
-    //return view('error.pagenotfound',[],404);
+    return view('error.pagenotfound',[],404);
 }

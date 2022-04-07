@@ -191,15 +191,7 @@ const graficosbarrasPromedio = (data) => {
         }
     };
     let legend = {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: -10,
-        floating: false,
-        borderWidth: 3,
-        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-        shadow: true
+        enabled:true
     };
     let credits = {
         enabled: false
@@ -467,15 +459,7 @@ const graficosbarrasPromedioImporte = (data) => {
         }
     };
     let legend = {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: -10,
-        floating: false,
-        borderWidth: 3,
-        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-        shadow: true
+        enabled:true
     };
     let credits = {
         enabled: false
@@ -751,15 +735,7 @@ const graficosbarrasPromedioCalzado = (data) => {
         }
     };
     let legend = {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: -10,
-        floating: false,
-        borderWidth: 3,
-        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-        shadow: true
+        enabled:true
     };
     let credits = {
         enabled: false
@@ -972,15 +948,7 @@ const graficosbarrasPromedioCalzadoImporte = (data) => {
         }
     };
     let legend = {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: -10,
-        floating: false,
-        borderWidth: 3,
-        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-        shadow: true
+        enabled:true
     };
     let credits = {
         enabled: false
